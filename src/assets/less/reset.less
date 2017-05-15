@@ -1,0 +1,64 @@
+@import (reference) "./_mixin";
+@none: none;
+@normal: normal;
+/* reset */
+html {
+	outline: @none;
+	overflow-x: hidden; 
+	-webkit-tap-highlight-color: transparent;  /* 去除点击时的高亮边框 */
+	-webkit-overflow-scrolling: touch;         /* 增加弹性滚动效果 */
+	-webkit-text-size-adjust: @none;            /* 防止转屏时文字大小变化 */
+	-webkit-touch-callout: @none;    		   /* 禁止 iOS 弹出各种操作窗口 */
+	-webkit-user-select: @none;     			   /* 禁止用户选择文字 */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+body {
+	font-family: 'Avenir', Helvetica, Arial, sans-serif;
+	color: #333;
+	.fontSize(24);
+}
+html, body { 
+	position: relative;
+	height: 100%;
+	overflow: hidden;
+}
+html, body, div, table, th, tr, td, tbody, thead, tfoot, form, span, a, p, dl, dt, dd, strong,
+ol, ul, li, i, em, label, input, button, select, textarea, img, h1, h2, h3, h4, h5, h6, b {
+	padding: 0;
+	margin: 0;
+	font-style: @normal;	
+	font-weight: @normal;
+	border: none;
+}
+html, body, div, a, p, ul, ol, li, dl, dt, dd, h1, h2, h3, h4, h5, h6, input, button, select, textarea {
+	box-sizing: border-box;
+}
+input, button, textarea, select {
+	border: @none;
+	outline: @none;
+	line-height: @normal;
+	background: @none;  
+	-webkit-appearance: @none;  /* 去除ios中按钮的默认样式 */ 
+} 
+textarea { resize: @none; padding: 0 0.1111rem; }
+input[type = "checkbox"] { -webkit-appearance: checkbox; }
+input[type = "radio"] { -webkit-appearance: radio; }
+input[type = "text"],
+input[type = "password"],
+input[type = "tel"],
+input[type = "email"],
+input[type = "number"] { 
+	padding: 0 0.125rem;
+	.fontSize(28);
+}
+// input::-webkit-input-placeholder { color:#a5a5a5; }
+ol, ul, li { list-style: @none; }
+a,
+a:visited,
+a:link,
+a:active,
+a:focus { 
+	color: #343434;
+	text-decoration: @none; 
+} 
