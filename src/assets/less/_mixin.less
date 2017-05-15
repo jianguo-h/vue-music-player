@@ -1,0 +1,23 @@
+.fontSize(@fontSize) {
+	font-size: round(@fontSize / 2) * 1px;
+	[data-dpr = "2"] & {
+		font-size: @fontSize * 1px;
+	}
+	[data-dpr = "3"] & {
+		font-size: round(@fontSize / 2 * 3) * 1px;
+	}
+	[data-dpr = "4"] & {
+		font-size: round(@fontSize * 2) * 1px;
+	}
+}
+.bgImgContain {
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+.bgImg(@url, @suffix: ".png") {
+	background-image: url("../../../static/@{url}_@2x@{suffix}");
+	[data-dpr = "3"] & {
+		background-image: url("../../../static/@{url}_@3x@{suffix}");
+	}  
+} 
