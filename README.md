@@ -26,5 +26,7 @@ npm run e2e
 # run all tests
 npm test
 ```
+demo动态图预览（可能会很卡）
+<img src = "https://github.com/snow-imprint/music-player-vue2/blob/master/demo/demo.gif" />
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
