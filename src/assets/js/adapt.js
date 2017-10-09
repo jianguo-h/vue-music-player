@@ -1,3 +1,4 @@
+// rem 适配
 export function adapt() {
 	let evt = "onorientationchange" in window ? "onorientationchange" : "resize";
 	let isIPhone = window.navigator.appVersion.match(/iphone/gi);
