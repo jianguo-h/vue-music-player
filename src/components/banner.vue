@@ -21,7 +21,7 @@
 			return {
 				initialItems: [],									// 存储图片地址的原始数组(定义这个数组主要是为了处理loop为true的情况)
 				// 数组
-				items: ["../../static/banner1.jpg", "../../static/banner2.jpg", "../../static/banner3.jpg"],
+				items: ["../../static/img/banner1.jpg", "../../static/img/banner2.jpg", "../../static/img/banner3.jpg"],
 				curItemIndex: 0,									// 当前轮播的索引值	
 				curPaginationIndex: 0,								// 当前分页节点的索引值
 				translateX: 0,										// 需要滑动的距离

@@ -90,27 +90,27 @@
 					{
 						defaultColor: "#b2f5b5", 
 						activeColor: "#d1c90e",
-						currentImgSrc: "../../static/current-type1.png"
+						currentImgSrc: "../../static/img/current-type1.png"
 					},
 					{
 						defaultColor: "#c1f3dc", 
 						activeColor: "#33a3f5",
-						currentImgSrc: "../../static/current-type2.png"
+						currentImgSrc: "../../static/img/current-type2.png"
 					},
 					{ 
 						defaultColor: "#a0f533", 
 						activeColor: "#f32d2d",
-						currentImgSrc: "../../static/current-type3.png"
+						currentImgSrc: "../../static/img/current-type3.png"
 					},
 					{
 						defaultColor: "#eff366", 
 						activeColor: "#21d10e",
-						currentImgSrc: "../../static/current-type4.png"
+						currentImgSrc: "../../static/img/current-type4.png"
 					},
 					{	
 						defaultColor: "#efe8b2", 
 						activeColor: "#d200d2",
-						currentImgSrc: "../../static/current-type5.png"
+						currentImgSrc: "../../static/img/current-type5.png"
 					}
 				]
 			}

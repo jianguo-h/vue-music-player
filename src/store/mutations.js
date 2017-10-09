@@ -1,4 +1,4 @@
-const mutations = {
+export default {
 	setView(state, view) {
 		state.view = view;
 	},
@@ -79,5 +79,3 @@ const mutations = {
 		state.modeType = modeType;
 	}
 }
-
-export default mutations;

@@ -1,6 +1,6 @@
 import Vue from "vue";
 
-const actions = {
+export default {
 	playSong({ commit, getters }) {
 		getFilehash();
 
@@ -60,5 +60,3 @@ const actions = {
 		}
 	}
 }
-
-export default actions;

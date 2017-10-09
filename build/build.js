@@ -1,35 +1,29 @@
-require('./check-versions')()
+const fs = require('fs');
+const path = require('path');
+const rimraf = require('rimraf');
+const webpack = require('webpack');
+const webpackProdConfig = require('./webpack.prod.config');
 
-process.env.NODE_ENV = 'production'
+console.log('building for production...\n');
+const distPath = path.resolve(__dirname, '../dist');
 
-var ora = require('ora')
-var rm = require('rimraf')
-var path = require('path')
-var chalk = require('chalk')
-var webpack = require('webpack')
-var config = require('../config')
-var webpackConfig = require('./webpack.prod.conf')
+rimraf(distPath, err => {
+	if(err) throw err;
 
-var spinner = ora('building for production...')
-spinner.start()
-
-rm(path.join(config.build.assetsRoot, config.build.assetsSubDirectory), err => {
-  if (err) throw err
-  webpack(webpackConfig, function (err, stats) {
-    spinner.stop()
-    if (err) throw err
-    process.stdout.write(stats.toString({
-      colors: true,
-      modules: false,
-      children: false,
-      chunks: false,
-      chunkModules: false
-    }) + '\n\n')
-
-    console.log(chalk.cyan('  Build complete.\n'))
-    console.log(chalk.yellow(
-      '  Tip: built files are meant to be served over an HTTP server.\n' +
-      '  Opening index.html over file:// won\'t work.\n'
-    ))
-  })
-})
+	webpack(webpackProdConfig, (err, stats) => {
+		if(err) throw err;
+		// process.stdout.write(stats.toString({
+		// 	colors: true,
+		// 	modules: false,
+		// 	children: false,
+		// 	chunks: false,
+		// 	chunkModules: false
+		// }) + '\n\n');
+		
+		console.log('Build complete \n');
+		console.log(
+			'Tip: built files are meant to be served over an HTTP server.\n' +
+			'Opening index.html over file:// won\'t work.\n'
+		);
+	});
+});
