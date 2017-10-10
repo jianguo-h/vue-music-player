@@ -39,13 +39,13 @@ compiler.plugin('compilation', compilation => {
 });
 
 // proxy api requests
-Object.keys(proxyTable).forEach(ctx => {
+/*Object.keys(proxyTable).forEach(ctx => {
 	let options = proxyTable[ctx];
 	if(typeof options === 'string') {
 		options = { target: options }
 	}
 	app.use(httpProxyMiddleware(options.filter || ctx, options));
-});
+});*/
 
 app.use(webpackDevMiddlewareInstance);
 app.use(webpackHotMiddlewareInstance);

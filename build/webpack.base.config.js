@@ -9,7 +9,7 @@ module.exports = {
 	},
 	module: {
 		rules: [
-			{
+			/*{
 				enforce: 'pre',
 				test: /\.(js|vue)$/,
 				exclude: [
@@ -17,7 +17,7 @@ module.exports = {
 					path.resolve(__dirname, '../dist')
 				],
 				use: ['eslint-loader']
-			},
+			},*/
 			{
 				test: /\.vue$/,
 				loader: 'vue-loader',
@@ -37,7 +37,7 @@ module.exports = {
 				test: /\.less$/,
 				use: ['style-loader', 'css-loader', 'postcss-loader', 'less-loader']
 			},
-			{
+			/*{
 				test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
 				use: {
 					loader: 'url-loader',
@@ -45,12 +45,12 @@ module.exports = {
 						limit: 10240
 					}
 				}
-			}
+			}*/
 		]
 	},
 	resolve: {
 		alias: {
-			'vue$': 'vue/dist/vue.js'
+			'vue$': 'vue/dist/vue.esm.js',
 		},
 		extensions: ['.js', '.vue', '.json']
 	},
