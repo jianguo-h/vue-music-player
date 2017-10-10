@@ -5,4 +5,4 @@ hotClient.subscribe(evt => {
 	if(evt.action === 'reload') {
 		window.location.reload();
 	}
-})
+});

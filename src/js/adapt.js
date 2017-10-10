@@ -1,5 +1,5 @@
-// rem 适配
-export function adapt() {
+// rem 适配手机屏幕
+export default function() {
 	let evt = "onorientationchange" in window ? "onorientationchange" : "resize";
 	let isIPhone = window.navigator.appVersion.match(/iphone/gi);
 	let dpr = window.devicePixelRatio;
