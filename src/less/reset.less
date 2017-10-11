@@ -1,15 +1,15 @@
-@import (reference) "./_mixin";
+@import (reference) "./mixin.less";
 @none: none;
 @normal: normal;
 /* reset */
 html {
 	outline: @none;
 	overflow-x: hidden; 
-	-webkit-tap-highlight-color: transparent;  /* 去除点击时的高亮边框 */
-	-webkit-overflow-scrolling: touch;         /* 增加弹性滚动效果 */
-	-webkit-text-size-adjust: @none;            /* 防止转屏时文字大小变化 */
-	-webkit-touch-callout: @none;    		   /* 禁止 iOS 弹出各种操作窗口 */
-	-webkit-user-select: @none;     			   /* 禁止用户选择文字 */
+	-webkit-tap-highlight-color: transparent;		// 去除点击时的高亮边框
+	-webkit-overflow-scrolling: touch;				// 增加弹性滚动效果
+	-webkit-text-size-adjust: @none;				// 防止转屏时文字大小变化
+	-webkit-touch-callout: @none;					// 禁止 iOS 弹出各种操作窗口
+	-webkit-user-select: @none;						// 禁止用户选择文字
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
@@ -39,7 +39,7 @@ input, button, textarea, select {
 	outline: @none;
 	line-height: @normal;
 	background: @none;  
-	-webkit-appearance: @none;  /* 去除ios中按钮的默认样式 */ 
+	-webkit-appearance: @none;  // 去除ios中按钮的默认样式 
 } 
 textarea { resize: @none; padding: 0 0.1111rem; }
 input[type = "checkbox"] { -webkit-appearance: checkbox; }
@@ -52,7 +52,6 @@ input[type = "number"] {
 	padding: 0 0.125rem;
 	.fontSize(28);
 }
-// input::-webkit-input-placeholder { color:#a5a5a5; }
 ol, ul, li { list-style: @none; }
 a,
 a:visited,

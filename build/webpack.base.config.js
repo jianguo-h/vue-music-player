@@ -37,15 +37,15 @@ module.exports = {
 				test: /\.less$/,
 				use: ['style-loader', 'css-loader', 'postcss-loader', 'less-loader']
 			},
-			/*{
-				test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+			{
+				test: /\.(png|jpg|jpeg|gif|svg)$/,
 				use: {
 					loader: 'url-loader',
 					options: {
 						limit: 10240
 					}
 				}
-			}*/
+			}
 		]
 	},
 	resolve: {

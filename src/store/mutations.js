@@ -1,81 +1,81 @@
 export default {
-	setView(state, view) {
-		state.view = view;
-	},
-	setLoading(state, loading) {
-		state.loading = loading;
-	},
-	setSongList(state, songList) {
-		state.songList = songList;
-	},
-	setSearchCount(state, searchCount) {
-		state.searchCount = searchCount;
-	},
-	setShowDetail(state, showDetail) {
-		state.showDetail = showDetail;
-	},
-	setAudio(state, audio) {
-		state.audio = audio;
-	},
-	setAudioSrc(state, audioSrc) {
-		state.audioSrc = audioSrc;
-	},
-	setIsPlayed(state, isPlayed) {
-		state.isPlayed = isPlayed;
-	},
-	setCanPlayed(state, canPlayed) {
-		state.canPlayed = canPlayed;
-	},
-	setPaused(state) {
-		if(!state.audioSrc) {
-			state.paused = false;
-			return;
-		}
-		state.paused = !state.paused;
-		if(state.paused) {
-			state.audio.pause();
-		}
-		else {
-			state.audio.play();
-		}
-	},
-	setCurPlayIndex(state, curPlayIndex) {
-		let listTotal = state.listTotal;
-		if(curPlayIndex < 0) {
-			curPlayIndex = listTotal - 1;
-		}
-		else if(curPlayIndex >= listTotal) {
-			curPlayIndex = 0;
-		}
-		state.curPlayIndex = curPlayIndex;
-	},
-	setCurPlayImgSrc(state, curPlayImgSrc) {
-		state.curPlayImgSrc = curPlayImgSrc;
-	},
-	setCurPlayLrcArr(state, lyrics) {
-		if(lyrics.length === 0) {
-			return;
-		}
-		let lrc = lyrics.replace(/\n/g, "").split("[").slice(1);
-		let curPlayLrcArr = [];
-		for(let item of lrc) {
-			let times = item.split("]")[0].replace(".", ":").split(":");
-			let time = Number(times[0]) * 60 + Number(times[1]) + Number(times[2]) / 1000;
-			let obj = {
-				startTime: time.toFixed(2),
-				curLrc: item.split("]")[1]
-			}
-			curPlayLrcArr.push(obj);
-		}
-		state.curPlayLrcArr = curPlayLrcArr;
-	},
-	setLock(state, lock) {
-		state.lock = lock;
-	},
-	setLoop(state, loop) {
-		state.loop = loop;
-	},
-	setModeType(state, modeType) {
-		state.modeType = modeType;
-	}
+    setView(state, view) {
+        state.view = view;
+    },
+    setLoading(state, loading) {
+        state.loading = loading;
+    },
+    setSongList(state, songList) {
+        state.songList = songList;
+    },
+    setSearchCount(state, searchCount) {
+        state.searchCount = searchCount;
+    },
+    setShowDetail(state, showDetail) {
+        state.showDetail = showDetail;
+    },
+    setAudio(state, audio) {
+        state.audio = audio;
+    },
+    setAudioSrc(state, audioSrc) {
+        state.audioSrc = audioSrc;
+    },
+    setIsPlayed(state, isPlayed) {
+        state.isPlayed = isPlayed;
+    },
+    setCanPlayed(state, canPlayed) {
+        state.canPlayed = canPlayed;
+    },
+    setPaused(state) {
+        if(!state.audioSrc) {
+            state.paused = false;
+            return;
+        }
+        state.paused = !state.paused;
+        if(state.paused) {
+            state.audio.pause();
+        }
+        else {
+            state.audio.play();
+        }
+    },
+    setCurPlayIndex(state, curPlayIndex) {
+        let listTotal = state.listTotal;
+        if(curPlayIndex < 0) {
+            curPlayIndex = listTotal - 1;
+        }
+        else if(curPlayIndex >= listTotal) {
+            curPlayIndex = 0;
+        }
+        state.curPlayIndex = curPlayIndex;
+    },
+    setCurPlayImgSrc(state, curPlayImgSrc) {
+        state.curPlayImgSrc = curPlayImgSrc;
+    },
+    setCurPlayLrcArr(state, lyrics) {
+        if(lyrics.length === 0) {
+            return;
+        }
+        let lrc = lyrics.replace(/\n/g, "").split("[").slice(1);
+        let curPlayLrcArr = [];
+        for(let item of lrc) {
+            let times = item.split("]")[0].replace(".", ":").split(":");
+            let time = Number(times[0]) * 60 + Number(times[1]) + Number(times[2]) / 1000;
+            let obj = {
+                startTime: time.toFixed(2),
+                curLrc: item.split("]")[1]
+            }
+            curPlayLrcArr.push(obj);
+        }
+        state.curPlayLrcArr = curPlayLrcArr;
+    },
+    setLock(state, lock) {
+        state.lock = lock;
+    },
+    setLoop(state, loop) {
+        state.loop = loop;
+    },
+    setModeType(state, modeType) {
+        state.modeType = modeType;
+    }
 }

@@ -10,9 +10,9 @@ module.exports = {
 	        "/songsearch": {
 	            target: "http://songsearch.kugou.com/song_search_v2",
 	            changeOrigin: true,
-	            pathRewrite: {
+	            /*pathRewrite: {
 	                "^/songsearch": ""
-	            }
+	            }*/
 	        },
 	        // 获取歌曲接口
 	        "/play": {
