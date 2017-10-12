@@ -4,6 +4,7 @@ import axios from 'axios';
 import store from './store';
 import router from './router';
 
+import api from './api';
 import adapt from './js/adapt';
 
 if(module.hot) {
@@ -11,6 +12,7 @@ if(module.hot) {
 }
 
 adapt();
+Vue.prototype.api = api;
 Vue.prototype.axios = axios;
 Vue.config.productionTip = false;
 

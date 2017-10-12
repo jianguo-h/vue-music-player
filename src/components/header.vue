@@ -6,9 +6,9 @@
                 <input v-model = "keyword" @keyup = "keyup($event, keyword)" type="text" placeholder="歌手/歌名" />
                 <div class="search-list" v-if = "keyword !== ''">
                     <ul>
-                        <li v-for = "data in RecordDatas" @click = "search(data.HintInfo)">{{ data.HintInfo }}</li>
+                        <li v-for = "data in resultList" @click = "search(data.HintInfo)">{{ data.HintInfo }}</li>
                     </ul>
-                    <p v-if = "RecordCount === 0">暂无结果...</p>
+                    <p v-if = "resultCount === 0">暂无结果...</p>
                 </div>
             </div>
             <div class="search" @click = "search(keyword)"></div>
@@ -32,9 +32,9 @@
         name: "header",
         data() {
             return {
-                keyword: "",
-                RecordCount: null,
-                RecordDatas: null,
+                keyword: "",                // 搜索的关键字
+                resultCount: '',            // 得到的结果数量
+                resultList: [],             // 搜索得到的结果列表
                 tabArr: [
                     {
                         routerPath: "new",
@@ -67,36 +67,25 @@
                     alert("请输入关键字！");
                     return;
                 };
-                this.$router.push({
-                    path: "/search",
-                    query: {
-                        keyword
-                    }
-                });	
+                this.$router.push('/search?keyword=' + keyword);	
                 this.keyword = "";
             },
             // 搜索框keyup事件, keyword为关键字
             keyup(e, keyword) {
                 if(!keyword || keyword.trim() === "") {
-                    this.RecordCount = null;
-                    this.RecordDatas = null;
+                    this.resultCount = null;
+                    this.resultList = [];
                     return;
                 };
                 if(e.keyCode === 13) {
                     this.search(keyword);
                 }
-                this.axios.get("/searchtip", {
-                    params: {
-                        keyword,
-                        MusicTipCount: 7
-                    }
-                }).then(res => {
-                    console.log(">>> [res] 搜索结果", res);
-                    /*let data = JSON.parse(res.body).data[0];
-                    this.RecordCount = data.RecordCount;
-                    this.RecordDatas = data.RecordDatas;*/
+                this.api.search(keyword).then(res => {
+                    console.log(">>> [res] 根据关键字搜索", res);
+                    this.resultList = res.data.data[0].RecordDatas;
+                    this.resultCount = res.data.data[0].RecordCount;
                 }).catch(err => {
-                    console.log(">>> [err]", err);
+                    console.log(">>> [err] 根据关键字搜索", err);
                 });
             }
         }
@@ -153,7 +142,7 @@
                 width: 0.4722rem;
                 height: 0.4722rem;
                 .bgImgContain;
-                /*.bgImg("search");*/
+                .bgImg("search");
             }
         }
         .header-tab {
@@ -185,7 +174,7 @@
                 position: absolute;
                 transform: translate3d(0, -50%, 0);
                 .bgImgContain;
-                /*.bgImg("icon-goback");*/
+                .bgImg("icon-goback");
             }
             .searchCount {
                 color: #5d5d5d;
