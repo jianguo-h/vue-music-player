@@ -3,5 +3,7 @@ import config from '../../config';
 const proxyTable = config.dev.proxyTable;
 
 export default {
-    search: proxyTable,
+    search: '/searchtip',
+    play: '/play',
+    songsearch: '/songsearch'
 }
