@@ -2,6 +2,7 @@ const opn = require('opn');
 const path = require('path');
 const webpack = require('webpack');
 const config = require('../config');
+const router = require('../router');
 const webpackDevConfig = require('./webpack.dev.config');
 const httpProxyMiddleware = require('http-proxy-middleware');
 const webpackDevMiddleware = require('webpack-dev-middleware');
@@ -18,6 +19,9 @@ const proxyTable = config.dev.proxyTable;
 if(!process.env.NODE_ENV) {
 	process.env.NODE_ENV = config.dev.env;
 }
+
+// 路由设置
+router(express, app);
 
 const webpackDevMiddlewareInstance = webpackDevMiddleware(compiler, {
 	stats: {

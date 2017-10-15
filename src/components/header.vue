@@ -3,54 +3,55 @@
         <div class="header-search">
             <div class="logo"></div>
             <div class="search-form">
-                <input v-model = "keyword" @keyup = "keyup($event, keyword)" type="text" placeholder="歌手/歌名" />
-                <div class="search-list" v-if = "keyword !== ''">
-                    <ul>
+                <input type = 'text' v-model = "keyword" @input = "input" @keyup.enter = 'search(keyword)' placeholder="歌手/歌名" />
+                <div class="search-list" v-if = "keyword.trim() !== ''">
+                    <ul v-if = 'resultCount > 0'>
                         <li v-for = "data in resultList" @click = "search(data.HintInfo)">{{ data.HintInfo }}</li>
                     </ul>
-                    <p v-if = "resultCount === 0">暂无结果...</p>
+                    <p v-else>{{ searchTip }}</p>
                 </div>
             </div>
             <div class="search" @click = "search(keyword)"></div>
         </div>
-        <!-- <div class="header-tab" v-if = "$route.path.slice(1) !== 'search'">
+        <div class="header-tab" v-if = "$route.path !== '/search'">
             <ul>
-                <li v-for = "tab in tabArr">
-                    <router-link :to = "tab.routerPath">{{ tab.tabName }}</router-link>
+                <li v-for = "tab in tabs">
+                    <router-link :to = "tab.path">{{ tab.name }}</router-link>
                 </li>
             </ul>
         </div>
         <div class="header-search-result" v-if = "$route.path.slice(1) === 'search'">
             <div class="goback" @click = "$router.go(-1)"></div>
             <div class="searchCount">共有<em>{{ searchCount }}</em>条结果</div>
-        </div> -->
+        </div>
     </div>
 </template>
 
 <script>
     export default {
-        name: "header",
+        name: 'header',
         data() {
             return {
-                keyword: "",                // 搜索的关键字
-                resultCount: '',            // 得到的结果数量
+                keyword: '',                // 搜索的关键字
+                resultCount: 0,             // 得到的结果数量
                 resultList: [],             // 搜索得到的结果列表
-                tabArr: [
+                searchTip: '正在搜索...',   // 搜索时的提示信息
+                tabs: [
                     {
-                        routerPath: "new",
-                        tabName: "新歌"
+                        path: "new",
+                        name: "新歌"
                     },
                     {
-                        routerPath: "recommend",
-                        tabName: "推荐"
+                        path: "recommend",
+                        name: "推荐"
                     },
                     {
-                        routerPath: "local",
-                        tabName: "本地"
+                        path: "local",
+                        name: "本地"
                     },
                     {
-                        routerPath: "collect",
-                        tabName: "已收藏"
+                        path: "collect",
+                        name: "已收藏"
                     }
                 ]
             }
@@ -63,37 +64,43 @@
         methods: {
             // 点击搜索事件, keyword为关键字
             search(keyword) {
-                if(!keyword || keyword.trim() === "") {
+                if(!keyword || keyword.trim() === '') {
                     alert("请输入关键字！");
                     return;
                 };
                 this.$router.push('/search?keyword=' + keyword);	
-                this.keyword = "";
+                this.keyword = '';
             },
-            // 搜索框keyup事件, keyword为关键字
-            keyup(e, keyword) {
-                if(!keyword || keyword.trim() === "") {
-                    this.resultCount = null;
-                    this.resultList = [];
+            // 搜索框input事件, keyword为关键字
+            input() {
+                const keyword = this.keyword;
+                if(!keyword || keyword.trim() === '') 
                     return;
-                };
-                if(e.keyCode === 13) {
-                    this.search(keyword);
-                }
+
+                this.resultCount = 0;
+                this.searchTip = '正在搜索...';
                 this.api.search(keyword).then(res => {
-                    console.log(">>> [res] 根据关键字搜索", res);
-                    this.resultList = res.data.data[0].RecordDatas;
-                    this.resultCount = res.data.data[0].RecordCount;
+                    console.log('>>> [res] 根据关键字搜索', res);
+                    if(res.status === 200 && res.statusText === 'OK') {
+                        this.resultList = res.data.data[0].RecordDatas;
+                        this.resultCount = res.data.data[0].RecordCount;
+                    }
+                    else {
+                        this.resultCount = 0;
+                        this.searchTip = '暂无结果...';
+                    }
                 }).catch(err => {
-                    console.log(">>> [err] 根据关键字搜索", err);
+                    this.resultCount = 0;
+                    this.searchTip = '网络出现错误或服务不可用';
+                    console.log('>>> [err] 根据关键字搜索', err);
                 });
             }
         }
     }
 </script>
 
-<style lang = "less">
-    @import (reference) "../less/mixin.less";
+<style lang = 'less'>
+    @import (reference) '../less/mixin.less';
 
     #header {
         .header-search {

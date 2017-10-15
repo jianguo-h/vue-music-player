@@ -1,11 +1,11 @@
 <template>
 	<div class="content" @scroll = "scrollLoad" ref = "content">
-		<banner v-if = "routerPath === 'new'"></banner>
+		<!-- <banner v-if = "routerPath === 'new'"></banner> -->
 		<div class = "list" :class = "[routerPath + '-songList', {noSongData: songList.length === 0}]">
 			<ul v-if = "songList.length > 0">
 				<li v-for = "(songData, index) in songList" :class = "{active: view === routerPath && index === curPlayIndex && isPlayed}" @click = "sendData(index)">
 					<p class = "filename">{{ songData.FileName }}</p>
-					<collect :songData = "songData" :songList = "songList"></collect>
+					<!-- <collect :songData = "songData" :songList = "songList"></collect> -->
 				</li>
 			</ul>
 			<p v-else = "songList.length === 0">暂无数据！</p>
@@ -15,7 +15,7 @@
 
 <script>
 	import banner from "./banner";
-	import collect from "./collect";
+	// import collect from "./collect";
 	import { mapState } from "vuex";
 
 	export default {
@@ -23,7 +23,6 @@
 		data() {
 			return {
 				songList: [],				// 存储歌曲列表的数组
-				routerPath: "",				// 当前url中的路由
 				page: 1,					// 加载的页数
 				totalPage: 0,				// 总页数
 				loaded: false				// 数据是否全部加载完毕
@@ -35,19 +34,21 @@
 				"loading",
 				"view",
 				"isPlayed"
-			])
+			]),
+			routerPath() {
+				return this.$route.path.slice(1);
+			}
 		},
 		created() {
-			this.renderList();
+			this.getList();
 		},
 		watch: {
-			"$route": "renderList"
+			"$route": "getList"
 		},
 		methods: {
 			// 渲染列表数据
-			renderList() {
+			getList() {
 				this.$store.commit("setLoading", true);
-				this.routerPath = this.$route.path.slice(1);
 				if(this.routerPath === "search") {		
 					this.songList = [];
 					this.searchList();			
@@ -63,19 +64,23 @@
 					this.$store.commit("setLoading", false);
 				}
 				else {
-					this.$http.get(`/api/${this.routerPath}`)
-					.then(res => {
-						if(JSON.parse(res.bodyText).errno !== 0) return; 
-						this.songList = res.body.data;
-						this.$store.commit("setLoading", false);
-						this.initCollect();
-					}, error => {
-						alert(error);
+					this.api.getList(this.routerPath).then(res => {
+						console.log('>>> [res] 渲染列表数据', res);
+						if(res.status === 200 && res.statusText === 'OK') {
+							this.songList = res.data.data.slice(0) || [];
+							this.$store.commit("setLoading", false);
+							// this.initCollect();
+						}
+						else {
+							this.songList = [];
+						}
+					}).catch(err => {
+						console.log('>>> [err] 渲染列表数据', err);
 					});
 				}
 			},
 			// 根据搜索关键字得到歌曲列表
-			searchList() {
+			/*searchList() {
 				let page = this.page;
 				let keyword = this.$route.query.keyword;
 				this.$http.get("/songsearch", {
@@ -158,17 +163,17 @@
 						alert("已加载全部数据！");
 					}
 				}
-			}
+			}*/
 		},
 		components: {
-			collect,
+			// collect,
 			banner
 		}
 	}
 </script>
 
 <style lang = "less">
-	@import (reference) "../assets/less/_mixin";
+	@import (reference) '../less/mixin.less';
 	.content {
 		flex: 1;
 		overflow-y: scroll;
