@@ -2,6 +2,9 @@
     <div id = "app">
         <loading></loading>
         <v-header></v-header>
+        <keep-alive>
+            <router-view></router-view>
+        </keep-alive>
     </div>
 </template>
 
