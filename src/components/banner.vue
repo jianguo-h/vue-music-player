@@ -19,22 +19,22 @@
 		name: "banner",
 		data() {
 			return {
-				initialItems: [],									// 存储图片地址的原始数组(定义这个数组主要是为了处理loop为true的情况)
+				initialItems: [],			// 存储图片地址的原始数组(定义这个数组主要是为了处理loop为true的情况)
 				// 数组
 				items: ["../../static/img/banner1.jpg", "../../static/img/banner2.jpg", "../../static/img/banner3.jpg"],
-				curItemIndex: 0,									// 当前轮播的索引值	
-				curPaginationIndex: 0,								// 当前分页节点的索引值
-				translateX: 0,										// 需要滑动的距离
-				translateOffset: 0,									// 偏移的距离
-				itemSpacing: 30,									// 图片之间的间距
-				speed: 500,											// 速度
-				interval: 3000,										// 时间间隔
-				animated: false,									// 是否有在运动
-				loop: true,											// 是否循环
-				startTime: 0,										// touchstart按下时的时间
-				startX: 0,											// touchstart按下时的pageX
-				startY: 0,											// touchstart按下时的pageY
-				offsetX: 0											// 手指滑动时的偏移值
+				curItemIndex: 0,			// 当前轮播的索引值	
+				curPaginationIndex: 0,		// 当前分页节点的索引值
+				translateX: 0,				// 需要滑动的距离
+				translateOffset: 0,			// 偏移的距离
+				itemSpacing: 30,			// 图片之间的间距
+				speed: 500,					// 速度
+				interval: 3000,				// 时间间隔
+				animated: false,			// 是否有在运动
+				loop: true,					// 是否循环
+				startTime: 0,				// touchstart按下时的时间
+				startX: 0,					// touchstart按下时的pageX
+				startY: 0,					// touchstart按下时的pageY
+				offsetX: 0					// 手指滑动时的偏移值
 			}
 		},
 		// 根据loop的值初始化
