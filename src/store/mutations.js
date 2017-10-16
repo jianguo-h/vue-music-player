@@ -40,7 +40,7 @@ export default {
         }
     },
     setCurPlayIndex(state, curPlayIndex) {
-        let listTotal = state.listTotal;
+        const listTotal = state.listTotal;
         if(curPlayIndex < 0) {
             curPlayIndex = listTotal - 1;
         }
@@ -56,12 +56,12 @@ export default {
         if(lyrics.length === 0) {
             return;
         }
-        let lrc = lyrics.replace(/\n/g, "").split("[").slice(1);
-        let curPlayLrcArr = [];
-        for(let item of lrc) {
-            let times = item.split("]")[0].replace(".", ":").split(":");
-            let time = Number(times[0]) * 60 + Number(times[1]) + Number(times[2]) / 1000;
-            let obj = {
+        const lrc = lyrics.replace(/\n/g, "").split("[").slice(1);
+        const curPlayLrcArr = [];
+        for(const item of lrc) {
+            const times = item.split("]")[0].replace(".", ":").split(":");
+            const time = Number(times[0]) * 60 + Number(times[1]) + Number(times[2]) / 1000;
+            const obj = {
                 startTime: time.toFixed(2),
                 curLrc: item.split("]")[1]
             }
