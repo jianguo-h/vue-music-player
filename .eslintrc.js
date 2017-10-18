@@ -18,10 +18,12 @@ module.exports = {
         'eol-last': 0,
         'brace-style': 0,
         'prefer-const': 2,
+        'comma-dangle': 2,      // 禁止结尾有多余的逗号
         'no-unused-vars': 1,
         'no-multi-spaces': 0,
         'keyword-spacing': 0,
         'indent': ['error', 4],
+        'no-useless-return': 0,
         'space-before-function-paren': 0,
     }
 }

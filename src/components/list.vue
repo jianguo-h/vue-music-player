@@ -73,9 +73,14 @@
                         }
                         else {
                             this.songList = [];
+                            this.$Message.error({
+                                message: '获取歌曲列表失败',
+                                duration: 3
+                            });
                         }
                     }).catch(err => {
                         console.log('>>> [err] 渲染列表数据', err);
+                        this.$Message.error('网络出现错误或服务暂时不可用');
                     });
                 }
             },
@@ -148,7 +153,7 @@
                 const content = this.$refs.content;
                 const scrollTop = content.scrollTop;                // 元素滚动的高度
                 const scrollHeight = content.scrollHeight;          // 元素的实际高度(包括滚动的高度)
-                const clientHeight = content.clientHeight           // 元素在窗口可见的高度(不包括滚动的高度)
+                const clientHeight = content.clientHeight;          // 元素在窗口可见的高度(不包括滚动的高度)
                 const offsetHeight = scrollHeight - scrollTop - clientHeight;
 
                 if(offsetHeight <= 100) {
@@ -159,7 +164,7 @@
                     }
                     else {
                         this.loaded = true;
-                        alert("已加载全部数据！");
+                        this.$Message.info('已加载全部数据！');
                     }
                 }
             }

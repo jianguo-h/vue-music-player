@@ -1,21 +1,24 @@
 <template>
     <div id = "app">
-        <loading></loading>
+        <!-- <loading></loading> -->
         <v-header></v-header>
         <keep-alive>
             <router-view></router-view>
         </keep-alive>
+        <player></player>
     </div>
 </template>
 
 <script>
     import header from './components/header';
     import loading from './components/loading';
+    import player from './components/player';
     export default {
         name: 'app',
         components: {
             'v-header': header,
-            loading
+            loading,
+            player
         }
     }
 </script>

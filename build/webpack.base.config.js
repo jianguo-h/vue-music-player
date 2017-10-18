@@ -38,13 +38,30 @@ module.exports = {
 				use: ['style-loader', 'css-loader', 'postcss-loader', 'less-loader']
 			},
 			{
-				test: /\.(png|jpg|jpeg|gif|svg)$/,
-				use: {
-					loader: 'url-loader',
-					options: {
-						limit: 10240
+		        test: /\.css$/,
+		        use: ['style-loader', 'css-loader']
+			},
+			{
+				test: /\.(eot|svg|ttf|woff|woff2)$/,
+				use: [
+					{
+						loader: 'url-loader',
+						options: {
+							limit: 10240
+						}
 					}
-				}
+				]
+			},
+			{
+				test: /\.(png|jpg|jpeg|gif|svg)$/,
+				use: [
+					{
+						loader: 'url-loader',
+						options: {
+							limit: 10240
+						}
+					}
+				]
 			}
 		]
 	},
