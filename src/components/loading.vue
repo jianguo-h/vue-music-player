@@ -5,11 +5,11 @@
 <script>
     export default {
         name: "loading",
-         computed: {
+        computed: {
             loading() {
                 return this.$store.state.loading;
             }
-        } 
+        }
     }
 </script>
 
