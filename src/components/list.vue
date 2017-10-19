@@ -1,6 +1,6 @@
 <template>
     <div class="content" @scroll = "scrollLoad" ref = "content">
-        <!-- <banner v-if = "routerPath === 'new'"></banner> -->
+        <banner v-if = "routerPath === 'new'"></banner>
         <div class = "list" :class = "[routerPath + '-songList', {noSongData: songList.length === 0}]">
             <ul v-if = "songList.length > 0">
                 <li v-for = "(song, index) in songList" :class = "{active: view === routerPath && index === curPlayIndex && isPlayed}" @click = "play(index)">

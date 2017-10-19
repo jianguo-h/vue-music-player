@@ -20,7 +20,7 @@ if(!process.env.NODE_ENV) {
 	process.env.NODE_ENV = config.dev.env;
 }
 
-// 路由设置
+// config router
 router(express, app);
 
 const webpackDevMiddlewareInstance = webpackDevMiddleware(compiler, {
@@ -42,7 +42,7 @@ compiler.plugin('compilation', compilation => {
 	})
 });
 
-// proxy api requests
+// config proxy
 Object.keys(proxyTable).forEach(ctx => {
 	let options = proxyTable[ctx];
 	if(typeof options === 'string') {
@@ -51,8 +51,20 @@ Object.keys(proxyTable).forEach(ctx => {
 	app.use(httpProxyMiddleware(options.filter || ctx, options));
 });
 
+// use middleWare
 app.use(webpackDevMiddlewareInstance);
 app.use(webpackHotMiddlewareInstance);
+
+// static path config
+const static = {
+	path: path.join(__dirname, '../static'),
+	imgPath: path.join(__dirname, '../static/img'),
+	dataPath: path.join(__dirname, '../static/data'),
+}
+app.use('/static', express.static(static.path));
+app.use('/static/img', express.static(static.imgPath));
+app.use('/static/data', express.static(static.dataPath));
+
 
 let _resolve;
 const readyPromise = new Promise((resolve, reject) => {
