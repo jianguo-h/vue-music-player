@@ -1,6 +1,6 @@
 <template>
     <div id = "app">
-        <!-- <loading></loading> -->
+        <loading></loading>
         <v-header></v-header>
         <keep-alive>
             <router-view></router-view>

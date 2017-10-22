@@ -12,32 +12,33 @@
 </template>
 
 <script>
+    const clientWidth = document.documentElement.clientWidth;
+    const dpr = window.navigator.appVersion.match(/iphone/gi) ? Math.floor(window.devicePixelRatio) : 1;
     export default {
         name: "banner",
         data() {
             return {
-                initialItems: [],                   // 存储图片地址的原始数组(定义这个数组主要是为了处理loop为true的情况)
+                initialItems: [],                // 存储图片地址的原始数组(定义这个数组主要是为了处理loop为true的情况)
                 // 数组
                 items: ["static/img/banner1.jpg", "static/img/banner2.jpg", "static/img/banner3.jpg"],
-                curItemIndex: 0,                    // 当前轮播的索引值
-                curPaginationIndex: 0,              // 当前分页节点的索引值
-                translateX: 0,                      // 需要滑动的距离
-                translateOffset: 0,                 // 偏移的距离
-                itemSpacing: 30,                    // 图片之间的间距
-                speed: 500,                         // 速度
-                interval: 3000,                     // 时间间隔
-                animated: false,                    // 是否有在运动
-                loop: true,                         // 是否循环
-                startTime: 0,                       // touchstart按下时的时间
-                startX: 0,                          // touchstart按下时的pageX
-                startY: 0,                          // touchstart按下时的pageY
-                offsetX: 0                          // 手指滑动时的偏移值
+                curItemIndex: 0,                 // 当前轮播的索引值
+                curPaginationIndex: 0,           // 当前分页节点的索引值
+                translateX: 0,                   // 需要滑动的距离
+                translateOffset: 0,              // 偏移的距离
+                itemSpacing: 30,                 // 图片之间的间距
+                speed: 500,                      // 速度
+                interval: 3000,                  // 时间间隔
+                animated: false,                 // 是否有在运动
+                loop: true,                      // 是否循环
+                startTime: 0,                    // touchstart按下时的时间
+                startX: 0,                       // touchstart按下时的pageX
+                startY: 0,                       // touchstart按下时的pageY
+                offsetX: 0                       // 手指滑动时的偏移值
             }
         },
         computed: {
             bannerWrapperSize() {
-                const dpr = window.navigator.appVersion.match(/iphone/gi) ? Math.floor(window.devicePixelRatio) : 1;
-                return document.body.offsetWidth * dpr;
+                return clientWidth * dpr;
             }
         },
         // 根据loop的值初始化
@@ -47,7 +48,7 @@
         // 自动播放
         mounted() {
             setInterval(() => {
-                this.next();
+                this.play();
             }, this.interval);
         },
         methods: {
@@ -76,58 +77,49 @@
                 }
             },
             // touchstart事件
-            touchstart(e) {
+            touchstart(evt) {
                 this.startTime = new Date().getTime();
-                this.startX = e.targetTouches[0].pageX;
-                this.startY = e.targetTouches[0].pageY;
+                this.startX = evt.targetTouches[0].pageX;
+                this.startY = evt.targetTouches[0].pageY;
             },
             // touchmove事件
-            touchmove(e) {
+            touchmove(evt) {
                 if(this.animated) return;
-                const endX = e.targetTouches[0].pageX;
-                // const endY = e.targetTouches[0].pageY;
+                const endX = evt.targetTouches[0].pageX;
                 this.offsetX = endX - this.startX;
 
                 this.speed = 0;
                 this.translateX = -this.offsetX + (this.bannerWrapperSize + this.itemSpacing) * this.curItemIndex + this.translateOffset;
             },
             // touchend事件
-            touchend(e) {
-                // const endX = e.changedTouches[0].pageX;
+            touchend(evt) {
                 const offsetTime = new Date().getTime() - this.startTime;
                 const boundary = offsetTime <= 500 ? 50 : this.bannerWrapperSize / 2;
 
                 if(this.offsetX >= boundary) {
-                    this.prev();
+                    this.play('prev');
                 }
                 else if(this.offsetX < -boundary) {
-                    this.next();
+                    this.play();
                 }
                 else {
                     this.translate(this.curItemIndex);
                 }
             },
-            // 下一张
-            next() {
+            // 运动, slide 为滑动的方向
+            play(slide = 'next') {
                 if(this.animated) return;
                 const itemsLen = this.items.length;
-                this.curItemIndex++;
+                slide === 'next' ? this.curItemIndex++ : this.curItemIndex--;
                 if(!this.loop && this.curItemIndex > itemsLen - 1) {
                     this.curItemIndex = 0;
                 }
-                this.translate(this.curItemIndex);
-            },
-            // 上一张
-            prev() {
-                if(this.animated) return;
-                const itemsLen = this.items.length;
-                this.curItemIndex--;
-                if(!this.loop && this.curItemIndex < 0) {
+                else if(!this.loop && this.curItemIndex < 0) {
                     this.curItemIndex = itemsLen - 1;
                 }
                 this.translate(this.curItemIndex);
             },
-            // 滑动
+            // 滑动, curItemIndex 当前显示图片的索引值
             translate(curItemIndex) {
                 this.animated = true;
                 this.speed = 500;

@@ -11,7 +11,7 @@ export default {
         commit("setPaused");
 
         const songName = getters.curPlayFileName;
-        api.getSongHash(songName).then(res => {
+        api.getSongInfo(songName).then(res => {
             console.log('>>> [res] 获取歌曲的hash值', res);
             if(res.status === 200 && res.statusText === 'OK') {
                 const hash = res.data.data.lists[0].FileHash;
@@ -30,12 +30,15 @@ export default {
         });
 
         const play = hash => {
-            api.getSongInfo(hash).then(res => {
+            api.play(hash).then(res => {
                 console.log('>>> [res] 获取歌曲的信息', res);
                 if(res.status === 200 && res.statusText === 'OK') {
                     const data = res.data.data;
                     if(!data.play_url || data.play_url === "") {
-                        alert("暂无播放来源！");
+                        Message.error({
+                            message: '暂无播放来源',
+                            duration: 3
+                        });
                         commit("setLoading", false);
                         return;
                     }
