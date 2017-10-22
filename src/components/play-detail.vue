@@ -46,8 +46,8 @@
                         <transition name = "fade">
                             <div class="play-list" v-if = "isShowList">
                                 <ul>
-                                    <li v-for = "(songData, index) in songList" :class = "{active: curPlayIndex === index}" @click = "playSong(index)">
-                                        {{ index + 1 }}. {{ songData.FileName }}
+                                    <li v-for = "(song, index) in songList" :class = "{active: curPlayIndex === index}" @click = "playSong(index)">
+                                        {{ index + 1 }}. {{ song.FileName }}
                                     </li>
                                 </ul>
                             </div>
@@ -65,10 +65,10 @@
     import { mapState, mapGetters } from "vuex";
 
     export default {
-        name: "playDetail",
+        name: "play-detail",
         data() {
             return {
-                songData: {},                   // 存储当前播放歌曲信息的对象
+                // songData: {},                   // 存储当前播放歌曲信息的对象
                 isShowList: false,              // 是否显示歌曲列表
                 curPlayTime: 0,                 // 当前播放时间(秒为单位)
                 curLrcIndex: 0,                 // 当前歌词高亮行
@@ -132,46 +132,23 @@
             ...mapGetters([
                 "curPlayFileName",
                 "listTotal"
-            ])
+            ]),
+            songData() {
+                return this.songList[this.curPlayIndex];
+            }
         },
         created() {
-            let currentColorObj = "";
-            let modeType = "";
-            let mode = 1;
-            if(window.localStorage.currentColorObj) {
-                currentColorObj = JSON.parse(window.localStorage.currentColorObj);
-            }
-            else {
-                currentColorObj = this.lrcColorList[0];
-            }
-            if(window.localStorage.modeType) {
-                modeType = window.localStorage.modeType;
-            }
-            else {
-                modeType = "order";
-            }
-            if(modeType === "loop") {
-                mode = 2;
-            }
-            else if(modeType === "random") {
-                mode = 3;
-            }
-            else {
-                mode = 1;
-            }
-            this.mode = mode;
-            this.$store.commit("setModeType", modeType);
-            this.currentImgSrc = currentColorObj.currentImgSrc;
-            this.defaultColor = currentColorObj.defaultColor;
-            this.activeColor = currentColorObj.activeColor;
+            this.init();
         },
         watch: {
             isPlayed(newIsPlayed, oldIsPlayed) {
+                console.log('>>> isPlayed', newIsPlayed);
                 if(newIsPlayed) {
                     this.initPlay();
                 }
             },
             paused(newPaused, oldPaused) {
+                console.log('>>> paused', newPaused);
                 if(newPaused) {
                     this.clearTimer();
                 }
@@ -185,6 +162,7 @@
                 }
             },
             curLrcIndex(newCurLrcIndex, oldCurLrcIndex) {
+                console.log('>>> curLrcIndex', newCurLrcIndex);
                 if(!this.showDetail) return;
 
                 const lrcBox = this.$refs.lrcBox;
@@ -200,10 +178,33 @@
             }
         },
         methods: {
+            // 根据localStorage中的数据初始化播放信息
+            init() {
+                let mode = 1;
+                let { currentColorObj, modeType } = window.localStorage;
+                if(currentColorObj) {
+                    currentColorObj = JSON.parse(currentColorObj);
+                }
+                else {
+                    currentColorObj = this.lrcColorList[0];
+                }
+                if(!modeType) {
+                    modeType = "order";
+                }
+                if(modeType === "loop") {
+                    mode = 2;
+                }
+                else if(modeType === "random") {
+                    mode = 3;
+                }
+                this.mode = mode;
+                this.$store.commit("setModeType", modeType);
+                this.currentImgSrc = currentColorObj.currentImgSrc;
+                this.defaultColor = currentColorObj.defaultColor;
+                this.activeColor = currentColorObj.activeColor;
+            },
             // 初始化播放信息
             initPlay() {
-                const songData = this.songList[this.curPlayIndex];
-                this.songData = songData;
                 this.progress = 0;
                 this.curPlayTime = 0;
                 this.audio.currentTime = 0;
@@ -260,8 +261,8 @@
                 }
             },
             // 点击进度条更新时间
-            updateProgress(e) {
-                const offsetX = e.offsetX;
+            updateProgress(evt) {
+                const offsetX = evt.offsetX;
                 const targetWidth = this.$refs.progressBar.offsetWidth;
                 this.progress = Number((offsetX / targetWidth * 100).toFixed(2));
                 this.curPlayTime = parseInt((this.endTime * this.progress / 100).toFixed(2));

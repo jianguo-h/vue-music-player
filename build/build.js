@@ -12,13 +12,13 @@ rimraf(distPath, err => {
 
 	webpack(webpackProdConfig, (err, stats) => {
 		if(err) throw err;
-		// process.stdout.write(stats.toString({
-		// 	colors: true,
-		// 	modules: false,
-		// 	children: false,
-		// 	chunks: false,
-		// 	chunkModules: false
-		// }) + '\n\n');
+		process.stdout.write(stats.toString({
+			colors: true,
+			modules: false,
+			children: false,
+			chunks: false,
+			chunkModules: false
+		}) + '\n\n');
 		
 		console.log('Build complete \n');
 		console.log(

@@ -27,12 +27,6 @@
             changePlay(operate) {
                 let curPlayIndex = this.curPlayIndex;
                 operate === "next" ? curPlayIndex++ : curPlayIndex--;
-                /*if(operate === "next") {
-                    curPlayIndex++;
-                }
-                else {
-                    curPlayIndex--;
-                }*/
 
                 this.$store.commit("setCurPlayIndex", curPlayIndex);
                 this.$store.commit("setLock", false);

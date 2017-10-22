@@ -20,7 +20,7 @@
                 </li>
             </ul>
         </div>
-        <div class="header-search-result" v-if = "$route.path.slice(1) === 'search'">
+        <div class="header-search-result" v-else>
             <div class="goback" @click = "$router.go(-1)"></div>
             <div class="searchCount">共有<em>{{ searchCount }}</em>条结果</div>
         </div>
@@ -48,11 +48,11 @@
                     {
                         path: "local",
                         name: "本地"
-                    },
+                    }/*,
                     {
                         path: "collect",
                         name: "已收藏"
-                    }
+                    }*/
                 ]
             }
         },
@@ -65,17 +65,16 @@
             // 点击搜索事件, keyword为关键字
             search(keyword) {
                 if(!keyword || keyword.trim() === '') {
-                    alert("请输入关键字！");
+                    this.$Message.warning("请输入搜索内容");
                     return;
                 };
-                this.$router.push('/search?keyword=' + keyword);	
+                this.$router.push('/search?keyword=' + keyword);
                 this.keyword = '';
             },
             // 搜索框input事件, keyword为关键字
             input() {
                 const keyword = this.keyword;
-                if(!keyword || keyword.trim() === '') 
-                    return;
+                if(!keyword || keyword.trim() === '') return;
 
                 this.resultCount = 0;
                 this.searchTip = '正在搜索...';
@@ -84,10 +83,13 @@
                     if(res.status === 200 && res.statusText === 'OK') {
                         this.resultList = res.data.data[0].RecordDatas;
                         this.resultCount = res.data.data[0].RecordCount;
+                        if(this.resultList.length <= 0) {
+                            this.resultCount = 0;
+                            this.searchTip = '暂无结果...';
+                        }
                     }
                     else {
-                        this.resultCount = 0;
-                        this.searchTip = '暂无结果...';
+                        this.searchTip = '搜索出错, 请稍后重试';
                     }
                 }).catch(err => {
                     this.resultCount = 0;
@@ -165,6 +167,7 @@
                         display: block;
                         &.active {
                             border-bottom: 2px solid #33a3f5;
+                            color: #33a3f5;
                         }
                     }
                 }

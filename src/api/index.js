@@ -16,11 +16,11 @@ export default {
         console.log('>>> [api.requestData] 获取静态json数据中的歌曲列表', path);
         return axios.post(request[path]);
     },
-    // 获取歌曲的hash值
-    getSongHash(songName) {
+    // 获取歌曲的一些信息
+    getSongInfo(songName, page = 1) {
         const requestData = {
-            page: 1,
-            pagesize: 30,
+            page,
+            pagesize: 20,
             keyword: songName,
             platform: "WebFilter",
             userid: -1,
@@ -28,13 +28,13 @@ export default {
             privilege_filter: 0,
             filter: 2
         };
-        console.log('>>> [api.requestData] 获取歌曲的hash值', requestData);
+        console.log('>>> [api.requestData] 获取歌曲的一些信息', requestData);
         return axios.get(request.songsearch, {
             params: { ...requestData }
         });
     },
     // 根据hash值获取歌曲的信息
-    getSongInfo(hash) {
+    play(hash) {
         const requestData = {
             r: "play/getdata",
             hash

@@ -1,5 +1,5 @@
 <template>
-    <div class="content" @scroll = "scrollLoad" ref = "content">
+    <div class="content">
         <banner v-if = "routerPath === 'new'"></banner>
         <div class = "list" :class = "[routerPath + '-songList', {noSongData: songList.length === 0}]">
             <ul v-if = "songList.length > 0">
@@ -42,18 +42,26 @@
         created() {
             this.getList();
         },
+        mounted() {
+            if(this.routerPath === 'search') {
+                document.addEventListener('scroll', () => {
+                    this.scrollLoad();
+                });
+            }
+        },
         watch: {
             "$route": "getList"
         },
         methods: {
             // 渲染列表数据
             getList() {
+                const routerPath = this.routerPath;
                 this.$store.commit("setLoading", true);
-                if(this.routerPath === "search") {
+                if(routerPath === "search") {
                     this.songList = [];
                     this.searchList();
                 }
-                else if(this.routerPath === "collect") {
+                else if(routerPath === "collect") {
                     const collectedArr = window.localStorage.collectedArr;
                     if(!collectedArr) {
                         this.songList = [];
@@ -64,7 +72,7 @@
                     this.$store.commit("setLoading", false);
                 }
                 else {
-                    this.api.getList(this.routerPath).then(res => {
+                    this.api.getList(routerPath).then(res => {
                         console.log('>>> [res] 渲染列表数据', res);
                         if(res.status === 200 && res.statusText === 'OK') {
                             this.songList = res.data.data.slice(0) || [];
@@ -88,35 +96,29 @@
             searchList() {
                 const page = this.page;
                 const keyword = this.$route.query.keyword;
-                this.$http.get("/songsearch", {
-                    params: {
-                        page,
-                        keyword,
-                        // pagesize: 30,
-                        platform: "WebFilter",
-                        userid: -1,
-                        iscorrection: 1,
-                        privilege_filter: 0,
-                        filter: 2
-                    }
-                }).then(res => {
-                    const data = JSON.parse(res.body).data;
-                    const searchCount = data.total;
-                    this.totalPage = Math.ceil(searchCount / 20);
-                    for(const list of data.lists) {
-                        const songObj = {
-                            SingerName: list.SingerName,
-                            SongName: list.SongName,
-                            FileName: list.FileName
-                        }
-                        this.songList.push(songObj);
-                    }
 
-                    this.initCollect();
-                    this.$store.commit("setLoading", false);
-                    this.$store.commit("setSearchCount", searchCount);
-                }, res => {
-                    alert("暂无搜索结果！");
+                this.api.getSongInfo(keyword, page).then(res => {
+                    console.log('>>> [res] 获取歌曲列表', res);
+                    const data = res.data.data;
+                    if(res.status === 200 && res.statusText === 'OK') {
+                        const searchCount = data.total;
+                        this.totalPage = Math.ceil(searchCount / 20);
+                        const songList = this.songList.slice(0);
+                        const searchSongList = data.lists.map(song => {
+                            return {
+                                SingerName: song.SingerName,
+                                SongName: song.SongName,
+                                FileName: song.FileName
+                            };
+                        });
+                        this.songList = songList.concat(searchSongList);
+                        // this.initCollect();
+                        this.$store.commit("setLoading", false);
+                        this.$store.commit("setSearchCount", searchCount);
+                    }
+                }).catch(err => {
+                    console.log('>>> [err] 获取歌曲列表', err);
+                    this.$Message.error('网络出现错误或服务暂时不可用');
                 });
             },
             // 初始化收藏
@@ -147,13 +149,16 @@
             },
             // 滑动加载
             scrollLoad() {
-                if(this.loading || this.loaded || this.routerPath !== "search") {
+                if(this.loading || this.loaded) {
                     return;
                 }
-                const content = this.$refs.content;
-                const scrollTop = content.scrollTop;                // 元素滚动的高度
-                const scrollHeight = content.scrollHeight;          // 元素的实际高度(包括滚动的高度)
-                const clientHeight = content.clientHeight;          // 元素在窗口可见的高度(不包括滚动的高度)
+                const docEl = document.documentElement
+                /* 
+                 scrollTop 元素滚动的高度
+                 scrollHeight 元素的实际高度(包括滚动的高度)
+                 clientHeight 元素在窗口可见的高度(不包括滚动的高度)
+                */
+                const { scrollTop, scrollHeight, clientHeight } = docEl;
                 const offsetHeight = scrollHeight - scrollTop - clientHeight;
 
                 if(offsetHeight <= 100) {

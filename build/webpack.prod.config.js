@@ -16,16 +16,23 @@ const webpackProdConfig = webpackMerge(webpackBaseConfig, {
 				test: /\.less$/,
 				use: ExtractTextPlugin.extract({
 					fallback: 'style-loader',
-					use: ['css-loader', 'postcss-loader', 'less-loader']
+					use: ['css-loader', 'less-loader']
 				})
-			}
+			},
+			/*{
+				test: /\.css$/,
+				use: ExtractTextPlugin.extract({
+					fallback: 'style-loader',
+					use: ['css-loader']
+				})
+			}*/
 		]
 	},
 	plugins: [
 		new webpack.DefinePlugin({
 			'process.env.NODE_ENV': JSON.stringify(config.build.env)
 		}),
-		// 提取css
+		// 提取less
 		new ExtractTextPlugin({
 			filename: 'css/app.bundle.css'
 		}),

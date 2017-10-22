@@ -3,7 +3,7 @@ import App from './App';
 import axios from 'axios';
 import store from './store';
 import router from './router';
-import { Message, Loading } from 'element-ui';
+import { Message } from 'element-ui';
 import 'element-ui/lib/theme-default/index.css';
 
 import api from './api';
@@ -15,7 +15,6 @@ if(module.hot) {
 
 adapt();
 Vue.prototype.$Message = Message;
-Vue.prototype.$Loading = Loading.service;
 Vue.prototype.api = api;
 Vue.config.productionTip = false;
 
