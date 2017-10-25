@@ -48,11 +48,7 @@
                     {
                         path: "local",
                         name: "本地"
-                    }/*,
-                    {
-                        path: "collect",
-                        name: "已收藏"
-                    }*/
+                    }
                 ]
             }
         },
@@ -65,7 +61,7 @@
             // 点击搜索事件, keyword为关键字
             search(keyword) {
                 if(!keyword || keyword.trim() === '') {
-                    this.$Message.warning("请输入搜索内容");
+                    this.$MessageBox.alert("请输入搜索内容");
                     return;
                 };
                 this.$router.push('/search?keyword=' + keyword);
@@ -105,6 +101,12 @@
     @import (reference) '../less/mixin.less';
 
     #header {
+        position: fixed;
+        width: 100%;
+        z-index: 10;
+        top: 0;
+        left: 0;
+        background-color: #fff;
         .header-search {
             display: flex;
             align-items: center;

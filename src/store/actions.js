@@ -1,9 +1,9 @@
 import api from '../api';
-import { Message } from 'element-ui';
+import { Toast, Indicator } from 'mint-ui';
 
 export default {
     playSong({ commit, getters }) {
-        commit("setLoading", true);
+        Indicator.open('加载中...');
         commit("setIsPlayed", false);
         commit("setAudioSrc", "");
         commit("setCurPlayLrcArr", []);
@@ -18,7 +18,7 @@ export default {
                 play(hash);
             }
             else {
-                Message.error({
+                Toast.error({
                     message: '播放歌曲失败',
                     duration: 3
                 });
@@ -26,7 +26,7 @@ export default {
             }
         }).catch(err => {
             console.log('>>> [err] 获取歌曲的hash值', err);
-            Message.error('网络出现错误或服务暂时不可用');
+            Toast.error('网络出现错误或服务暂时不可用');
         });
 
         const play = hash => {
@@ -35,18 +35,18 @@ export default {
                 if(res.status === 200 && res.statusText === 'OK') {
                     const data = res.data.data;
                     if(!data.play_url || data.play_url === "") {
-                        Message.error({
+                        Toast.error({
                             message: '暂无播放来源',
                             duration: 3
                         });
-                        commit("setLoading", false);
+                        Indicator.close('加载中...');
                         return;
                     }
                     const audioSrc = data.play_url;
                     const curPlayImgSrc = data.img;
                     const lyrics = data.lyrics;
-    
-                    commit("setLoading", false);
+
+                    Indicator.close();
                     commit("setCanPlayed", true);
                     commit("setAudioSrc", audioSrc);
                     commit("setCurPlayLrcArr", lyrics);
@@ -54,14 +54,14 @@ export default {
                 }
                 else {
                     console.log('>>> 获取歌曲信息失败');
-                    Message.error({
+                    Toast.error({
                         message: '播放歌曲失败',
                         duration: 3
                     });
                 }
             }).catch(err => {
                 console.log('>>> [err] 获取歌曲的信息', err);
-                Message.error('网络出现错误或服务暂时不可用');
+                Toast.error('网络出现错误或服务暂时不可用');
             });
         }
     }

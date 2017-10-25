@@ -1,6 +1,8 @@
+const path = require('path');
 const webpack = require('webpack');
 const config = require('../config');
 const webpackMerge = require('webpack-merge');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const webpackBaseConfig = require('./webpack.base.config');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
@@ -15,24 +17,40 @@ const webpackProdConfig = webpackMerge(webpackBaseConfig, {
 			{
 				test: /\.less$/,
 				use: ExtractTextPlugin.extract({
-					fallback: 'style-loader',
+					fallback: 'style-loader', 
 					use: ['css-loader', 'less-loader']
 				})
 			},
-			/*{
+			{
 				test: /\.css$/,
 				use: ExtractTextPlugin.extract({
-					fallback: 'style-loader',
+					fallback: 'style-loader', 
 					use: ['css-loader']
 				})
-			}*/
+			},
+			{
+				test: /\.vue$/,
+				loader: 'vue-loader',
+				options: {
+					loaders: {
+						less: ExtractTextPlugin.extract({
+							fallback: 'style-loader',
+							use: ['css-loader', 'less-loader']
+						}),
+						css: ExtractTextPlugin.extract({
+							fallback: 'style-loader',
+							use: ['css-loader']
+						}),
+					}
+				}
+			}
 		]
 	},
 	plugins: [
 		new webpack.DefinePlugin({
 			'process.env.NODE_ENV': JSON.stringify(config.build.env)
 		}),
-		// 提取less
+		// 提取less和css
 		new ExtractTextPlugin({
 			filename: 'css/app.bundle.css'
 		}),
@@ -52,8 +70,22 @@ const webpackProdConfig = webpackMerge(webpackBaseConfig, {
 			compress: {
 				warnings: false
 			},
+			except: ['$super', '$', 'exports', 'require'],
 			sourceMap: true
-		})
+		}),
+		// 提取公共的js
+		new webpack.optimize.CommonsChunkPlugin({
+			name: 'vendors',
+			filename: 'js/vendors.js',
+			allChunks: true
+			// minChunks: Infinity
+		}),
+		new CopyWebpackPlugin([
+			{
+				from: path.join(__dirname, '../static'),
+				to: 'static'
+			}
+		])
 	]
 });
 

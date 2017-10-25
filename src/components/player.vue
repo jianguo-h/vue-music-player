@@ -68,7 +68,7 @@
                     this.$store.commit("setIsPlayed", true);
                 }
                 else {
-                    this.$Message.error({
+                    this.$Toast({
                         message: '歌曲暂时无法播放, 请稍后重试',
                         duration: 3
                     });

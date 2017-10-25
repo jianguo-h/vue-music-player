@@ -12,9 +12,6 @@
                 </div>
             </div>
             <div class="playDetail-bottom">
-                <div class="collect-box">
-                    <!-- <collect v-if = "view !== 'collect' && showDetail" :songList = "songList" :songData = "songData"></collect> -->
-                </div>
                 <div class="lrcColor-box">
                     <div class="cur-lrcColor" :style = "{backgroundImage: 'url('+ currentImgSrc +')'}" @click = "isShowColorList = !isShowColorList"></div>
                     <transition name = "fade">
@@ -60,7 +57,6 @@
 </template>
 
 <script>
-    // import collect from "./collect";
     import playOperate from "./play-operate";
     import { mapState, mapGetters } from "vuex";
 
@@ -356,8 +352,7 @@
             }
         },
         components: {
-            'play-operate': playOperate,
-            // collect
+            'play-operate': playOperate
         }
     }
 </script>
@@ -419,11 +414,6 @@
         }
         .playDetail-bottom {
             position: relative;
-            .collect-box {
-                position: absolute;
-                left: 0.8333rem;
-                top: -0.5556rem;
-            }
             .lrcColor-box {
                 position: absolute;
                 right: 0.8333rem;

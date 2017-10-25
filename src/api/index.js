@@ -9,7 +9,7 @@ export default {
             keyword
         };
         console.log(">>> [api.requestData] 根据关键字搜索", requestData);
-        return axios.post(request.search, requestData); 
+        return axios.post(request.search, requestData);
     },
     // 获取静态json数据中的歌曲列表
     getList(path) {
