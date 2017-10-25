@@ -2,28 +2,25 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-	entry: ['./src/main.js'],
+	entry: {
+		app: './src/main.js',
+		// vendors: ['vue', 'vue-router', 'vuex', 'axios']
+	},
 	output: {
-		filename: 'app.buldle.js',
-		path: path.resolve(__dirname, '../dist')
+		filename: 'js/app.buldle.js',
+		path: path.resolve(__dirname, '../dist'),
+		// chunkFilename: '[id].[chunkhash].js'
 	},
 	module: {
 		rules: [
-			/*{
-				enforce: 'pre',
-				test: /\.(js|vue)$/,
-				exclude: [
-					path.resolve(__dirname, '../node_modules'),
-					path.resolve(__dirname, '../dist')
-				],
-				use: ['eslint-loader']
-			},*/
 			{
 				test: /\.vue$/,
 				loader: 'vue-loader',
+				exclude: /node_modules/,
 				options: {
 					loaders: {
 						js: 'babel-loader',
+						css: 'vue-style-loader!css-loader!postcss-loader',
 						less: "vue-style-loader!css-loader!postcss-loader!less-loader"
 					}
 				}
@@ -67,7 +64,7 @@ module.exports = {
 	},
 	resolve: {
 		alias: {
-			'vue$': 'vue/dist/vue.esm.js',
+			'vue': 'vue/dist/vue.esm.js'
 		},
 		extensions: ['.js', '.vue', '.json']
 	},
@@ -75,7 +72,8 @@ module.exports = {
 		new HtmlWebpackPlugin({
 			filename: 'index.html',
 			template: './index.html',
-			inject: true
+			// chunks: ['vendors'],
+			inject: true,
 		}),
 	]
 }

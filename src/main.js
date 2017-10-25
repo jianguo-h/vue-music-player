@@ -1,11 +1,8 @@
 import Vue from 'vue';
 import App from './App';
-import axios from 'axios';
+import { Toast, Indicator, MessageBox, Loadmore } from 'mint-ui';
 import store from './store';
 import router from './router';
-import { Message } from 'element-ui';
-import 'element-ui/lib/theme-default/index.css';
-
 import api from './api';
 import adapt from './js/adapt';
 
@@ -14,8 +11,11 @@ if(module.hot) {
 }
 
 adapt();
-Vue.prototype.$Message = Message;
+Vue.component(Loadmore.name, Loadmore);
 Vue.prototype.api = api;
+Vue.prototype.$Toast = Toast;
+Vue.prototype.$Indicator = Indicator;
+Vue.prototype.$MessageBox = MessageBox;
 Vue.config.productionTip = false;
 
 const vm = new Vue({
@@ -25,3 +25,4 @@ const vm = new Vue({
     template: '<App/>',
     components: { App }
 });
+window.vm = vm;

@@ -1,6 +1,5 @@
 <template>
     <div id = "app">
-        <loading></loading>
         <v-header></v-header>
         <keep-alive>
             <router-view></router-view>
@@ -11,13 +10,11 @@
 
 <script>
     import header from './components/header';
-    import loading from './components/loading';
     import player from './components/player';
     export default {
         name: 'app',
         components: {
             'v-header': header,
-            loading,
             player
         }
     }
@@ -25,4 +22,7 @@
 
 <style lang = "less">
     @import "./less/reset.less";
+    #app {
+        padding-top: 2.6944rem;
+    }
 </style>

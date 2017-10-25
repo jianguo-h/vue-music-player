@@ -1,31 +1,36 @@
 <template>
     <div class="content">
         <banner v-if = "routerPath === 'new'"></banner>
-        <div class = "list" :class = "[routerPath + '-songList', {noSongData: songList.length === 0}]">
+        <mt-loadmore class = "list">
             <ul v-if = "songList.length > 0">
                 <li v-for = "(song, index) in songList" :class = "{active: view === routerPath && index === curPlayIndex && isPlayed}" @click = "play(index)">
                     <p class = "filename">{{ song.FileName }}</p>
-                    <!-- <collect :songData = "songData" :songList = "songList"></collect> -->
+                </li>
+            </ul>
+        </mt-loadmore>
+        <!-- <div class = "list" :class = "[routerPath + '-songList', {noSongData: songList.length === 0}]">
+            <ul v-if = "songList.length > 0">
+                <li v-for = "(song, index) in songList" :class = "{active: view === routerPath && index === curPlayIndex && isPlayed}" @click = "play(index)">
+                    <p class = "filename">{{ song.FileName }}</p>
                 </li>
             </ul>
             <p v-else>暂无数据！</p>
-        </div>
+        </div> -->
     </div>
 </template>
 
 <script>
     import banner from "./banner";
-    // import collect from "./collect";
     import { mapState } from "vuex";
 
     export default {
         name: "list",
         data() {
             return {
-                songList: [],		// 存储歌曲列表的数组
-                page: 1,			// 加载的页数
-                totalPage: 0,		// 总页数
-                loaded: false		// 数据是否全部加载完毕
+                songList: [],       // 存储歌曲列表的数组
+                page: 1,            // 加载的页数
+                totalPage: 0,       // 总页数
+                loaded: false       // 数据是否全部加载完毕
             }
         },
         computed: {
@@ -56,39 +61,28 @@
             // 渲染列表数据
             getList() {
                 const routerPath = this.routerPath;
-                this.$store.commit("setLoading", true);
+                this.$Indicator.open('加载中...');
                 if(routerPath === "search") {
                     this.songList = [];
                     this.searchList();
-                }
-                else if(routerPath === "collect") {
-                    const collectedArr = window.localStorage.collectedArr;
-                    if(!collectedArr) {
-                        this.songList = [];
-                    }
-                    else {
-                        this.songList = JSON.parse(collectedArr);
-                    }
-                    this.$store.commit("setLoading", false);
                 }
                 else {
                     this.api.getList(routerPath).then(res => {
                         console.log('>>> [res] 渲染列表数据', res);
                         if(res.status === 200 && res.statusText === 'OK') {
                             this.songList = res.data.data.slice(0) || [];
-                            this.$store.commit("setLoading", false);
-                            // this.initCollect();
+                            this.$Indicator.close();
                         }
                         else {
                             this.songList = [];
-                            this.$Message.error({
+                            this.$Toast({
                                 message: '获取歌曲列表失败',
                                 duration: 3
                             });
                         }
                     }).catch(err => {
                         console.log('>>> [err] 渲染列表数据', err);
-                        this.$Message.error('网络出现错误或服务暂时不可用');
+                        this.$Toast('网络出现错误或服务暂时不可用');
                     });
                 }
             },
@@ -112,31 +106,14 @@
                             };
                         });
                         this.songList = songList.concat(searchSongList);
-                        // this.initCollect();
-                        this.$store.commit("setLoading", false);
+                        this.$Indicator.close();
                         this.$store.commit("setSearchCount", searchCount);
                     }
                 }).catch(err => {
                     console.log('>>> [err] 获取歌曲列表', err);
-                    this.$Message.error('网络出现错误或服务暂时不可用');
+                    this.$Toast('网络出现错误或服务暂时不可用');
                 });
             },
-            // 初始化收藏
-            /*initCollect() {
-                let collectedArr = window.localStorage.collectedArr;
-                if(collectedArr === "" || !collectedArr) return;
-
-                collectedArr = JSON.parse(collectedArr);
-                for(let [index, songData] of this.songList.entries()) {
-                    for(let collectObj of collectedArr) {
-                        if(songData.FileName === collectObj.FileName) {
-                            let newSongData = Object.assign({}, songData, {"collected": true});
-                            this.songList.splice(index, 1, newSongData);
-                            break;
-                        }
-                    }
-                }
-            },*/
             // 将部分数据传给player组件
             play(CurPlayIndex) {
                 const view = this.routerPath;
@@ -164,18 +141,17 @@
                 if(offsetHeight <= 100) {
                     if(this.page < this.totalPage) {
                         this.page++;
-                        this.$store.commit("setLoading", true);
+                        this.$Indicator.open('加载中...');
                         this.searchList();
                     }
                     else {
                         this.loaded = true;
-                        this.$Message.info('已加载全部数据！');
+                        this.$Toast('已加载全部数据！');
                     }
                 }
             }
         },
         components: {
-            // collect,
             banner
         }
     }
@@ -184,8 +160,6 @@
 <style lang = "less">
     @import (reference) '../less/mixin.less';
     .content {
-        flex: 1;
-        overflow-y: scroll;
         .list {
             ul {
                 padding: 0 0.2778rem;
