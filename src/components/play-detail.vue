@@ -367,6 +367,7 @@
         width: 100%;
     }
     .playDetail {
+        z-index: 99;
         display: flex;
         flex-direction: column;
         background-size: cover;

@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import App from './App';
-import { Toast, Indicator, MessageBox, Loadmore } from 'mint-ui';
+import { Toast, Indicator, MessageBox } from 'mint-ui';
 import store from './store';
 import router from './router';
 import api from './api';
@@ -11,7 +11,6 @@ if(module.hot) {
 }
 
 adapt();
-Vue.component(Loadmore.name, Loadmore);
 Vue.prototype.api = api;
 Vue.prototype.$Toast = Toast;
 Vue.prototype.$Indicator = Indicator;

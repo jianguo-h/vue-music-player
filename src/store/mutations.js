@@ -2,9 +2,6 @@ export default {
     setView(state, view) {
         state.view = view;
     },
-    setLoading(state, loading) {
-        state.loading = loading;
-    },
     setSongList(state, songList) {
         state.songList = songList;
     },

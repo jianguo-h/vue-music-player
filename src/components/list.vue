@@ -1,21 +1,14 @@
 <template>
     <div class="content">
         <banner v-if = "routerPath === 'new'"></banner>
-        <mt-loadmore class = "list">
-            <ul v-if = "songList.length > 0">
-                <li v-for = "(song, index) in songList" :class = "{active: view === routerPath && index === curPlayIndex && isPlayed}" @click = "play(index)">
-                    <p class = "filename">{{ song.FileName }}</p>
-                </li>
-            </ul>
-        </mt-loadmore>
-        <!-- <div class = "list" :class = "[routerPath + '-songList', {noSongData: songList.length === 0}]">
+        <div class = "list" :class = "[routerPath + '-songList', {noSongData: songList.length === 0}]">
             <ul v-if = "songList.length > 0">
                 <li v-for = "(song, index) in songList" :class = "{active: view === routerPath && index === curPlayIndex && isPlayed}" @click = "play(index)">
                     <p class = "filename">{{ song.FileName }}</p>
                 </li>
             </ul>
             <p v-else>暂无数据！</p>
-        </div> -->
+        </div>
     </div>
 </template>
 
@@ -30,13 +23,13 @@
                 songList: [],       // 存储歌曲列表的数组
                 page: 1,            // 加载的页数
                 totalPage: 0,       // 总页数
-                loaded: false       // 数据是否全部加载完毕
+                allLoaded: false,   // 数据是否全部加载完毕
+                isLoading: false    // 是否处于加载中
             }
         },
         computed: {
             ...mapState([
                 "curPlayIndex",
-                "loading",
                 "view",
                 "isPlayed"
             ]),
@@ -126,10 +119,10 @@
             },
             // 滑动加载
             scrollLoad() {
-                if(this.loading || this.loaded) {
+                if(this.isLoading || this.allLoaded) {
                     return;
                 }
-                const docEl = document.documentElement
+                const docEl = document.documentElement;
                 /* 
                  scrollTop 元素滚动的高度
                  scrollHeight 元素的实际高度(包括滚动的高度)
@@ -141,11 +134,12 @@
                 if(offsetHeight <= 100) {
                     if(this.page < this.totalPage) {
                         this.page++;
+                        this.isLoading = true;
                         this.$Indicator.open('加载中...');
                         this.searchList();
                     }
                     else {
-                        this.loaded = true;
+                        this.allLoaded = true;
                         this.$Toast('已加载全部数据！');
                     }
                 }
