@@ -1,6 +1,5 @@
 export default {
     view: "",                   // 当前播放歌曲所属的路由
-    loading: false,             // loading状态
     songList: [],               // 歌曲列表数组
     searchCount: 0,             // 搜索结果歌曲的数量
     showDetail: false,          // 是否显示详情页
