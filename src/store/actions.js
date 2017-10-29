@@ -9,6 +9,8 @@ export default {
         commit("setCurPlayLrcArr", []);
         commit("setCurPlayImgSrc", "../../static/img/singer-default.jpg");
         commit("setPaused");
+        commit('setLock', false);
+        commit('setCurLrcIndex', 0);
 
         const songName = getters.curPlayFileName;
         api.getSongInfo(songName).then(res => {
@@ -18,7 +20,7 @@ export default {
                 play(hash);
             }
             else {
-                Toast.error({
+                Toast({
                     message: '播放歌曲失败',
                     duration: 3
                 });
@@ -26,7 +28,7 @@ export default {
             }
         }).catch(err => {
             console.log('>>> [err] 获取歌曲的hash值', err);
-            Toast.error('网络出现错误或服务暂时不可用');
+            Toast('网络出现错误或服务暂时不可用');
         });
 
         const play = hash => {
@@ -34,8 +36,8 @@ export default {
                 console.log('>>> [res] 获取歌曲的信息', res);
                 if(res.status === 200 && res.statusText === 'OK') {
                     const data = res.data.data;
-                    if(!data.play_url || data.play_url === "") {
-                        Toast.error({
+                    if(!data.play_url) {
+                        Toast({
                             message: '暂无播放来源',
                             duration: 3
                         });
@@ -54,14 +56,14 @@ export default {
                 }
                 else {
                     console.log('>>> 获取歌曲信息失败');
-                    Toast.error({
+                    Toast({
                         message: '播放歌曲失败',
                         duration: 3
                     });
                 }
             }).catch(err => {
                 console.log('>>> [err] 获取歌曲的信息', err);
-                Toast.error('网络出现错误或服务暂时不可用');
+                Toast('网络出现错误或服务暂时不可用');
             });
         }
     }
