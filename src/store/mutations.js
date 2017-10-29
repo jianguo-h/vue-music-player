@@ -55,10 +55,11 @@ export default {
         }
         const lrc = lyrics.replace(/\n/g, "").split("[").slice(1);
         const curPlayLrcArr = [];
-        for(const item of lrc) {
+        for(const [index, item] of lrc.entries()) {
             const times = item.split("]")[0].replace(".", ":").split(":");
             const time = Number(times[0]) * 60 + Number(times[1]) + Number(times[2]) / 1000;
             const obj = {
+                index,
                 startTime: time.toFixed(2),
                 curLrc: item.split("]")[1]
             }
@@ -74,5 +75,15 @@ export default {
     },
     setModeType(state, modeType) {
         state.modeType = modeType;
+    },
+    setCurLrcIndex(state, curLrcIndex) {
+        state.curLrcIndex = curLrcIndex;
+    },
+    setLrcColor(state, lrcColor) {
+        state.lrcColor = lrcColor;
+    },
+    setLrcSwitch(state, lrcSwitch) {
+        state.lrcSwitch = lrcSwitch;
+        window.localStorage.lrcSwitch = lrcSwitch;
     }
 }

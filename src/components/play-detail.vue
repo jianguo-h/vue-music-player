@@ -12,6 +12,9 @@
                 </div>
             </div>
             <div class="playDetail-bottom">
+                <div class="lrc-switch">
+                    <mt-switch :value = 'lrcSwitch' @change = 'toggleLrcSwitch'></mt-switch>
+                </div>
                 <div class="lrcColor-box">
                     <div class="cur-lrcColor" :style = "{backgroundImage: 'url('+ currentImgSrc +')'}" @click = "isShowColorList = !isShowColorList"></div>
                     <transition name = "fade">
@@ -123,7 +126,8 @@
                 "curPlayImgSrc",
                 "curPlayLrcArr",
                 "lock",
-                "modeType"
+                "modeType",
+                'lrcSwitch'
             ]),
             ...mapGetters([
                 "curPlayFileName",
@@ -159,6 +163,7 @@
             },
             curLrcIndex(newCurLrcIndex, oldCurLrcIndex) {
                 console.log('>>> curLrcIndex', newCurLrcIndex);
+                this.$store.commit('setCurLrcIndex', newCurLrcIndex);
                 if(!this.showDetail) return;
 
                 const lrcBox = this.$refs.lrcBox;
@@ -177,7 +182,7 @@
             // 根据localStorage中的数据初始化播放信息
             init() {
                 let mode = 1;
-                let { currentColorObj, modeType } = window.localStorage;
+                let { currentColorObj, modeType, lrcSwitch } = window.localStorage;
                 if(currentColorObj) {
                     currentColorObj = JSON.parse(currentColorObj);
                 }
@@ -193,8 +198,20 @@
                 else if(modeType === "random") {
                     mode = 3;
                 }
-                this.mode = mode;
+                if(lrcSwitch === 'false') {
+                    lrcSwitch = false;
+                }
+                else {
+                    lrcSwitch = true
+                }
+                
                 this.$store.commit("setModeType", modeType);
+                this.$store.commit('setLrcSwitch', lrcSwitch);
+                this.$store.commit('setLrcColor', {
+                    defaultColor: currentColorObj.defaultColor,
+                    activeColor: currentColorObj.activeColor
+                });
+                this.mode = mode;
                 this.currentImgSrc = currentColorObj.currentImgSrc;
                 this.defaultColor = currentColorObj.defaultColor;
                 this.activeColor = currentColorObj.activeColor;
@@ -333,8 +350,17 @@
                     defaultColor: this.defaultColor,
                     activeColor: this.activeColor
                 }
+                this.$store.commit('setLrcColor', {
+                    defaultColor: this.defaultColor,
+                    activeColor: this.activeColor
+                });
                 // 存入localStorage中
                 window.localStorage.currentColorObj = JSON.stringify(currentColorObj);
+            },
+            // 悬浮歌词开关
+            toggleLrcSwitch(lrcSwitch) {
+                lrcSwitch = !lrcSwitch;
+                this.$store.commit('setLrcSwitch', lrcSwitch);
             }
         },
         filters: {
@@ -415,6 +441,11 @@
         }
         .playDetail-bottom {
             position: relative;
+            .lrc-switch {
+                position: absolute;
+                left: 0.8333rem;
+                top: -0.8333rem;
+            }
             .lrcColor-box {
                 position: absolute;
                 right: 0.8333rem;
@@ -547,11 +578,5 @@
     .move-enter, .move-leave-active {
         opacity: 0;
         transform: translate3d(100%, 0, 0);
-    } 
-    .fade-enter-active, .fade-leave-active {
-        transition: all .5s;
     }
-    .fade-enter, .fade-leave-active {
-        opacity: 0;
-    }  
 </style>

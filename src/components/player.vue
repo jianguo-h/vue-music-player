@@ -60,7 +60,6 @@
             // 监听audio的canplay事件
             canplay() {
                 if(this.lock) return;
-
                 const audio = this.$refs.audio;
                 if(audio.readyState === 4) {
                     audio.play();

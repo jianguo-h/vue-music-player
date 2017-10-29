@@ -29,7 +29,7 @@
                 operate === "next" ? curPlayIndex++ : curPlayIndex--;
 
                 this.$store.commit("setCurPlayIndex", curPlayIndex);
-                this.$store.commit("setLock", false);
+                // this.$store.commit("setLock", false);
                 this.$store.dispatch("playSong");
             }
         }
