@@ -204,7 +204,7 @@
                 else {
                     lrcSwitch = true
                 }
-                
+
                 this.$store.commit("setModeType", modeType);
                 this.$store.commit('setLrcSwitch', lrcSwitch);
                 this.$store.commit('setLrcColor', {

@@ -37,10 +37,10 @@
             ]),
             // 边界对象
             boundary() {
-                const left = 0;         
-                const right = document.body.offsetWidth - this.$refs.suspendLyric.offsetWidth;      
-                const top = 0;          
-                const bottom = document.body.offsetHeight - this.$refs.suspendLyric.offsetHeight;     
+                const left = 0;
+                const right = document.body.offsetWidth - this.$refs.suspendLyric.offsetWidth;
+                const top = 0;
+                const bottom = document.body.offsetHeight - this.$refs.suspendLyric.offsetHeight;
                 return {
                     left,       // 左边界
                     right,      // 右边界

@@ -27,6 +27,7 @@ export default {
                 console.log('>>> 获取歌曲的hash值失败');
             }
         }).catch(err => {
+            Indicator.close();
             console.log('>>> [err] 获取歌曲的hash值', err);
             Toast('网络出现错误或服务暂时不可用');
         });
@@ -62,6 +63,7 @@ export default {
                     });
                 }
             }).catch(err => {
+                Indicator.close();
                 console.log('>>> [err] 获取歌曲的信息', err);
                 Toast('网络出现错误或服务暂时不可用');
             });
