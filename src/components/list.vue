@@ -74,6 +74,7 @@
                             });
                         }
                     }).catch(err => {
+                        this.$Indicator.close();
                         console.log('>>> [err] 渲染列表数据', err);
                         this.$Toast('网络出现错误或服务暂时不可用');
                     });
@@ -103,6 +104,7 @@
                         this.$store.commit("setSearchCount", searchCount);
                     }
                 }).catch(err => {
+                    this.$Indicator.close();
                     console.log('>>> [err] 获取歌曲列表', err);
                     this.$Toast('网络出现错误或服务暂时不可用');
                 });
