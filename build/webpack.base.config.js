@@ -3,48 +3,27 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
 	entry: {
-		app: './src/main.js',
-		// vendors: ['vue', 'vue-router', 'vuex', 'axios']
+		app: './src/main.js'
 	},
 	output: {
 		filename: 'js/app.buldle.js',
 		path: path.resolve(__dirname, '../dist'),
-		// chunkFilename: '[id].[chunkhash].js'
 	},
 	module: {
 		rules: [
-			{
-				test: /\.vue$/,
-				loader: 'vue-loader',
-				exclude: /node_modules/,
-				options: {
-					loaders: {
-						js: 'babel-loader',
-						css: 'vue-style-loader!css-loader!postcss-loader',
-						less: "vue-style-loader!css-loader!postcss-loader!less-loader"
-					}
-				}
-			},
 			{
 				test: /\.js$/,
 				exclude: /node_modules/,
 				use: ["babel-loader"]
 			},  
-			{
-				test: /\.less$/,
-				use: ['style-loader', 'css-loader', 'postcss-loader', 'less-loader']
-			},
-			{
-		        test: /\.css$/,
-		        use: ['style-loader', 'css-loader']
-			},
+			
 			{
 				test: /\.(eot|svg|ttf|woff|woff2)$/,
 				use: [
 					{
 						loader: 'url-loader',
 						options: {
-							limit: 10240
+							limit: 1024 * 10
 						}
 					}
 				]
@@ -55,7 +34,7 @@ module.exports = {
 					{
 						loader: 'url-loader',
 						options: {
-							limit: 10240
+							limit: 1024 * 10
 						}
 					}
 				]
@@ -70,10 +49,9 @@ module.exports = {
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
-			filename: 'index.html',
-			template: './index.html',
-			// chunks: ['vendors'],
 			inject: true,
+			filename: 'index.html',
+			template: './index.html'
 		}),
 	]
 }

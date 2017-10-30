@@ -9,6 +9,9 @@ const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 const webpackProdConfig = webpackMerge(webpackBaseConfig, {
 	devtool: false,
+	entry: {
+		vendors: ['vue', 'vue-router', 'vuex', 'axios']
+	},
 	output: {
 		publicPath: config.build.publicPath
 	},
@@ -50,9 +53,17 @@ const webpackProdConfig = webpackMerge(webpackBaseConfig, {
 		new webpack.DefinePlugin({
 			'process.env.NODE_ENV': JSON.stringify(config.build.env)
 		}),
+		// 提取公共的js
+		new webpack.optimize.CommonsChunkPlugin({
+			name: 'vendors',
+			filename: 'js/vendors.js',
+			allChunks: true,
+			minChunks: Infinity
+		}),
 		// 提取less和css
 		new ExtractTextPlugin({
-			filename: 'css/app.bundle.css'
+			filename: 'css/app.bundle.css',
+			allChunks: true
 		}),
 		// 压缩css
 		new OptimizeCssAssetsPlugin({
@@ -73,13 +84,7 @@ const webpackProdConfig = webpackMerge(webpackBaseConfig, {
 			except: ['$super', '$', 'exports', 'require'],
 			sourceMap: true
 		}),
-		// 提取公共的js
-		new webpack.optimize.CommonsChunkPlugin({
-			name: 'vendors',
-			filename: 'js/vendors.js',
-			allChunks: true
-			// minChunks: Infinity
-		}),
+		// 拷贝静态文件
 		new CopyWebpackPlugin([
 			{
 				from: path.join(__dirname, '../static'),
