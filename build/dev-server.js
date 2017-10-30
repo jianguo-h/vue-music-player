@@ -65,7 +65,6 @@ app.use('/static', express.static(static.path));
 app.use('/static/img', express.static(static.imgPath));
 app.use('/static/data', express.static(static.dataPath));
 
-
 let _resolve;
 const readyPromise = new Promise((resolve, reject) => {
 	_resolve = resolve;
@@ -75,9 +74,7 @@ console.log('> Starting dev server...')
 webpackDevMiddlewareInstance.waitUntilValid(() => {
 	console.log('server start at ' + url);
 	if(process.env.NODE_ENV === config.dev.env) {
-		opn(url, {
-			app: 'chrome'
-		});
+		opn(url);
 	}
 	_resolve();
 });
