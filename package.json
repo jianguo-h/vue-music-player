@@ -5,7 +5,8 @@
   "main": ".eslintrc.js",
   "scripts": {
     "dev": "set NODE_ENV=development&&node build/dev-server.js",
-    "build": "set NODE_ENV=production&&node build/build.js"
+    "build": "set NODE_ENV=production&&node build/build.js",
+    "start": "node express/index.js"
   },
   "repository": {
     "type": "git",

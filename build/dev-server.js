@@ -3,6 +3,7 @@ const path = require('path');
 const webpack = require('webpack');
 const config = require('../config');
 const router = require('../router');
+const songData = require('../static/data/song.json');
 const webpackDevConfig = require('./webpack.dev.config');
 const httpProxyMiddleware = require('http-proxy-middleware');
 const webpackDevMiddleware = require('webpack-dev-middleware');
@@ -21,7 +22,7 @@ if(!process.env.NODE_ENV) {
 }
 
 // config router
-router(express, app);
+router(express, app, songData);
 
 const webpackDevMiddlewareInstance = webpackDevMiddleware(compiler, {
 	stats: {
