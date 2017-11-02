@@ -1,0 +1,188 @@
+{
+	"local": [
+		{
+			"SongName": "年轮",
+			"SingerName": "张碧晨",
+			"FileName": "张碧晨 - 年轮",
+			"collected": false
+		}, 
+		{
+			"SongName": "走在冷风中",
+			"SingerName": "刘思涵",
+			"FileName": "刘思涵 - 走在冷风中",
+			"collected": false
+		}, 
+		{
+			"SongName": "剑伤",
+			"SingerName": "李易峰",
+			"FileName": "李易峰 - 剑伤",
+			"collected": false
+		}, 
+		{
+			"SongName": "海阔天空",
+			"SingerName": "Beyond",
+			"FileName": "Beyond - 海阔天空",
+			"collected": false
+		}, 
+		{
+			"SongName": "就算没有如果",
+			"SingerName": "香香",
+			"FileName": "香香 - 就算没有如果",
+			"collected": false
+		}, 
+		{
+			"SongName": "淘汰",
+			"SingerName": "陈奕迅",
+			"FileName": "陈奕迅 - 淘汰",
+			"collected": false
+		}, 
+		{
+			"SongName": "喜欢你",
+			"SingerName": "G.E.M.邓紫棋",
+			"FileName": "G.E.M.邓紫棋 - 喜欢你",
+			"collected": false
+		}, 
+		{
+			"SongName": "小幸运",
+			"SingerName": "田馥甄",
+			"FileName": "田馥甄 - 小幸运",
+			"collected": false
+		}, 
+		{
+			"SongName": "剑心",
+			"SingerName": "张杰",
+			"FileName": "张杰 - 剑心",
+			"collected": false
+		}, 
+		{
+			"SongName": "Let It Go",
+			"SingerName": "Idina Menzel",
+			"FileName": "Idina Menzel - Let It Go",
+			"collected": false
+		}
+	],
+	"new": [
+		{
+			"SongName": "瞒着你就爱",
+			"SingerName": "凤凰传奇",
+			"FileName": "凤凰传奇 - 瞒着你就爱",
+			"collected": false
+		}, 
+		{
+			"SongName": "慢慢习惯",
+			"SingerName": "刘德华",
+			"FileName": "刘德华 - 慢慢习惯",
+			"collected": false
+		}, 
+		{
+			"SongName": "对你说爱",
+			"SingerName": "孙楠",
+			"FileName": "孙楠 - 对你说爱",
+			"collected": false
+		}, 
+		{
+			"SongName": "失落的缘",
+			"SingerName": "谭维维",
+			"FileName": "谭维维 - 失落的缘",
+			"collected": false
+		}, 
+		{
+			"SongName": "等小姐",
+			"SingerName": "阿悄",
+			"FileName": "阿悄 - 等小姐",
+			"collected": false
+		}, 
+		{
+			"SongName": "从心出发",
+			"SingerName": "庄心妍",
+			"FileName": "庄心妍 - 从心出发",
+			"collected": false
+		}, 
+		{
+			"SongName": "动物世界",
+			"SingerName": "薛之谦",
+			"FileName": "薛之谦 - 动物世界",
+			"collected": false
+		}, 
+		{
+			"SongName": "亲爱的,同学",
+			"SingerName": "谭松韵",
+			"FileName": "谭松韵 - 亲爱的,同学",
+			"collected": false
+		}, 
+		{
+			"SongName": "珍珠",
+			"SingerName": "吉克隽逸",
+			"FileName": "吉克隽逸 - 珍珠",
+			"collected": false
+		}, 
+		{
+			"SongName": "天衍录",
+			"SingerName": "柳岩",
+			"FileName": "柳岩 - 天衍录",
+			"collected": false
+		}
+	],
+	"recommend": [
+		{
+			"SongName": "刚好遇见你",
+			"SingerName": "李玉刚",
+			"FileName": "李玉刚 - 刚好遇见你",
+			"collected": false
+		}, 
+		{
+			"SongName": "演员",
+			"SingerName": "薛之谦",
+			"FileName": "薛之谦 - 演员",
+			"collected": false
+		}, 
+		{
+			"SongName": "逆流成河",
+			"SingerName": "金南玲",
+			"FileName": "金南玲 - 逆流成河",
+			"collected": false
+		}, 
+		{
+			"SongName": "勉为其难",
+			"SingerName": "王冕",
+			"FileName": "王冕 - 勉为其难",
+			"collected": false
+		}, 
+		{
+			"SongName": "没有你陪伴真的好孤单",
+			"SingerName": "梦然",
+			"FileName": "梦然 - 没有你陪伴真的好孤单",
+			"collected": false
+		}, 
+		{
+			"SongName": "社会摇",
+			"SingerName": "萧全",
+			"FileName": "萧全 - 社会摇",
+			"collected": false
+		}, 
+		{
+			"SongName": "你还要我怎样",
+			"SingerName": "薛之谦",
+			"FileName": "薛之谦 - 你还要我怎样",
+			"collected": false
+		}, 
+		{
+			"SongName": "繁花",
+			"SingerName": "董贞",
+			"FileName": "董贞 - 繁花",
+			"collected": false
+		}, 
+		{
+			"SongName": "走着走着就散了",
+			"SingerName": "庄心妍",
+			"FileName": "庄心妍 - 走着走着就散了",
+			"collected": false
+		}, 
+		{
+			"SongName": "童话镇",
+			"SingerName": "陈一发",
+			"FileName": "陈一发 - 童话镇",
+			"collected": false
+		}
+	]
+}

@@ -79,7 +79,9 @@ const webpackProdConfig = webpackMerge(webpackBaseConfig, {
 		// 压缩混淆js
 		new webpack.optimize.UglifyJsPlugin({
 			compress: {
-				warnings: false
+				warnings: false,
+				drop_console: true,		// 去除日志
+				drop_debugger: true		// 去除debugger
 			},
 			except: ['$super', '$', 'exports', 'require'],
 			sourceMap: true
