@@ -41,10 +41,12 @@
             this.getList();
         },
         mounted() {
-            if(this.routerPath === 'search') {
-                document.addEventListener('scroll', () => {
+            // 防止多次绑定
+            document.onscroll = null;
+            document.onscroll = () => {
+                if(this.routerPath === 'search') {
                     this.scrollLoad();
-                });
+                }
             }
         },
         watch: {
@@ -85,6 +87,8 @@
                 const page = this.page;
                 const keyword = this.$route.query.keyword;
 
+                this.isLoading = true;
+                this.$Indicator.open('加载中...');
                 this.api.getSongInfo(keyword, page).then(res => {
                     console.log('>>> [res] 获取歌曲列表', res);
                     const data = res.data.data;
@@ -99,8 +103,9 @@
                                 FileName: song.FileName
                             };
                         });
-                        this.songList = songList.concat(searchSongList);
+                        this.isLoading = false;
                         this.$Indicator.close();
+                        this.songList = songList.concat(searchSongList);
                         this.$store.commit("setSearchCount", searchCount);
                     }
                 }).catch(err => {
@@ -136,8 +141,6 @@
                 if(offsetHeight <= 100) {
                     if(this.page < this.totalPage) {
                         this.page++;
-                        this.isLoading = true;
-                        this.$Indicator.open('加载中...');
                         this.searchList();
                     }
                     else {
