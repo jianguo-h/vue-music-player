@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/snow-imprint/music-player-vue2.git"
+    "url": "git+https://github.com/snow-imprint/vue-music-player.git"
   },
   "author": "jianguo",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/snow-imprint/music-player-vue2/issues"
+    "url": "https://github.com/snow-imprint/vue-music-player/issues"
   },
-  "homepage": "https://github.com/snow-imprint/music-player-vue2#readme",
+  "homepage": "https://github.com/snow-imprint/vue-music-player#readme",
   "dependencies": {
     "axios": "^0.16.2",
     "mint-ui": "^2.2.9",
