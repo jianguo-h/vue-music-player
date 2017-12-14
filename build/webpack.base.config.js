@@ -1,9 +1,11 @@
 const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
 	entry: {
-		app: './src/main.js'
+		app: './src/main.js',
+		vendors: ['vue', 'vue-router', 'vuex', 'axios', 'mint-ui']
 	},
 	output: {
 		filename: 'js/app.buldle.js',
@@ -52,6 +54,13 @@ module.exports = {
 			inject: true,
 			filename: 'index.html',
 			template: './index.html'
+		}),
+		// 提取公共的js
+		new webpack.optimize.CommonsChunkPlugin({
+			name: 'vendors',
+			filename: 'js/vendors.js',
+			allChunks: true,
+			minChunks: Infinity
 		}),
 	]
 }
