@@ -2,7 +2,7 @@
   "name": "vue-music-player",
   "version": "2.0.0",
   "description": "> A Vue.js project",
-  "main": ".eslintrc.js",
+  "main": "src/main.js",
   "scripts": {
     "dev": "set NODE_ENV=development&&node build/dev-server.js",
     "build": "set NODE_ENV=production&&node build/build.js",
