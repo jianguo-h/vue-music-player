@@ -1,14 +1,14 @@
 {
-	'presets': [
-		['es2015', { 'modules': false }],
-		'stage-0',
+	"presets": [
+		["es2015", { "modules": false }],
+		"stage-0"
 	],
-	'plugins': [
-        'transform-runtime',
-        ['component', [
+	"plugins": [
+        "transform-runtime",
+        ["component", [
             {
-                'libraryName': 'mint-ui',
-                'style': true
+                "libraryName": "mint-ui",
+                "style": true
             }
         ]]
     ]
