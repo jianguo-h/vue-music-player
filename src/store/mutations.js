@@ -37,7 +37,7 @@ export default {
         }
     },
     setCurPlayIndex(state, curPlayIndex) {
-        const listTotal = state.listTotal;
+        const listTotal = state.songList.length;
         if(curPlayIndex < 0) {
             curPlayIndex = listTotal - 1;
         }
