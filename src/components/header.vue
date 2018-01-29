@@ -29,7 +29,7 @@
 
 <script>
     export default {
-        name: 'header',
+        name: 'v-header',
         data() {
             return {
                 keyword: '',                // 搜索的关键字
