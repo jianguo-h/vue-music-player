@@ -55,6 +55,13 @@
                     return curPlayLrcArr[0];
                 }
                 if((curLrcIndex + 1) % 2 === 0) {
+                    if(!curPlayLrcArr[curLrcIndex + 1]) {
+                        return {
+                            ...curPlayLrcArr[curLrcIndex],
+                            index: curLrcIndex + 1,
+                            curLrc: ''
+                        }
+                    }
                     return curPlayLrcArr[curLrcIndex + 1];
                 }
                 return curPlayLrcArr[curLrcIndex];
