@@ -32,7 +32,7 @@ module.exports = {
 	        }
 		}
 	},
-	build: {
+	prod: {
 		env: "production",
 		publicPath: "./"
 	}
