@@ -9,6 +9,7 @@ Object.keys(webpackBaseConfig.entry).forEach(name => {
 });
 
 const webpackDevConfig = webpackMerge(webpackBaseConfig, {
+	mode: config.dev.env,
 	devtool: '#cheap-module-eval-source-map',
 	output: {
 		publicPath: config.dev.publicPath
@@ -38,11 +39,11 @@ const webpackDevConfig = webpackMerge(webpackBaseConfig, {
 		]
 	},
 	plugins: [
-		new webpack.DefinePlugin({
+		/*new webpack.DefinePlugin({
 			'process.env.NODE_ENV': JSON.stringify(config.dev.env)
-		}),
+		}),*/
 		new webpack.HotModuleReplacementPlugin(),
-	    new webpack.NoEmitOnErrorsPlugin()
+	    // new webpack.NoEmitOnErrorsPlugin()
 	]
 });
 

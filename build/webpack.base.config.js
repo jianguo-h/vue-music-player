@@ -8,7 +8,8 @@ module.exports = {
 		vendors: ['vue', 'vue-router', 'vuex', 'axios', 'mint-ui']
 	},
 	output: {
-		filename: 'js/app.buldle.js',
+		filename: 'js/[name].[hash].js',
+		chunkFilename: 'js/[name].[chunkhash].js',
 		path: path.resolve(__dirname, '../dist'),
 	},
 	module: {
@@ -45,7 +46,7 @@ module.exports = {
 	},
 	resolve: {
 		alias: {
-			'vue': 'vue/dist/vue.esm.js'
+			'vue$': 'vue/dist/vue.esm.js'
 		},
 		extensions: ['.js', '.vue', '.json']
 	},
@@ -56,11 +57,34 @@ module.exports = {
 			template: './index.html'
 		}),
 		// 提取公共的js
-		new webpack.optimize.CommonsChunkPlugin({
+		/*new webpack.optimize.CommonsChunkPlugin({
 			name: 'vendors',
 			filename: 'js/vendors.js',
 			allChunks: true,
 			minChunks: Infinity
-		}),
-	]
+		}),*/
+	],
+	optimization: {
+		splitChunks: {
+			cacheGroups: {
+				default: {
+		            minChunks: 2,
+		            priority: -20,
+		            reuseExistingChunk: true
+		        },
+				commons: {
+		            name: "commons",
+		            chunks: "initial",
+		            minChunks: 2
+		        },
+				vendors: {
+					test: /[\\/]node_modules[\\/]/,
+					chunks: 'initial',
+					name: 'vendors',
+					priority: -10
+				}
+			}
+		},
+		runtimeChunk: 'single'
+	}
 }
