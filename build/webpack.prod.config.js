@@ -8,16 +8,17 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 const webpackProdConfig = webpackMerge(webpackBaseConfig, {
+	mode: config.prod.env,
 	devtool: false,
 	output: {
-		publicPath: config.build.publicPath
+		publicPath: config.prod.publicPath
 	},
 	module: {
 		rules: [
 			{
 				test: /\.less$/,
 				use: ExtractTextPlugin.extract({
-					fallback: 'style-loader', 
+					fallback: 'style-loader',
 					use: ['css-loader', 'less-loader']
 				})
 			},
@@ -30,15 +31,32 @@ const webpackProdConfig = webpackMerge(webpackBaseConfig, {
 			},
 			{
 				test: /\.vue$/,
+				/*use: [
+					{
+						loader: 'vue-loader',
+						options: {
+							loaders: {
+								less: ExtractTextPlugin.extract({
+									fallback: 'vue-style-loader',
+									use: ['css-loader', 'less-loader']
+								}),
+								css: ExtractTextPlugin.extract({
+									fallback: 'vue-style-loader',
+									use: ['css-loader']
+								}),
+							}
+						}
+					}
+				]*/
 				loader: 'vue-loader',
 				options: {
 					loaders: {
 						less: ExtractTextPlugin.extract({
-							fallback: 'style-loader',
+							fallback: 'vue-style-loader',
 							use: ['css-loader', 'less-loader']
 						}),
 						css: ExtractTextPlugin.extract({
-							fallback: 'style-loader',
+							fallback: 'vue-style-loader',
 							use: ['css-loader']
 						}),
 					}
@@ -47,12 +65,12 @@ const webpackProdConfig = webpackMerge(webpackBaseConfig, {
 		]
 	},
 	plugins: [
-		new webpack.DefinePlugin({
-			'process.env.NODE_ENV': JSON.stringify(config.build.env)
-		}),
+		/*new webpack.DefinePlugin({
+			'process.env.NODE_ENV': JSON.stringify(config.prod.env)
+		}),*/
 		// 提取less和css
 		new ExtractTextPlugin({
-			filename: 'css/app.bundle.css',
+			filename: 'css/app.[hash].css',
 			allChunks: true
 		}),
 		// 压缩css
@@ -67,7 +85,7 @@ const webpackProdConfig = webpackMerge(webpackBaseConfig, {
 			canPrint: true
 		}),
 		// 压缩混淆js
-		new webpack.optimize.UglifyJsPlugin({
+		/*new webpack.optimize.UglifyJsPlugin({
 			compress: {
 				warnings: false,
 				drop_console: true,		// 去除日志
@@ -75,7 +93,7 @@ const webpackProdConfig = webpackMerge(webpackBaseConfig, {
 			},
 			except: ['$super', '$', 'exports', 'require'],
 			sourceMap: true
-		}),
+		}),*/
 		// 拷贝静态文件
 		new CopyWebpackPlugin([
 			{
