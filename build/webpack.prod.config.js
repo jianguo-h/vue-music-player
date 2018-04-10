@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const config = require('../config');
 const webpackMerge = require('webpack-merge');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const webpackBaseConfig = require('./webpack.base.config');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
@@ -57,15 +58,16 @@ const webpackProdConfig = webpackMerge(webpackBaseConfig, {
 			canPrint: true
 		}),
 		// 压缩混淆js
-		/*new webpack.optimize.UglifyJsPlugin({
-			compress: {
+		new UglifyJsPlugin({
+			uglifyOptions: {
 				warnings: false,
-				drop_console: true,		// 去除日志
-				drop_debugger: true		// 去除debugger
+				compress: {
+					drop_console: true,		// 去除日志
+					drop_debugger: true		// 去除debugger
+				},
 			},
-			except: ['$super', '$', 'exports', 'require'],
-			sourceMap: true
-		}),*/
+			parallel: true
+		}),
 		// 拷贝静态文件
 		new CopyWebpackPlugin([
 			{
