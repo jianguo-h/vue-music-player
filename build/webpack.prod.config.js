@@ -4,7 +4,7 @@ const config = require('../config');
 const webpackMerge = require('webpack-merge');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const webpackBaseConfig = require('./webpack.base.config');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 const webpackProdConfig = webpackMerge(webpackBaseConfig, {
@@ -17,48 +17,21 @@ const webpackProdConfig = webpackMerge(webpackBaseConfig, {
 		rules: [
 			{
 				test: /\.less$/,
-				use: ExtractTextPlugin.extract({
-					fallback: 'style-loader',
-					use: ['css-loader', 'less-loader']
-				})
+				use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'less-loader']
 			},
 			{
 				test: /\.css$/,
-				use: ExtractTextPlugin.extract({
-					fallback: 'style-loader', 
-					use: ['css-loader']
-				})
+				use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader']
 			},
 			{
 				test: /\.vue$/,
-				/*use: [
-					{
-						loader: 'vue-loader',
-						options: {
-							loaders: {
-								less: ExtractTextPlugin.extract({
-									fallback: 'vue-style-loader',
-									use: ['css-loader', 'less-loader']
-								}),
-								css: ExtractTextPlugin.extract({
-									fallback: 'vue-style-loader',
-									use: ['css-loader']
-								}),
-							}
-						}
-					}
-				]*/
 				loader: 'vue-loader',
+				exclude: /node_modules/,
 				options: {
 					loaders: {
-						less: ExtractTextPlugin.extract({
-							fallback: 'vue-style-loader',
-							use: ['css-loader', 'less-loader']
-						}),
-						css: ExtractTextPlugin.extract({
-							fallback: 'vue-style-loader',
-							use: ['css-loader']
-						}),
+						js: ['babel-loader'],
+						less: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'less-loader'],
+						css: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader']
 					}
 				}
 			}
@@ -69,9 +42,8 @@ const webpackProdConfig = webpackMerge(webpackBaseConfig, {
 			'process.env.NODE_ENV': JSON.stringify(config.prod.env)
 		}),*/
 		// 提取less和css
-		new ExtractTextPlugin({
-			filename: 'css/app.[hash].css',
-			allChunks: true
+		new MiniCssExtractPlugin({
+			filename: 'css/[name].[hash].css'
 		}),
 		// 压缩css
 		new OptimizeCssAssetsPlugin({
