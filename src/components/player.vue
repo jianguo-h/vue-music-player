@@ -133,7 +133,7 @@
                     width: 4.4444rem;
                      white-space: nowrap;
                     overflow: hidden;
-                    text-overflow: ellipsis; 
+                    text-overflow: ellipsis;
                 }
                 .singer-name {
                     color: #888;
@@ -141,8 +141,8 @@
                     .fontSize(26);
                 }
             }
-        }	
-    } 
+        }
+    }
     .fade-enter-active, .fade-leave-active {
         transition: all .5s;
     }

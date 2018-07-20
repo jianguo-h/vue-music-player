@@ -8,7 +8,14 @@
             </div>
             <div class="playDetail-center">
                 <div class="lrc-box" ref = "lrcBox" :style = "{transform: 'translateY(-' + translateY + 'px)', color: defaultColor}">
-                    <p :style = "{color: curLrcIndex === index ? activeColor : ''}" :startTime = "lrcObj.startTime" v-for = "(lrcObj, index) in curPlayLrcArr">{{ lrcObj.curLrc }}</p>
+                    <p
+                        :style = "{color: curLrcIndex === index ? activeColor : ''}"
+                        :startTime = "lrcObj.startTime"
+                        v-for = "(lrcObj, index) of curPlayLrcArr"
+                        :key = 'index'
+                    >
+                        {{ lrcObj.curLrc }}
+                    </p>
                 </div>
             </div>
             <div class="playDetail-bottom">
@@ -16,11 +23,22 @@
                     <mt-switch :value = 'lrcSwitch' @change = 'toggleLrcSwitch'></mt-switch>
                 </div>
                 <div class="lrcColor-box">
-                    <div class="cur-lrcColor" :style = "{backgroundImage: 'url('+ currentImgSrc +')'}" @click = "isShowColorList = !isShowColorList"></div>
+                    <div
+                        class="cur-lrcColor"
+                        :style = "{backgroundImage: 'url('+ currentImgSrc +')'}"
+                        @click = "isShowColorList = !isShowColorList"
+                    >
+                    </div>
                     <transition name = "fade">
                         <div class="color-list" v-if = "isShowColorList">
                             <ul>
-                                <li v-for = "(currentObj, index) in lrcColorList" :style = "{backgroundImage: 'url('+ currentObj.currentImgSrc +')'}" @click = "changeLrcColor(index)"></li>
+                                <li
+                                    v-for = "(currentObj, index) of lrcColorList"
+                                    :key = 'index'
+                                    :style = "{backgroundImage: 'url('+ currentObj.currentImgSrc +')'}"
+                                    @click = "changeLrcColor(index)"
+                                >
+                                </li>
                             </ul>
                         </div>
                     </transition>
@@ -46,7 +64,12 @@
                         <transition name = "fade">
                             <div class="play-list" v-if = "isShowList">
                                 <ul>
-                                    <li v-for = "(song, index) in songList" :class = "{active: curPlayIndex === index}" @click = "playSong(index)">
+                                    <li
+                                        v-for = "(song, index) of songList"
+                                        :key = 'index'
+                                        :class = "{active: curPlayIndex === index}"
+                                        @click = "playSong(index)"
+                                    >
                                         {{ index + 1 }}. {{ song.FileName }}
                                     </li>
                                 </ul>
@@ -483,7 +506,7 @@
                     position: relative;
                     margin: 0 0.2778rem;
                     background-color: #6c6b70;
-                    .progress-bar {	
+                    .progress-bar {
                         width: 100%;
                         height: 100%;
                         position: relative;
