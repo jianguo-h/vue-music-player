@@ -3,7 +3,12 @@
         <banner v-if = "routerPath === 'new'"></banner>
         <div class = "list" :class = "[routerPath + '-songList', {noSongData: songList.length === 0}]">
             <ul v-if = "songList.length > 0">
-                <li v-for = "(song, index) in songList" :class = "{active: view === routerPath && index === curPlayIndex && isPlayed}" @click = "play(index)">
+                <li
+                    v-for = "(song, index) of songList"
+                    :key = 'index'
+                    :class = "{active: view === routerPath && index === curPlayIndex && isPlayed}"
+                    @click = "play(index)"
+                >
                     <p class = "filename">{{ song.FileName }}</p>
                 </li>
             </ul>
@@ -130,7 +135,7 @@
                     return;
                 }
                 const docEl = document.documentElement;
-                /* 
+                /*
                  scrollTop 元素滚动的高度
                  scrollHeight 元素的实际高度(包括滚动的高度)
                  clientHeight 元素在窗口可见的高度(不包括滚动的高度)
@@ -176,7 +181,7 @@
                     }
                 }
             }
-        } 
+        }
         .noSongData {
             display: flex;
             align-items: center;

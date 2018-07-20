@@ -19,38 +19,38 @@ const proxyTable = config.dev.proxyTable;
 
 // 当环境变量不存在时设置为开发环境
 if(!process.env.NODE_ENV) {
-	process.env.NODE_ENV = config.dev.env;
+    process.env.NODE_ENV = config.dev.env;
 }
 
 // config router
 router(express, app, songData);
 
 const webpackDevMiddlewareInstance = webpackDevMiddleware(compiler, {
-	stats: {
-		colors: true
-	}
+    stats: {
+        colors: true
+    }
 });
 const webpackHotMiddlewareInstance = webpackHotMiddleware(compiler, {
-	log: () => {}
+    log: () => {}
 });
 
 // force page reload when html-webpack-plugin template changes
 compiler.plugin('compilation', compilation => {
-	compilation.plugin('html-webpack-plugin-after-emit', (data, cb) => {
-		webpackHotMiddlewareInstance.publish({
-			action: 'reload'
-		});
-		cb();
-	})
+    compilation.plugin('html-webpack-plugin-after-emit', (data, cb) => {
+        webpackHotMiddlewareInstance.publish({
+            action: 'reload'
+        });
+        cb();
+    })
 });
 
 // config proxy
 Object.keys(proxyTable).forEach(ctx => {
-	let options = proxyTable[ctx];
-	if(typeof options === 'string') {
-		options = { target: options }
-	}
-	app.use(httpProxyMiddleware(options.filter || ctx, options));
+    let options = proxyTable[ctx];
+    if(typeof options === 'string') {
+        options = { target: options }
+    }
+    app.use(httpProxyMiddleware(options.filter || ctx, options));
 });
 
 // use middleWare
@@ -58,27 +58,27 @@ app.use(webpackDevMiddlewareInstance);
 app.use(webpackHotMiddlewareInstance);
 
 // static path config
-const static = {
-	path: path.join(__dirname, '../static'),
-	imgPath: path.join(__dirname, '../static/img'),
-	dataPath: path.join(__dirname, '../static/data'),
+const staticObj = {
+    path: path.join(__dirname, '../static'),
+    imgPath: path.join(__dirname, '../static/img'),
+    dataPath: path.join(__dirname, '../static/data'),
 }
-app.use('/static', express.static(static.path));
-app.use('/static/img', express.static(static.imgPath));
-app.use('/static/data', express.static(static.dataPath));
+app.use('/static', express.static(staticObj.path));
+app.use('/static/img', express.static(staticObj.imgPath));
+app.use('/static/data', express.static(staticObj.dataPath));
 
 let _resolve;
-const readyPromise = new Promise((resolve, reject) => {
-	_resolve = resolve;
+/* const readyPromise =  */new Promise((resolve, reject) => {
+    _resolve = resolve;
 });
 
 console.log('> Starting dev server...')
 webpackDevMiddlewareInstance.waitUntilValid(() => {
-	console.log('server start at ' + url);
-	if(process.env.NODE_ENV === config.dev.env) {
-		opn(url);
-	}
-	_resolve();
+    console.log('server start at ' + url);
+    if(process.env.NODE_ENV === config.dev.env) {
+        opn(url);
+    }
+    _resolve();
 });
 
 // 判断要启动的端口号是否被占用, 占用的话先关闭占用的进程再开启node服务
@@ -106,9 +106,9 @@ exec(cmd, (err, stdout, stderr) => {
     }
     // 端口被占用时
     if(isOccupy) {
-        exec('taskkill /F /pid ' + pid, (err, stdout, stderr) => {
-            if(err) {
-                console.log('>>> 释放指定端口失败', err);    
+        exec('taskkill /F /pid ' + pid, (error, stdoutK, stderrK) => {
+            if(error) {
+                console.log('>>> 释放指定端口失败', error);
                 return;
             }
             app.listen(port);

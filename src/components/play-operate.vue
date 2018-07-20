@@ -82,6 +82,6 @@
         }
         .next {
             .bgImg("play-next");
-        }	
+        }
     }
 </style>

@@ -6,7 +6,7 @@
                 <input type = 'text' v-model = "keyword" @input = "input" @keyup.enter = 'search(keyword)' placeholder="歌手/歌名" />
                 <div class="search-list" v-if = "keyword.trim() !== ''">
                     <ul v-if = 'resultCount > 0'>
-                        <li v-for = "data in resultList" @click = "search(data.HintInfo)">{{ data.HintInfo }}</li>
+                        <li v-for = "(data, index) in resultList" :key='index' @click = "search(data.HintInfo)">{{ data.HintInfo }}</li>
                     </ul>
                     <p v-else>{{ searchTip }}</p>
                 </div>
@@ -15,7 +15,7 @@
         </div>
         <div class="header-tab" v-if = "$route.path !== '/search'">
             <ul>
-                <li v-for = "tab in tabs">
+                <li v-for = "(tab, index) of tabs" :key='index'>
                     <router-link :to = "tab.path">{{ tab.name }}</router-link>
                 </li>
             </ul>
@@ -63,7 +63,7 @@
                 if(!keyword || keyword.trim() === '') {
                     this.$MessageBox.alert("请输入搜索内容");
                     return;
-                };
+                }
                 this.$router.push('/search?keyword=' + keyword);
                 this.keyword = '';
             },

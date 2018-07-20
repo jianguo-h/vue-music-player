@@ -1,12 +1,28 @@
 <template>
     <div class="banner" @touchstart = "touchstart" @touchmove = "touchmove" @touchend = "touchend">
-        <div class="banner-wrapper" ref = "bannerWrapper" :style = "{transform: 'translateX(-'+ translateX +'px)', transitionDuration: speed + 'ms'}" @transitionend = "transitionend">
-            <div class="banner-item" :style = "{marginRight: itemSpacing + 'px'}" v-for = "item in items">
+        <div
+            class="banner-wrapper"
+            ref = "bannerWrapper"
+            :style = "{transform: 'translateX(-'+ translateX +'px)', transitionDuration: speed + 'ms'}"
+            @transitionend = "transitionend"
+        >
+            <div
+                class="banner-item"
+                :style = "{marginRight: itemSpacing + 'px'}"
+                v-for = "(item, index) of items"
+                :key = 'index'
+            >
                 <img :src = "item" width = "100%">
             </div>
         </div>
         <div class="banner-pagination" v-if = "initialItems.length > 0">
-            <span :class = "{active: curPaginationIndex === index}" v-for = "(inititalItem, index) in initialItems" @click = "translate(index)"></span>
+            <span
+                :class = "{active: curPaginationIndex === index}"
+                v-for = "(inititalItem, index) in initialItems"
+                :key = 'index'
+                @click = "translate(index)"
+            >
+            </span>
         </div>
     </div>
 </template>

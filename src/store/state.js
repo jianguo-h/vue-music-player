@@ -14,7 +14,7 @@ export default {
     lock: false,                // 事件开关, 防止canplay事件多次执行
     loop: false,                // 歌曲是否循环播放
     modeType: 'order',          // 播放模式
-    curLrcIndex: 0,             // 当前播放歌曲所播放到的当前歌词行      
+    curLrcIndex: 0,             // 当前播放歌曲所播放到的当前歌词行
     lrcSwitch: false,           // 是否显示悬浮歌词
     lrcColor: {
         defaultColor: "#b2f5b5",

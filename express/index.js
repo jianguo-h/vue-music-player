@@ -60,9 +60,9 @@ exec(cmd, (err, stdout, stderr) => {
     }
     // 端口被占用时
     if(isOccupy) {
-        exec('taskkill /F /pid ' + pid, (err, stdout, stderr) => {
-            if(err) {
-                console.log('>>> 释放指定端口失败', err);    
+        exec('taskkill /F /pid ' + pid, (error, stdoutK, stderrK) => {
+            if(error) {
+                console.log('>>> 释放指定端口失败', error);
                 return;
             }
             startServer(serverPort);

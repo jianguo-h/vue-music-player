@@ -4,8 +4,8 @@
         v-if = 'canPlayed && lrcSwitch'
         ref = 'suspendLyric'
         id="suspend-lyric"
-        @touchstart = 'touchstart' 
-        @touchmove.prevent = 'touchmove' 
+        @touchstart = 'touchstart'
+        @touchmove.prevent = 'touchmove'
         @touchend = 'touchend'>
             <span class = 'close' @click = 'close'></span>
             <p :style = '{color: firstLrc.index === curLrcIndex ? lrcColor.activeColor : lrcColor.defaultColor}'>{{ firstLrc.curLrc }}</p>
