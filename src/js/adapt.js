@@ -1,6 +1,6 @@
 // rem 适配手机屏幕
 export default function () {
-  const evt = "onorientationchange" in window ? "onorientationchange" : "resize";
+  // const evt = "onorientationchange" in window ? "onorientationchange" : "resize";
   const isIPhone = window.navigator.appVersion.match(/iphone/gi);
   let dpr = window.devicePixelRatio;
   if(isIPhone) {
@@ -37,6 +37,6 @@ export default function () {
     docEl.setAttribute("data-dpr", dpr);
     docEl.style.fontSize = fontSize + "px";
   }
-  window.addEventListener(evt, fn, false);
+  window.addEventListener('resize', fn, false);
   document.addEventListener("DOMContentLoaded", fn, false)
 }

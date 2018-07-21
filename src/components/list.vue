@@ -1,6 +1,6 @@
 <template>
   <div class="content">
-    <banner v-if="routerPath === 'new'"></banner>
+    <banner v-show="routerPath === 'new'"></banner>
     <div class="list" :class="[routerPath + '-songList', {noSongData: songList.length === 0}]">
       <ul v-if="songList.length > 0">
         <li

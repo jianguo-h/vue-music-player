@@ -48,6 +48,8 @@ module.exports = {
     'arrow-body-style': 0,                  // 要求箭头函数体使用大括号
     'radix': 0,                             // 强制在parseInt()使用基数参数
     'func-names': 0,                        // 要求或禁止使用命名的 function 表达式
+    'object-shorthand': 0,                  // 要求或禁止对象字面量中方法和属性使用简写语法
+    'no-lonely-if': 0,                      // 禁止 if 作为唯一的语句出现在 else 语句中
     'import/order': 0,
     'import/no-unresolved': 0,
     'import/newline-after-import': 0,
