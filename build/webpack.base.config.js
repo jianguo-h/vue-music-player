@@ -8,8 +8,8 @@ module.exports = {
     vendors: ['vue', 'vue-router', 'vuex', 'axios', 'mint-ui']
   },
   output: {
-    filename: 'js/[name].[hash].js',
-    chunkFilename: 'js/[name].[chunkhash].js',
+    filename: 'static/js/[name].[hash].js',
+    chunkFilename: 'static/js/[name].[chunkhash].js',
     path: path.resolve(__dirname, '../dist'),
   },
   module: {
@@ -25,7 +25,8 @@ module.exports = {
           {
             loader: 'url-loader',
             options: {
-              limit: 1024 * 10
+              limit: 1024 * 3,
+              name: 'static/fonts/[name].[hash:7].[ext]'
             }
           }
         ]
@@ -36,7 +37,8 @@ module.exports = {
           {
             loader: 'url-loader',
             options: {
-              limit: 1024 * 10
+              limit: 1024 * 3,
+              name: 'static/img/[name].[hash:7].[ext]'
             }
           }
         ]
