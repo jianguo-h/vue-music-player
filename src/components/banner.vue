@@ -18,19 +18,20 @@
 </template>
 
 <script>
+  let timer = null;
   const clientWidth = document.documentElement.clientWidth;
-  const dpr = window.navigator.appVersion.match(/iphone/gi)
+  /* const dpr = window.navigator.appVersion.match(/iphone/gi)
     ? Math.floor(window.devicePixelRatio)
-    : 1;
+    : 1; */
   export default {
     name: "banner",
     data() {
       return {
         initialItems: [],             // 存储图片地址的原始数组(定义这个数组主要是为了处理loop为true的情况)
         items: [                      // 数组
-          "static/img/banner1.jpg",
-          "static/img/banner2.jpg",
-          "static/img/banner3.jpg"
+          require('../../static/img/banner1.jpg'),
+          require('../../static/img/banner2.jpg'),
+          require('../../static/img/banner3.jpg'),
         ],
         curItemIndex: 0,              // 当前轮播的索引值
         curPaginationIndex: 0,        // 当前分页节点的索引值
@@ -47,24 +48,44 @@
         offsetX: 0                    // 手指滑动时的偏移值
       };
     },
-    computed: {
+    /* computed: {
       bannerWrapperSize() {
         return clientWidth * dpr;
       }
-    },
+    }, */
     // 根据loop的值初始化
     created() {
       this.initBanner();
     },
     // 自动播放
     mounted() {
-      setInterval(() => {
-        this.play();
-      }, this.interval);
+      if(this.$route.path === '/new') {
+        timer = setInterval(() => {
+          this.play();
+        }, this.interval);
+      }
+    },
+    watch: {
+      '$route.path'(path) {
+        if(path === '/new') {
+          if(!timer) {
+            timer = setInterval(() => {
+              this.play();
+            }, this.interval);
+          }
+        }
+        else {
+          if(timer) {
+            clearInterval(timer);
+            timer = null;
+          }
+        }
+      }
     },
     methods: {
       // 初始化轮播图
       initBanner() {
+        // debugger
         const items = this.items;
         const firstItem = items[0];
         const lastItem = items[items.length - 1];
@@ -72,7 +93,7 @@
           this.items.push(firstItem);
           this.items.unshift(lastItem);
           this.speed = 0;
-          this.translateOffset = (this.bannerWrapperSize + this.itemSpacing) * (this.curItemIndex + 1);
+          this.translateOffset = (clientWidth + this.itemSpacing) * (this.curItemIndex + 1);
           this.translateX = this.translateOffset;
 
           for (const [index, item] of items.entries()) {
@@ -99,12 +120,12 @@
         this.offsetX = endX - this.startX;
 
         this.speed = 0;
-        this.translateX = -this.offsetX + (this.bannerWrapperSize + this.itemSpacing) * this.curItemIndex + this.translateOffset;
+        this.translateX = -this.offsetX + (clientWidth + this.itemSpacing) * this.curItemIndex + this.translateOffset;
       },
       // touchend事件
       touchend(evt) {
         const offsetTime = new Date().getTime() - this.startTime;
-        const boundary = offsetTime <= 500 ? 50 : this.bannerWrapperSize / 2;
+        const boundary = offsetTime <= 500 ? 50 : clientWidth / 2;
 
         if (this.offsetX >= boundary) {
           this.play("prev");
@@ -130,7 +151,7 @@
       translate(curItemIndex) {
         this.animated = true;
         this.speed = 500;
-        this.translateX = (this.bannerWrapperSize + this.itemSpacing) * curItemIndex + this.translateOffset;
+        this.translateX = (clientWidth + this.itemSpacing) * curItemIndex + this.translateOffset;
         this.setPagination(curItemIndex);
       },
       // 设置分页的样式
@@ -155,7 +176,7 @@
           } else if (this.curItemIndex === -1) {
             this.curItemIndex = itemsLen - 3;
           }
-          this.translateX = (this.bannerWrapperSize + this.itemSpacing) * this.curItemIndex + this.translateOffset;
+          this.translateX = (clientWidth + this.itemSpacing) * this.curItemIndex + this.translateOffset;
         }
       }
     }
