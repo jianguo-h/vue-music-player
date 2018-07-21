@@ -43,7 +43,7 @@ const webpackProdConfig = webpackMerge(webpackBaseConfig, {
     }),*/
     // 提取less和css
     new MiniCssExtractPlugin({
-      filename: 'css/[name].[hash].css'
+      filename: 'static/css/[name].[hash].css'
     }),
     // 压缩css
     new OptimizeCssAssetsPlugin({
@@ -68,12 +68,12 @@ const webpackProdConfig = webpackMerge(webpackBaseConfig, {
       parallel: true
     }),
     // 拷贝静态文件
-    new CopyWebpackPlugin([
+    /* new CopyWebpackPlugin([
       {
         from: path.join(__dirname, '../static'),
         to: 'static'
       }
-    ])
+    ]) */
   ]
 });
 
