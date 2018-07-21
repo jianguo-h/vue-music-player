@@ -7,7 +7,7 @@ export default {
     commit("setIsPlayed", false);
     commit("setAudioSrc", "");
     commit("setCurPlayLrcArr", []);
-    commit("setCurPlayImgSrc", "static/img/singer-default.jpg");
+    commit("setCurPlayImgSrc", require("../../static/img/singer-default.jpg"));
     commit("setPaused");
     commit('setLock', false);
     commit('setCurLrcIndex', 0);
