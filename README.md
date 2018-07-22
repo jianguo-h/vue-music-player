@@ -37,7 +37,7 @@ npm run build（或者直接双击run-build.bat文件）
 # also you can
 或者执行完第一步后，也可以在控制台下直接运行npm run start命令
 该命令会直接运行express目录下的index.js文件，加载已打包好的dist目录下的文件
-启动成功后直接在浏览器中打开 http:localhost:8088 即可
+启动成功后直接在浏览器中打开 http://localhost:8088 即可
 ```
 
 ## 部分效果图
