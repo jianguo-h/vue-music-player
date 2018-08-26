@@ -4,13 +4,12 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 module.exports = {
   entry: {
-    app: './src/main.js',
-    vendors: ['vue', 'vue-router', 'vuex', 'axios', 'mint-ui']
+    app: './src/main.js'
   },
   output: {
     filename: 'static/js/[name].[hash].js',
     chunkFilename: 'static/js/[name].[chunkhash].js',
-    path: path.resolve(__dirname, '../dist'),
+    path: path.resolve(__dirname, '../dist')
   },
   module: {
     rules: [
@@ -58,31 +57,14 @@ module.exports = {
       template: './index.html'
     }),
     new VueLoaderPlugin()
-    // 提取公共的js
-    /*new webpack.optimize.CommonsChunkPlugin({
-        name: 'vendors',
-        filename: 'js/vendors.js',
-        allChunks: true,
-        minChunks: Infinity
-    }),*/
   ],
   optimization: {
     splitChunks: {
       cacheGroups: {
-        default: {
-          minChunks: 2,
-          priority: -20,
-          reuseExistingChunk: true
-        },
-        commons: {
-          name: "commons",
-          chunks: "initial",
-          minChunks: 2
-        },
-        vendors: {
+        vendor: {
           test: /[\\/]node_modules[\\/]/,
-          chunks: 'initial',
-          name: 'vendors',
+          chunks: 'all',
+          name: 'vendor',
           priority: -10
         }
       }
