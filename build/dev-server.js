@@ -4,6 +4,7 @@ const express = require('express');
 const webpack = require('webpack');
 const config = require('../config');
 const proxy = require('../express/proxy');
+const historyMode = require('./history-mode');
 const webpackDevConfig = require('./webpack.dev.config');
 const detectionPort = require('../express/detection-port');
 const webpackDevMiddleware = require('webpack-dev-middleware');
@@ -37,6 +38,9 @@ compiler.plugin('compilation', compilation => {
     cb();
   })
 });
+
+// config history mode
+historyMode(app);
 
 // config proxy
 const extraProxys = {
