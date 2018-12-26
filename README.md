@@ -20,7 +20,7 @@ vue + vue-router + vuex + axios + mint-ui + es6 + less
 ## Build Setup
 
 ``` bash
-# git clone https://github.com/snow-imprint/vue-music-player.git
+# git clone https://github.com/jianguo-h/vue-music-player.git
 
 # install dependencies
 npm i or cnpm i
@@ -43,11 +43,11 @@ npm run build（或者直接双击run-build.bat文件）
 ## 部分效果图
 
 ### 首页和播放页
-<img src = "https://github.com/snow-imprint/vue-music-player/blob/master/screenshot/index.gif" /><img src = "https://github.com/snow-imprint/vue-music-player/blob/master/screenshot/whole.gif" />
+<img src = "https://github.com/jianguo-h/vue-music-player/blob/master/screenshot/index.gif" /><img src = "https://github.com/jianguo-h/vue-music-player/blob/master/screenshot/whole.gif" />
 
 
 ### 播放详情和搜索功能
-<img src = "https://github.com/snow-imprint/vue-music-player/blob/master/screenshot/play-detail.gif" /><img src = "https://github.com/snow-imprint/vue-music-player/blob/master/screenshot/search.gif" />
+<img src = "https://github.com/jianguo-h/vue-music-player/blob/master/screenshot/play-detail.gif" /><img src = "https://github.com/jianguo-h/vue-music-player/blob/master/screenshot/search.gif" />
 
 
 ## 目录
