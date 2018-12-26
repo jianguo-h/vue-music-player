@@ -7,8 +7,8 @@ module.exports = {
     app: './src/main.js'
   },
   output: {
-    filename: 'static/js/[name].[hash].js',
-    chunkFilename: 'static/js/[name].[chunkhash].js',
+    filename: 'static/js/[name].[hash:8].js',
+    chunkFilename: 'static/js/[name].[chunkhash:8].js',
     path: path.resolve(__dirname, '../dist')
   },
   module: {
@@ -19,25 +19,13 @@ module.exports = {
         use: ["babel-loader"]
       },
       {
-        test: /\.(eot|svg|ttf|woff|woff2)$/,
+        test: /\.(eot|svg|ttf|woff|woff2|png|jpg|jpeg|gif|svg)$/,
         use: [
           {
             loader: 'url-loader',
             options: {
               limit: 1024 * 3,
-              name: 'static/fonts/[name].[hash:7].[ext]'
-            }
-          }
-        ]
-      },
-      {
-        test: /\.(png|jpg|jpeg|gif|svg)$/,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              limit: 1024 * 3,
-              name: 'static/img/[name].[hash:7].[ext]'
+              name: 'static/imgs/[name].[hash:7].[ext]'
             }
           }
         ]
@@ -61,11 +49,17 @@ module.exports = {
   optimization: {
     splitChunks: {
       cacheGroups: {
-        vendor: {
+        vendors: {
           test: /[\\/]node_modules[\\/]/,
           chunks: 'all',
-          name: 'vendor',
+          name: 'vendors',
           priority: -10
+        },
+        commons: {
+          chunks: 'all',
+          name: 'commons',
+          priority: -11,
+          minChunks: 2
         }
       }
     },
