@@ -10,29 +10,28 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/snow-imprint/vue-music-player.git"
+    "url": "git+https://github.com/jianguo-h/vue-music-player.git"
   },
   "author": "jianguo",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/snow-imprint/vue-music-player/issues"
+    "url": "https://github.com/jianguo-h/vue-music-player/issues"
   },
-  "homepage": "https://github.com/snow-imprint/vue-music-player#readme",
+  "homepage": "https://github.com/jianguo-h/vue-music-player#readme",
   "dependencies": {
     "connect-history-api-fallback": "^1.5.0",
     "express": "^4.16.3",
     "http-proxy-middleware": "^0.18.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+    "@babel/preset-env": "^7.2.3",
     "autoprefixer": "^9.0.0",
     "axios": "^0.18.0",
-    "babel-core": "^6.26.3",
-    "babel-eslint": "^8.2.6",
-    "babel-loader": "^7.1.5",
+    "babel-eslint": "^10.0.1",
+    "babel-loader": "^8.0.4",
     "babel-plugin-component": "^1.1.1",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-stage-0": "^6.24.1",
     "copy-webpack-plugin": "^4.5.1",
     "css-loader": "^1.0.0",
     "cssnano": "^4.0.3",

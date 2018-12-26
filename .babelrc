@@ -1,15 +1,14 @@
 {
 	"presets": [
-		["env", { "modules": false }],
-		"stage-0"
+		["@babel/env", {
+      "modules": false
+    }]
 	],
 	"plugins": [
-        "transform-runtime",
-        ["component", [
-            {
-                "libraryName": "mint-ui",
-                "style": true
-            }
-        ]]
-    ]
+		"@babel/plugin-syntax-dynamic-import",
+		["component", {
+			"libraryName": "mint-ui",
+			"style": true
+		}]
+	]
 }
