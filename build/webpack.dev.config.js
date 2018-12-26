@@ -26,24 +26,13 @@ const webpackDevConfig = webpackMerge(webpackBaseConfig, {
       },
       {
         test: /\.vue$/,
-        loader: 'vue-loader',
-        exclude: /node_modules/,
-        options: {
-          loaders: {
-            js: 'babel-loader',
-            css: 'vue-style-loader!css-loader!postcss-loader',
-            less: "vue-style-loader!css-loader!postcss-loader!less-loader"
-          }
-        }
+        use: ['vue-loader'],
+        exclude: /node_modules/
       }
     ]
   },
   plugins: [
-    /*new webpack.DefinePlugin({
-        'process.env.NODE_ENV': JSON.stringify(config.dev.env)
-    }),*/
     new webpack.HotModuleReplacementPlugin(),
-    // new webpack.NoEmitOnErrorsPlugin()
   ]
 });
 

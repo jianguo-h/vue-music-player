@@ -1,7 +1,5 @@
-const path = require('path');
 const config = require('../config');
 const webpackMerge = require('webpack-merge');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const webpackBaseConfig = require('./webpack.base.config');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -40,12 +38,12 @@ const webpackProdConfig = webpackMerge(webpackBaseConfig, {
   plugins: [
     // 提取less和css
     new MiniCssExtractPlugin({
-      filename: 'static/css/[name].[hash].css'
+      filename: 'static/css/[name].[hash:8].css',
+      chunkFilename: 'static/css/[name].[chunkhash:8].css'
     }),
     // 压缩css
     new OptimizeCssAssetsPlugin({
       assetNameRegExp: /\.css$/g,
-      cssProcessor: require('cssnano'),
       cssProcessorOptions: {
         discardComments: {
           removeAll: true
