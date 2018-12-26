@@ -54,13 +54,17 @@ const webpackProdConfig = webpackMerge(webpackBaseConfig, {
     // 压缩混淆js
     new UglifyJsPlugin({
       uglifyOptions: {
-        warnings: false,
+        warnings: false,          // 删除警告
         compress: {
           drop_console: true,     // 去除日志
           drop_debugger: true     // 去除debugger
         },
+        output: {
+          comments: false         // 去除注释
+        }
       },
-      parallel: true
+      cache: true,                // 使用缓存
+      parallel: true              // 开启多线程压缩
     })
   ]
 });
