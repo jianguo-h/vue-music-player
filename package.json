@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "set NODE_ENV=development&&node build/dev-server.js",
     "build": "set NODE_ENV=production&&node build/build.js",
+    "build-dll": "node build/build.dll.js",
     "start": "node express/index.js"
   },
   "repository": {
@@ -27,6 +28,7 @@
     "@babel/core": "^7.2.2",
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "@babel/preset-env": "^7.2.3",
+    "add-asset-html-webpack-plugin": "^3.1.2",
     "autoprefixer": "^9.4.3",
     "axios": "^0.18.0",
     "babel-eslint": "^10.0.1",
