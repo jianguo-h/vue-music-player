@@ -57,9 +57,7 @@ app.use(webpackHotMiddlewareInstance);
 
 // static path config
 const staticPath = path.resolve(__dirname, '../static');
-const dllPath = path.resolve(__dirname, '../dll');
 app.use('/static', express.static(staticPath));
-app.use('/dll', express.static(dllPath));
 
 let _resolve;
 new Promise(resolve => {
