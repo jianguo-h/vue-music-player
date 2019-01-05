@@ -50,7 +50,7 @@ const webpackProdConfig = webpackMerge(webpackBaseConfig, {
       filepath: path.resolve(__dirname, '../dll/*.js'),
       // 不加这个会在dist目录下多出一个libs.js文件，并不会到dist/static/js目录下去，原因未知
       // https://github.com/SimenB/add-asset-html-webpack-plugin/issues/82
-      outputPath: 'static/js/'
+      outputPath: 'static/js'
     }),
     // 提取less和css
     new MiniCssExtractPlugin({
