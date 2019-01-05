@@ -1,8 +1,6 @@
 const path = require('path');
-const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
-const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -48,20 +46,7 @@ module.exports = {
       template: './index.html'
     }),
     // 加载vue-loader
-    new VueLoaderPlugin(),
-    // dllPlugin
-    new webpack.DllReferencePlugin({
-      context: __dirname,
-      manifest: require('../dll/libs-manifest.json')
-    }),
-    // 将dllplugin生成的js自动注入到html中
-    new AddAssetHtmlPlugin({
-      publicPath: '/static/js/',
-      filepath: path.resolve(__dirname, '../dll/*.js'),
-      // 不加这个会在dist目录下多出一个libs.js文件，并不会到dist/static/js目录下去，原因未知
-      // https://github.com/SimenB/add-asset-html-webpack-plugin/issues/82
-      outputPath: 'static/js/'
-    })
+    new VueLoaderPlugin()
   ],
   optimization: {
     splitChunks: {
