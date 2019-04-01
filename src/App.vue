@@ -9,18 +9,23 @@
   </div>
 </template>
 
-<script>
-  import header from "./components/header";
-  import player from "./components/player";
-  import suspendLyric from "./components/suspend-lyric";
-  export default {
-    name: "app",
+<script lang="ts">
+  import Vue from 'vue';
+  import Component from 'vue-class-component';
+  import header from "./components/header.vue";
+  import player from "./components/player.vue";
+  import suspendLyric from "./components/suspend-lyric.vue";
+
+  @Component({
     components: {
       "v-header": header,
       "suspend-lyric": suspendLyric,
       player
     }
-  };
+  })
+  export default class App extends Vue {
+
+  }
 </script>
 
 <style lang = "less">
