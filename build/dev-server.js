@@ -16,7 +16,7 @@ const devPort = config.dev.port;
 const url = 'http://localhost:' + devPort;
 
 // 当环境变量不存在时设置为开发环境
-if(!process.env.NODE_ENV) {
+if (!process.env.NODE_ENV) {
   process.env.NODE_ENV = config.dev.env;
 }
 
@@ -26,7 +26,7 @@ const webpackDevMiddlewareInstance = webpackDevMiddleware(compiler, {
   }
 });
 const webpackHotMiddlewareInstance = webpackHotMiddleware(compiler, {
-  log: () => { }
+  log: () => {}
 });
 
 // force page reload when html-webpack-plugin template changes
@@ -36,7 +36,7 @@ compiler.plugin('compilation', compilation => {
       action: 'reload'
     });
     cb();
-  })
+  });
 });
 
 // config history mode
@@ -67,7 +67,7 @@ new Promise(resolve => {
 console.log('> Starting dev server...');
 webpackDevMiddlewareInstance.waitUntilValid(() => {
   console.log('server start at ' + url);
-  if(process.env.NODE_ENV === config.dev.env) {
+  if (process.env.NODE_ENV === config.dev.env) {
     opn(url);
   }
   _resolve();

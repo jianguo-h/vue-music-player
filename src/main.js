@@ -1,17 +1,12 @@
 import Vue from 'vue';
 import App from './App';
-import {
-  Toast,
-  Indicator,
-  MessageBox,
-  Switch
-} from 'mint-ui';
+import { Toast, Indicator, MessageBox, Switch } from 'mint-ui';
 import store from './store';
 import router from './router';
 import api from './api';
 import adapt from './js/adapt';
 
-if(module.hot) {
+if (module.hot) {
   module.hot.accept();
 }
 
@@ -27,7 +22,7 @@ const vm = new Vue({
   el: '#app',
   store,
   router,
-  template: '<App/>',
-  components: { App }
+  components: { App },
+  template: '<App/>'
 });
 window.vm = vm;
