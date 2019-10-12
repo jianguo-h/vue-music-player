@@ -4,6 +4,7 @@ const config = require('../config');
 const webpackMerge = require('webpack-merge');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const webpackBaseConfig = require('./webpack.base.config');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
@@ -49,6 +50,8 @@ const webpackProdConfig = webpackMerge(webpackBaseConfig, {
     ]
   },
   plugins: [
+    // 每次打包前清除dist目录
+    new CleanWebpackPlugin(),
     // dllPlugin
     new webpack.DllReferencePlugin({
       context: __dirname,

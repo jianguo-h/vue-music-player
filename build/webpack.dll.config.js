@@ -1,8 +1,10 @@
 const path = require('path');
 const webpack = require('webpack');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
+  mode: 'production',
   entry: {
     libs: ['axios', 'vue', 'vue-router', 'vuex']
   },
@@ -17,6 +19,7 @@ module.exports = {
     }
   },
   plugins: [
+    new CleanWebpackPlugin(),
     new webpack.DllPlugin({
       context: __dirname,
       name: '[name]_library',

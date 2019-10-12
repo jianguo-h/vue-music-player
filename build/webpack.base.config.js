@@ -22,6 +22,7 @@ module.exports = {
         test: /\.tsx?$/,
         exclude: /node_modules/,
         use: [
+          'babel-loader',
           {
             loader: 'ts-loader',
             options: {
@@ -46,7 +47,8 @@ module.exports = {
   },
   resolve: {
     alias: {
-      vue$: 'vue/dist/vue.esm.js'
+      vue$: 'vue/dist/vue.esm.js',
+      '@src': path.resolve(__dirname, '../src')
     },
     extensions: ['.ts', '.js', '.vue', '.json']
   },
