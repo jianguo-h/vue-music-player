@@ -1,6 +1,6 @@
 <template>
   <transition name="fade">
-    <div class="player" v-if="canPlayed">
+    <div v-if="canPlayed" class="player">
       <div
         class="footer-play"
         :style="{ visibility: !showDetail ? 'visible' : 'hidden' }"
@@ -27,11 +27,11 @@
       </keep-alive>
       <div class="audio">
         <audio
+          ref="audio"
           :src="audioSrc"
           :loop="loop"
           @canplay="canplay"
           @ended="ended"
-          ref="audio"
         ></audio>
       </div>
     </div>
@@ -44,7 +44,7 @@ import playOperate from './play-operate';
 import { mapState, mapGetters } from 'vuex';
 
 export default {
-  name: 'player',
+  name: 'Player',
   computed: {
     ...mapState([
       'audioSrc',

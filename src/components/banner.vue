@@ -6,8 +6,8 @@
     @touchend="touchend"
   >
     <div
-      class="banner-wrapper"
       ref="bannerWrapper"
+      class="banner-wrapper"
       :style="{
         transform: 'translateX(-' + translateX + 'px)',
         transitionDuration: speed + 'ms'
@@ -15,19 +15,19 @@
       @transitionend="transitionend"
     >
       <div
-        class="banner-item"
-        :style="{ marginRight: itemSpacing + 'px' }"
         v-for="(item, index) of items"
         :key="index"
+        class="banner-item"
+        :style="{ marginRight: itemSpacing + 'px' }"
       >
         <img :src="item" width="100%" />
       </div>
     </div>
-    <div class="banner-pagination" v-if="initialItems.length > 0">
+    <div v-if="initialItems.length > 0" class="banner-pagination">
       <span
-        :class="{ active: curPaginationIndex === index }"
         v-for="(inititalItem, index) in initialItems"
         :key="index"
+        :class="{ active: curPaginationIndex === index }"
         @click="translate(index)"
       >
       </span>
@@ -42,7 +42,7 @@ const clientWidth = document.documentElement.clientWidth;
     ? Math.floor(window.devicePixelRatio)
     : 1; */
 export default {
-  name: 'banner',
+  name: 'Banner',
   data() {
     return {
       initialItems: [], // 存储图片地址的原始数组(定义这个数组主要是为了处理loop为true的情况)
@@ -67,6 +67,22 @@ export default {
       offsetX: 0 // 手指滑动时的偏移值
     };
   },
+  watch: {
+    '$route.path'(path) {
+      if (path === '/new') {
+        if (!timer) {
+          timer = setInterval(() => {
+            this.play();
+          }, this.interval);
+        }
+      } else {
+        if (timer) {
+          clearInterval(timer);
+          timer = null;
+        }
+      }
+    }
+  },
   /* computed: {
       bannerWrapperSize() {
         return clientWidth * dpr;
@@ -82,22 +98,6 @@ export default {
       timer = setInterval(() => {
         this.play();
       }, this.interval);
-    }
-  },
-  watch: {
-    '$route.path'(path) {
-      if (path === '/new') {
-        if (!timer) {
-          timer = setInterval(() => {
-            this.play();
-          }, this.interval);
-        }
-      } else {
-        if (timer) {
-          clearInterval(timer);
-          timer = null;
-        }
-      }
     }
   },
   methods: {

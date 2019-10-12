@@ -1,9 +1,9 @@
 <template>
   <transition name="move">
     <div
+      v-if="showDetail"
       class="playDetail"
       :style="{ 'background-image': 'url(' + curPlayImgSrc + ')' }"
-      v-if="showDetail"
     >
       <div class="playDetail-mark"></div>
       <div class="playDetail-top">
@@ -15,18 +15,18 @@
       </div>
       <div class="playDetail-center">
         <div
-          class="lrc-box"
           ref="lrcBox"
+          class="lrc-box"
           :style="{
             transform: 'translateY(-' + translateY + 'px)',
             color: defaultColor
           }"
         >
           <p
-            :style="{ color: curLrcIndex === index ? activeColor : '' }"
-            :startTime="lrcObj.startTime"
             v-for="(lrcObj, index) of curPlayLrcArr"
             :key="index"
+            :style="{ color: curLrcIndex === index ? activeColor : '' }"
+            :startTime="lrcObj.startTime"
           >
             {{ lrcObj.curLrc }}
           </p>
@@ -43,7 +43,7 @@
             @click="isShowColorList = !isShowColorList"
           ></div>
           <transition name="fade">
-            <div class="color-list" v-if="isShowColorList">
+            <div v-if="isShowColorList" class="color-list">
               <ul>
                 <li
                   v-for="(currentObj, index) of lrcColorList"
@@ -61,14 +61,14 @@
           <div class="start-time">{{ curPlayTime | formatDate }}</div>
           <div class="progress-wrap">
             <div
+              ref="progressBar"
               class="progress-bar"
               @click="updateProgress"
-              ref="progressBar"
             ></div>
             <div class="progress" :style="{ width: progress + '%' }"></div>
             <div
-              class="progress-dot"
               ref="progressDot"
+              class="progress-dot"
               :style="{ 'margin-left': progress + '%' }"
             ></div>
           </div>
@@ -81,7 +81,7 @@
             @click="switchMode"
           >
             <transition name="fade">
-              <div class="mode-tip" v-if="showModeTip">{{ modeTip }}</div>
+              <div v-if="showModeTip" class="mode-tip">{{ modeTip }}</div>
             </transition>
           </div>
           <play-operate></play-operate>
@@ -92,7 +92,7 @@
               @click="isShowList = !isShowList"
             ></div>
             <transition name="fade">
-              <div class="play-list" v-if="isShowList">
+              <div v-if="isShowList" class="play-list">
                 <ul>
                   <li
                     v-for="(song, index) of songList"
@@ -117,7 +117,7 @@ import playOperate from './play-operate';
 import { mapState, mapGetters } from 'vuex';
 
 export default {
-  name: 'play-detail',
+  name: 'PlayDetail',
   data() {
     return {
       // songData: {},          // 存储当前播放歌曲信息的对象
@@ -188,17 +188,14 @@ export default {
       return this.songList[this.curPlayIndex];
     }
   },
-  created() {
-    this.init();
-  },
   watch: {
-    isPlayed(newIsPlayed, oldIsPlayed) {
+    isPlayed(newIsPlayed) {
       console.log('>>> isPlayed', newIsPlayed);
       if (newIsPlayed) {
         this.initPlay();
       }
     },
-    paused(newPaused, oldPaused) {
+    paused(newPaused) {
       console.log('>>> paused', newPaused);
       if (newPaused) {
         this.clearTimer();
@@ -211,7 +208,7 @@ export default {
         }, 100);
       }
     },
-    curLrcIndex(newCurLrcIndex, oldCurLrcIndex) {
+    curLrcIndex(newCurLrcIndex) {
       console.log('>>> curLrcIndex', newCurLrcIndex);
       this.$store.commit('setCurLrcIndex', newCurLrcIndex);
       if (!this.showDetail) return;
@@ -226,6 +223,9 @@ export default {
         this.translateY = 0;
       }
     }
+  },
+  created() {
+    this.init();
   },
   methods: {
     // 根据localStorage中的数据初始化播放信息
