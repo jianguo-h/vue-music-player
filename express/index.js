@@ -1,5 +1,5 @@
 const path = require('path');
-const proxy = require('./proxy')
+const proxy = require('./proxy');
 const router = require('./router');
 const express = require('express');
 const config = require('../config');
