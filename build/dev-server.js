@@ -75,7 +75,7 @@ console.log('> Starting dev server...');
 webpackDevMiddlewareInstance.waitUntilValid(() => {
   console.log('server start at ' + url);
   if (process.env.NODE_ENV === config.dev.env) {
-    open(url);
+    // open(url);
   }
   _resolve();
 });

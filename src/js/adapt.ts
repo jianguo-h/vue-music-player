@@ -1,5 +1,5 @@
 // rem 适配手机屏幕
-export default function() {
+export default function(): void {
   // const evt = "onorientationchange" in window ? "onorientationchange" : "resize";
   const isIPhone = window.navigator.appVersion.match(/iphone/gi);
   let dpr = window.devicePixelRatio;
@@ -27,7 +27,7 @@ export default function() {
       headEl.appendChild(metaEl);
     }
   }
-  const fn = () => {
+  const fn = (): void => {
     let docElWidth = docEl.getBoundingClientRect().width;
     if (docElWidth / dpr > 540) {
       docElWidth = 540 * dpr;
