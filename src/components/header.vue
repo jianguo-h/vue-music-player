@@ -6,8 +6,8 @@
         <input
           v-model="keyword"
           type="text"
-          @input="input"
           placeholder="歌手/歌名"
+          @input="input"
           @keyup.enter="search(keyword)"
         />
         <div v-if="keyword.trim() !== ''" class="search-list">
@@ -42,76 +42,73 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'v-header',
-  data() {
-    return {
-      keyword: '', // 搜索的关键字
-      resultCount: 0, // 得到的结果数量
-      resultList: [], // 搜索得到的结果列表
-      searchTip: '正在搜索...', // 搜索时的提示信息
-      tabs: [
-        {
-          path: 'new',
-          name: '新歌'
-        },
-        {
-          path: 'recommend',
-          name: '推荐'
-        },
-        {
-          path: 'local',
-          name: '本地'
-        }
-      ]
-    };
-  },
-  computed: {
-    searchCount() {
-      return this.$store.state.searchCount;
-    }
-  },
-  methods: {
-    // 点击搜索事件, keyword为关键字
-    search(keyword) {
-      if (!keyword || keyword.trim() === '') {
-        this.$MessageBox.alert('请输入搜索内容');
-        return;
-      }
-      this.$router.push('/search?keyword=' + keyword);
-      this.keyword = '';
-    },
-    // 搜索框input事件, keyword为关键字
-    input() {
-      const keyword = this.keyword;
-      if (!keyword || keyword.trim() === '') return;
+<script lang="ts">
+import { Vue, Component } from 'vue-property-decorator';
 
-      this.resultCount = 0;
-      this.searchTip = '正在搜索...';
-      this.api
-        .search(keyword)
-        .then(res => {
-          console.log('>>> [res] 根据关键字搜索', res);
-          if (res.status === 200 && res.statusText === 'OK') {
-            this.resultList = res.data.data[0].RecordDatas;
-            this.resultCount = res.data.data[0].RecordCount;
-            if (this.resultList.length <= 0) {
-              this.resultCount = 0;
-              this.searchTip = '暂无结果...';
-            }
-          } else {
-            this.searchTip = '搜索出错, 请稍后重试';
-          }
-        })
-        .catch(err => {
-          this.resultCount = 0;
-          this.searchTip = '网络出现错误或服务不可用';
-          console.log('>>> [err] 根据关键字搜索', err);
-        });
+@Component
+export default class VHeader extends Vue {
+  keyword: string = ''; // 搜索的关键字
+  resultCount: number = 0; // 得到的结果数量
+  resultList: any[] = []; // 搜索得到的结果列表
+  searchTip: string = '正在搜索...'; // 搜索时的提示信息
+  tabs: [
+    {
+      path: 'new';
+      name: '新歌';
+    },
+    {
+      path: 'recommend';
+      name: '推荐';
+    },
+    {
+      path: 'local';
+      name: '本地';
     }
+  ];
+
+  get searchCount(): number {
+    return this.$store.state.searchCount;
   }
-};
+
+  // 点击搜索事件, keyword为关键字
+  search(keyword: string) {
+    if (!keyword || keyword.trim() === '') {
+      this.$MessageBox.alert('请输入搜索内容');
+      return;
+    }
+    this.$router.push('/search?keyword=' + keyword);
+    this.keyword = '';
+  }
+
+  // 搜索框input事件, keyword为关键字
+  input() {
+    const keyword = this.keyword;
+    if (!keyword || keyword.trim() === '') return;
+
+    this.resultCount = 0;
+    this.searchTip = '正在搜索...';
+    this.api
+      .search(keyword)
+      .then(res => {
+        console.log('>>> [res] 根据关键字搜索', res);
+        if (res.status === 200 && res.statusText === 'OK') {
+          this.resultList = res.data.data[0].RecordDatas;
+          this.resultCount = res.data.data[0].RecordCount;
+          if (this.resultList.length <= 0) {
+            this.resultCount = 0;
+            this.searchTip = '暂无结果...';
+          }
+        } else {
+          this.searchTip = '搜索出错, 请稍后重试';
+        }
+      })
+      .catch(err => {
+        this.resultCount = 0;
+        this.searchTip = '网络出现错误或服务不可用';
+        console.log('>>> [err] 根据关键字搜索', err);
+      });
+  }
+}
 </script>
 
 <style lang="less">

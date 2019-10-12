@@ -2,9 +2,16 @@
 import axios from 'axios';
 import request from './request';
 
-export default {
+export interface IApi {
+  search(keyword: string): Promise<any>;
+  getList(path: string): Promise<any>;
+  getSongInfo(songName: string, page?: number): Promise<any>;
+  play(hash: string): Promise<any>;
+}
+
+const api: IApi = {
   // 根据关键字搜索
-  search(keyword: string): Promise<any> {
+  search(keyword) {
     return new Promise((resolve, reject) => {
       const params = {
         keyword
@@ -19,7 +26,7 @@ export default {
     });
   },
   // 获取静态json数据中的歌曲列表
-  getList(path: string): Promise<any> {
+  getList(path) {
     return new Promise((resolve, reject) => {
       console.log('>>> [api.params] 获取静态json数据中的歌曲列表', path);
       axios
@@ -31,7 +38,7 @@ export default {
     });
   },
   // 获取歌曲的一些信息
-  getSongInfo(songName: string, page: number = 1): Promise<any> {
+  getSongInfo(songName, page = 1) {
     return new Promise((resolve, reject) => {
       const params = {
         page,
@@ -54,7 +61,7 @@ export default {
     });
   },
   // 根据hash值获取歌曲的信息
-  play(hash: string): Promise<any> {
+  play(hash) {
     return new Promise((resolve, reject) => {
       const params = {
         r: 'play/getdata',
@@ -70,3 +77,5 @@ export default {
     });
   }
 };
+
+export default api;

@@ -3,37 +3,45 @@
     <span class="prev" @click="changePlay('prev')"></span>
     <span
       class="play"
-      @click="togglePlayState"
       :class="{ pause: paused }"
+      @click="togglePlayState"
     ></span>
     <span class="next" @click="changePlay('next')"></span>
   </div>
 </template>
 
-<script>
-import { mapState } from 'vuex';
+<script lang="ts">
+import { Vue, Component } from 'vue-property-decorator';
 
-export default {
-  name: 'play-operate',
-  computed: {
-    ...mapState(['paused', 'showDetail', 'curPlayIndex'])
-  },
-  methods: {
-    // 切换状态 play or paused
-    togglePlayState() {
-      this.$store.commit('setPaused');
-    },
-    // 切歌 上一首 or 下一首
-    changePlay(operate) {
-      let curPlayIndex = this.curPlayIndex;
-      operate === 'next' ? curPlayIndex++ : curPlayIndex--;
-
-      this.$store.commit('setCurPlayIndex', curPlayIndex);
-      // this.$store.commit("setLock", false);
-      this.$store.dispatch('playSong');
-    }
+@Component
+export default class PlayOperate extends Vue {
+  get paused() {
+    return this.$store.state.paused;
   }
-};
+
+  get showDetail() {
+    return this.$store.state.showDetail;
+  }
+
+  get curPlayIndex() {
+    return this.$store.state.curPlayIndex;
+  }
+
+  // 切换状态 play or paused
+  togglePlayState() {
+    this.$store.commit('setPaused');
+  }
+
+  // 切歌 上一首 or 下一首
+  changePlay(operate: 'prev' | 'next') {
+    let curPlayIndex = this.curPlayIndex;
+    operate === 'next' ? curPlayIndex++ : curPlayIndex--;
+
+    this.$store.commit('setCurPlayIndex', curPlayIndex);
+    // this.$store.commit("setLock", false);
+    this.$store.dispatch('playSong');
+  }
+}
 </script>
 
 <style lang="less">

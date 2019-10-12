@@ -2,8 +2,8 @@
   <transition name="fade">
     <div
       v-if="canPlayed && lrcSwitch"
-      ref="suspendLyric"
       id="suspend-lyric"
+      ref="suspendLyric"
       @touchstart="touchstart"
       @touchmove.prevent="touchmove"
       @touchend="touchend"
@@ -36,7 +36,7 @@
 <script>
 import { mapState } from 'vuex';
 export default {
-  name: 'suspend-lyric',
+  name: 'SuspendLyric',
   data() {
     return {
       isDrag: false, // 判断是否处于拖拽中

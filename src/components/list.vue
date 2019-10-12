@@ -27,7 +27,7 @@ import banner from './banner';
 import { mapState } from 'vuex';
 
 export default {
-  name: 'list',
+  name: 'List',
   data() {
     return {
       songList: [], // 存储歌曲列表的数组
@@ -43,6 +43,9 @@ export default {
       return this.$route.path.slice(1);
     }
   },
+  watch: {
+    $route: 'getList'
+  },
   created() {
     this.getList();
   },
@@ -54,9 +57,6 @@ export default {
         this.scrollLoad();
       }
     };
-  },
-  watch: {
-    $route: 'getList'
   },
   methods: {
     // 渲染列表数据
