@@ -5,7 +5,9 @@ const webpackBaseConfig = require('./webpack.base.config');
 
 // add hot-reload related code to entry chunks
 Object.keys(webpackBaseConfig.entry).forEach(name => {
-  webpackBaseConfig.entry[name] = ['webpack-hot-middleware/client'].concat(webpackBaseConfig.entry[name])
+  webpackBaseConfig.entry[name] = ['webpack-hot-middleware/client'].concat(
+    webpackBaseConfig.entry[name]
+  );
 });
 
 const webpackDevConfig = webpackMerge(webpackBaseConfig, {
@@ -31,9 +33,7 @@ const webpackDevConfig = webpackMerge(webpackBaseConfig, {
       }
     ]
   },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-  ]
+  plugins: [new webpack.HotModuleReplacementPlugin()]
 });
 
 module.exports = webpackDevConfig;

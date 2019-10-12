@@ -1,18 +1,18 @@
 module.exports = {
   presets: [
     [
-      "@babel/env",
+      '@babel/env',
       {
         modules: false
       }
     ]
   ],
   plugins: [
-    "@babel/plugin-syntax-dynamic-import",
+    '@babel/plugin-syntax-dynamic-import',
     [
-      "component",
+      'component',
       {
-        libraryName: "mint-ui",
+        libraryName: 'mint-ui',
         style: true
       }
     ]

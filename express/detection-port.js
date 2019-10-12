@@ -4,20 +4,20 @@ const cmd = process.platform === 'win32' ? 'netstat -ano' : 'ps aux';
 
 module.exports = function(app, port) {
   exec(cmd, (err, stdout) => {
-    if(err) {
+    if (err) {
       console.log('>>> err', err);
       return;
     }
-    let isOccupy = false;       // 用来标识端口号是否被占用了
-    let pid = '';               // 占用端口号的进程pid
+    let isOccupy = false; // 用来标识端口号是否被占用了
+    let pid = ''; // 占用端口号的进程pid
     const listLine = stdout.split('\n');
     // 检测端口号是否有被占用
-    for(const line of listLine) {
+    for (const line of listLine) {
       const lines = line.trim().split(/\s+/);
       const address = lines[1];
-      if(address) {
+      if (address) {
         const addressPort = address.split(':')[1];
-        if(addressPort && Number(addressPort) === port) {
+        if (addressPort && Number(addressPort) === port) {
           isOccupy = true;
           pid = lines[4];
           break;
@@ -25,31 +25,29 @@ module.exports = function(app, port) {
       }
     }
     // 端口被占用时
-    if(isOccupy) {
-      exec('taskkill /F /pid ' + pid, (error) => {
-        if(error) {
+    if (isOccupy) {
+      exec('taskkill /F /pid ' + pid, error => {
+        if (error) {
           console.log('>>> 释放指定端口失败', error);
           return;
         }
         startServer(port);
       });
-    }
-    else {
+    } else {
       startServer(port);
     }
   });
 
   // 开启服务
   const startServer = () => {
-    if(port) {
+    if (port) {
       app.listen(port, () => {
-        if(process.env.NODE_ENV !== 'development') {
+        if (process.env.NODE_ENV !== 'development') {
           console.log('server start at http://localhost:' + port);
         }
       });
-    }
-    else {
+    } else {
       throw new Error('port is not defined' + port);
     }
-  }
-}
+  };
+};

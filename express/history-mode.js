@@ -4,4 +4,4 @@ const history = require('connect-history-api-fallback');
 // 参考：https://github.com/bripkens/connect-history-api-fallback
 module.exports = app => {
   app.use(history());
-}
+};

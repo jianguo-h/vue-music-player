@@ -7,4 +7,4 @@ export default {
   search: '/searchtip',
   play: '/play',
   songsearch: '/songsearch'
-}
+};

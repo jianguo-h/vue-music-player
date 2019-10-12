@@ -16,7 +16,7 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        use: ["babel-loader"]
+        use: ['babel-loader']
       },
       {
         test: /\.tsx?$/,
@@ -25,7 +25,7 @@ module.exports = {
           {
             loader: 'ts-loader',
             options: {
-              appendTsSuffixTo: [/\.vue$/],
+              appendTsSuffixTo: [/\.vue$/]
             }
           }
         ]
@@ -46,7 +46,7 @@ module.exports = {
   },
   resolve: {
     alias: {
-      'vue$': 'vue/dist/vue.esm.js'
+      vue$: 'vue/dist/vue.esm.js'
     },
     extensions: ['.ts', '.js', '.vue', '.json']
   },
@@ -79,4 +79,4 @@ module.exports = {
     },
     runtimeChunk: 'single'
   }
-}
+};
