@@ -1,4 +1,4 @@
-const opn = require('opn');
+const open = require('open');
 const path = require('path');
 const express = require('express');
 const webpack = require('webpack');
@@ -30,14 +30,21 @@ const webpackHotMiddlewareInstance = webpackHotMiddleware(compiler, {
 });
 
 // force page reload when html-webpack-plugin template changes
-compiler.plugin('compilation', compilation => {
+compiler.hooks.compilation.tap('HtmlWebpackPlugin', compilation => {
+  compilation.hooks.htmlWebpackPluginAfterEmit.tap('HtmlWebpackPlugin', () => {
+    webpackHotMiddlewareInstance.publish({
+      action: 'reload'
+    });
+  });
+});
+/* compiler.plugin('compilation', compilation => {
   compilation.plugin('html-webpack-plugin-after-emit', (data, cb) => {
     webpackHotMiddlewareInstance.publish({
       action: 'reload'
     });
     cb();
   });
-});
+}); */
 
 // config history mode
 historyMode(app);
@@ -68,7 +75,7 @@ console.log('> Starting dev server...');
 webpackDevMiddlewareInstance.waitUntilValid(() => {
   console.log('server start at ' + url);
   if (process.env.NODE_ENV === config.dev.env) {
-    opn(url);
+    open(url);
   }
   _resolve();
 });
