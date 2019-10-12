@@ -1,15 +1,26 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "outDir": "./dist/",
-    "target": "es5",
-    "strict": true,
-    "module": "es2015",
     "sourceMap": true,
-    "noImplicitReturns": true,
+    "strict": true,
+    "noImplicitAny": false,
+    "noImplicitReturns": false,
+    "module": "esNext",
     "moduleResolution": "node",
-    "experimentalDecorators": true
+    "target": "es5",
+    "allowJs": true,
+    "experimentalDecorators": true,
+    "strictPropertyInitialization": false,
+    "noImplicitThis": false,
+    "paths": {
+      "@src/*": ["src/*"]
+    }
   },
   "include": [
     "./src/**/*"
+  ],
+  "exclude": [
+    "node_modules"
   ]
 }
