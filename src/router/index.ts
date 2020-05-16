@@ -10,13 +10,13 @@ const routerOptions: RouterOptions = {
   routes: [
     {
       path: '/',
-      redirect: '/new'
+      redirect: '/new',
     },
     {
       path: '/*',
-      component: List
-    }
-  ]
+      component: List,
+    },
+  ],
 };
 
 const router = new Router(routerOptions);

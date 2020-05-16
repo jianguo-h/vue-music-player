@@ -57,23 +57,17 @@ const mutations: MutationTree<IStoreState> = {
     if (lyrics.length === 0) {
       return;
     }
-    const lrc = lyrics
-      .replace(/\n/g, '')
-      .split('[')
-      .slice(1);
+    const lrc = lyrics.replace(/\n/g, '').split('[').slice(1);
 
     const curPlayLrcArr: any[] = [];
     for (const [index, item] of lrc.entries()) {
-      const times = item
-        .split(']')[0]
-        .replace('.', ':')
-        .split(':');
+      const times = item.split(']')[0].replace('.', ':').split(':');
       const time =
         Number(times[0]) * 60 + Number(times[1]) + Number(times[2]) / 1000;
       const obj = {
         index,
         startTime: time.toFixed(2),
-        curLrc: item.split(']')[1]
+        curLrc: item.split(']')[1],
       };
       curPlayLrcArr.push(obj);
     }
@@ -97,7 +91,7 @@ const mutations: MutationTree<IStoreState> = {
   setLrcSwitch(state, lrcSwitch) {
     state.lrcSwitch = lrcSwitch;
     window.localStorage.lrcSwitch = lrcSwitch;
-  }
+  },
 };
 
 export default mutations;

@@ -24,7 +24,7 @@ const actions: ActionTree<IStoreState, IStoreState> = {
             if (!data.play_url) {
               Toast({
                 message: '暂无播放来源',
-                duration: 3
+                duration: 3,
               });
               Indicator.close('加载中...');
               return;
@@ -42,7 +42,7 @@ const actions: ActionTree<IStoreState, IStoreState> = {
             console.log('>>> 获取歌曲信息失败');
             Toast({
               message: '播放歌曲失败',
-              duration: 3
+              duration: 3,
             });
           }
         })
@@ -64,7 +64,7 @@ const actions: ActionTree<IStoreState, IStoreState> = {
         } else {
           Toast({
             message: '播放歌曲失败',
-            duration: 3
+            duration: 3,
           });
           console.log('>>> 获取歌曲的hash值失败');
         }
@@ -74,7 +74,7 @@ const actions: ActionTree<IStoreState, IStoreState> = {
         console.log('>>> [err] 获取歌曲的hash值', err);
         Toast('网络出现错误或服务暂时不可用');
       });
-  }
+  },
 };
 
 export default actions;
