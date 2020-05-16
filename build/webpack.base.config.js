@@ -4,19 +4,19 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 module.exports = {
   entry: {
-    app: './src/main.ts'
+    app: './src/main.ts',
   },
   output: {
     filename: 'static/js/[name].[hash:8].js',
     chunkFilename: 'static/js/[name].[chunkhash:8].js',
-    path: path.resolve(__dirname, '../dist')
+    path: path.resolve(__dirname, '../dist'),
   },
   module: {
     rules: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        use: ['babel-loader']
+        use: ['babel-loader'],
       },
       {
         test: /\.tsx?$/,
@@ -26,10 +26,10 @@ module.exports = {
           {
             loader: 'ts-loader',
             options: {
-              appendTsSuffixTo: [/\.vue$/]
-            }
-          }
-        ]
+              appendTsSuffixTo: [/\.vue$/],
+            },
+          },
+        ],
       },
       {
         test: /\.(eot|svg|ttf|woff|woff2|png|jpg|jpeg|gif|svg)$/,
@@ -38,29 +38,29 @@ module.exports = {
             loader: 'url-loader',
             options: {
               limit: 1024 * 3,
-              name: 'static/imgs/[name].[hash:7].[ext]'
-            }
-          }
-        ]
-      }
-    ]
+              name: 'static/imgs/[name].[hash:7].[ext]',
+            },
+          },
+        ],
+      },
+    ],
   },
   resolve: {
     alias: {
       vue$: 'vue/dist/vue.esm.js',
-      '@src': path.resolve(__dirname, '../src')
+      '@src': path.resolve(__dirname, '../src'),
     },
-    extensions: ['.ts', '.js', '.vue', '.json']
+    extensions: ['.ts', '.js', '.vue', '.json'],
   },
   plugins: [
     // 自动注入
     new HtmlWebpackPlugin({
       inject: true,
       filename: 'index.html',
-      template: './index.html'
+      template: './src/index.html',
     }),
     // 加载vue-loader
-    new VueLoaderPlugin()
+    new VueLoaderPlugin(),
   ],
   optimization: {
     splitChunks: {
@@ -69,16 +69,16 @@ module.exports = {
           test: /[\\/]node_modules[\\/]/,
           chunks: 'all',
           name: 'vendors',
-          priority: -10
+          priority: -10,
         },
         commons: {
           chunks: 'all',
           name: 'commons',
           priority: -11,
-          minChunks: 2
-        }
-      }
+          minChunks: 2,
+        },
+      },
     },
-    runtimeChunk: 'single'
-  }
+    runtimeChunk: 'single',
+  },
 };
