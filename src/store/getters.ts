@@ -20,7 +20,7 @@ const getters: GetterTree<IStoreState, IStoreState> = {
       return '';
     }
     return state.songList[state.curPlayIndex].SingerName;
-  }
+  },
 };
 
 export default getters;

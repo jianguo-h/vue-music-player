@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import App from './App';
+import App from './App.vue';
 import { Toast, Indicator, MessageBox, Switch } from 'mint-ui';
 import store from './store';
 import router from './router';
@@ -23,5 +23,5 @@ new Vue({
   store,
   router,
   components: { App },
-  template: '<App/>'
+  template: '<App/>',
 });

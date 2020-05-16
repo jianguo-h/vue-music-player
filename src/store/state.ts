@@ -42,8 +42,8 @@ const state: IStoreState = {
   lrcSwitch: false, // 是否显示悬浮歌词
   lrcColor: {
     defaultColor: '#b2f5b5',
-    activeColor: '#d1c90e'
-  }
+    activeColor: '#d1c90e',
+  },
 };
 
 export default state;

@@ -14,7 +14,7 @@ const api: IApi = {
   search(keyword: string) {
     return new Promise((resolve, reject) => {
       const params = {
-        keyword
+        keyword,
       };
       console.log('>>> [api.params] 根据关键字搜索', params);
       axios
@@ -49,7 +49,7 @@ const api: IApi = {
         iscorrection: 1,
         // eslint-disable-next-line @typescript-eslint/camelcase
         privilege_filter: 0,
-        filter: 2
+        filter: 2,
       };
       console.log('>>> [api.params] 获取歌曲的一些信息', params);
       axios
@@ -65,7 +65,7 @@ const api: IApi = {
     return new Promise((resolve, reject) => {
       const params = {
         r: 'play/getdata',
-        hash
+        hash,
       };
       console.log('>>> [api.params] 根据hash值获取歌曲的信息', params);
       axios
@@ -75,7 +75,7 @@ const api: IApi = {
         })
         .catch(reject);
     });
-  }
+  },
 };
 
 export default api;

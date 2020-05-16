@@ -6,5 +6,5 @@ export default {
   local: '/api/local',
   search: '/searchtip',
   play: '/play',
-  songsearch: '/songsearch'
+  songsearch: '/songsearch',
 };

@@ -11,7 +11,7 @@ const storeOptions: StoreOptions<IStoreState> = {
   state,
   getters,
   actions,
-  mutations
+  mutations,
 };
 
 const store = new Vuex.Store(storeOptions);
