@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = {
   dev: {
     port: 8080,
@@ -33,4 +35,5 @@ module.exports = {
       },
     },
   },
+  libsPath: path.resolve(__dirname, '../src/libs'),
 };

@@ -2,6 +2,7 @@ import path from 'path';
 import webpack, { Configuration } from 'webpack';
 import UglifyJsPlugin from 'uglifyjs-webpack-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
+import { libsPath } from '../config';
 
 const webpackDllConfig: Configuration = {
   mode: 'production',
@@ -9,7 +10,7 @@ const webpackDllConfig: Configuration = {
     libs: ['axios', 'vue', 'vue-router', 'vuex'],
   },
   output: {
-    path: path.resolve(__dirname, '../dll'),
+    path: libsPath,
     filename: '[name].[hash:8].js',
     library: '[name]_library',
   },
@@ -23,7 +24,7 @@ const webpackDllConfig: Configuration = {
     new webpack.DllPlugin({
       context: __dirname,
       name: '[name]_library',
-      path: path.join(__dirname, '../dll/', '[name]-manifest.json'),
+      path: path.resolve(libsPath, '[name]-manifest.json'),
     }),
     new UglifyJsPlugin({
       uglifyOptions: {
