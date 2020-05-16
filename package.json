@@ -5,8 +5,8 @@
   "main": "src/main.ts",
   "scripts": {
     "dev": "env-cmd ts-node build/dev-server.ts",
-    "build": "set NODE_ENV=production&&node build/build.js",
-    "build-dll": "node build/build.dll.js",
+    "build": "env-cmd -f .env.production ts-node build/build.ts",
+    "build-dll": "env-cmd -f .env.production ts-node build/webpack.dll.config.ts",
     "start": "node express/index.js"
   },
   "repository": {

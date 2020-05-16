@@ -1,9 +1,9 @@
-const path = require('path');
-const webpack = require('webpack');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+import path from 'path';
+import webpack, { Configuration } from 'webpack';
+import UglifyJsPlugin from 'uglifyjs-webpack-plugin';
+import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 
-module.exports = {
+const webpackDllConfig: Configuration = {
   mode: 'production',
   entry: {
     libs: ['axios', 'vue', 'vue-router', 'vuex'],
@@ -41,3 +41,16 @@ module.exports = {
     }),
   ],
 };
+
+webpack(webpackDllConfig, (errout, stats) => {
+  if (errout) throw errout;
+  process.stdout.write(
+    stats.toString({
+      colors: true,
+      modules: false,
+      children: false,
+      chunks: false,
+      chunkModules: false,
+    }) + '\n\n'
+  );
+});
