@@ -3,9 +3,9 @@ module.exports = {
     [
       '@babel/env',
       {
-        modules: false
-      }
-    ]
+        modules: false,
+      },
+    ],
   ],
   plugins: [
     '@babel/plugin-syntax-dynamic-import',
@@ -13,8 +13,8 @@ module.exports = {
       'component',
       {
         libraryName: 'mint-ui',
-        style: true
-      }
-    ]
-  ]
+        style: true,
+      },
+    ],
+  ],
 };
