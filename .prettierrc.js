@@ -5,6 +5,8 @@ module.exports = {
   semi: true,
   // 使用单引号
   singleQuote: true,
+  jsxSingleQuote: true,
   // 缩进
-  tabWidth: 2
+  tabWidth: 2,
+  vueIndentScriptAndStyle: true,
 };
