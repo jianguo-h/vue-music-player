@@ -1,20 +1,16 @@
-const path = require('path');
-const webpack = require('webpack');
-const config = require('../config');
-const webpackMerge = require('webpack-merge');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const webpackBaseConfig = require('./webpack.base.config');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+import path from 'path';
+import webpack, { Configuration } from 'webpack';
+import webpackMerge from 'webpack-merge';
+import UglifyJsPlugin from 'uglifyjs-webpack-plugin';
+import webpackBaseConfig from './webpack.base.config';
+import { CleanWebpackPlugin } from 'clean-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import AddAssetHtmlPlugin from 'add-asset-html-webpack-plugin';
+import OptimizeCssAssetsPlugin from 'optimize-css-assets-webpack-plugin';
 
-const webpackProdConfig = webpackMerge(webpackBaseConfig, {
-  mode: config.prod.env,
+const webpackProdConfig: Configuration = webpackMerge(webpackBaseConfig, {
+  mode: 'production',
   devtool: false,
-  output: {
-    publicPath: config.prod.publicPath,
-  },
   module: {
     rules: [
       {
@@ -98,4 +94,4 @@ const webpackProdConfig = webpackMerge(webpackBaseConfig, {
   ],
 });
 
-module.exports = webpackProdConfig;
+export default webpackProdConfig;
