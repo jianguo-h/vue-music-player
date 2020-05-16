@@ -1,13 +1,13 @@
 const config = require('../config');
-const httpProxyMiddleware = require('http-proxy-middleware');
+const { createProxyMiddleware } = require('http-proxy-middleware');
 let proxyTable = config.proxyTable;
 const isDev = process.env.NODE_ENV === config.dev.env;
 
-module.exports = function(app, extraProxys = null) {
+module.exports = function (app, extraProxys = null) {
   if (extraProxys && extraProxys.constructor === Object) {
     proxyTable = {
       ...proxyTable,
-      ...extraProxys
+      ...extraProxys,
     };
   }
 
@@ -18,10 +18,10 @@ module.exports = function(app, extraProxys = null) {
     }
     app.use(
       ctx,
-      httpProxyMiddleware({
+      createProxyMiddleware({
         changeOrigin: true,
         target: isDev ? 'http://localhost:' + config.prod.port : options.target,
-        pathRewrite: isDev ? null : options.pathRewrite
+        pathRewrite: isDev ? null : options.pathRewrite,
       })
     );
   });
