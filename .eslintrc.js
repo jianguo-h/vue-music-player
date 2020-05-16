@@ -7,48 +7,51 @@ module.exports = {
     'prettier',
     'prettier/@typescript-eslint',
     'plugin:prettier/recommended',
-    'prettier/vue'
+    'prettier/vue',
   ],
-  plugins: [
-    'vue'
-  ],
+  plugins: ['vue'],
   parserOptions: {
     parser: '@typescript-eslint/parser',
     sourceType: 'module',
     ecmaVersion: 2019,
     ecmaFeatures: {
-      legacyDecorators: true
-    }
+      legacyDecorators: true,
+    },
   },
   env: {
     browser: true,
     es6: true,
-    node: true
+    node: true,
   },
   rules: {
-    'vue/script-indent': ['off', 2, { baseIndent: 1 }],
+    'vue/script-indent': ['error', 2, { baseIndent: 1 }],
     '@typescript-eslint/no-var-requires': 'warn',
-    '@typescript-eslint/explicit-function-return-type': 'warn',
+    '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/interface-name-prefix': 'off',
-    '@typescript-eslint/no-inferrable-types': ['error', {
-      ignoreParameters: true,
-      ignoreProperties: true
-    }]
+    '@typescript-eslint/no-inferrable-types': [
+      'error',
+      {
+        ignoreParameters: true,
+        ignoreProperties: true,
+      },
+    ],
+    '@typescript-eslint/camelcase': [
+      'error',
+      { properties: 'never', ignoreDestructuring: true },
+    ],
   },
   overrides: [
     {
       files: ['*.vue'],
       rules: {
         indent: 'off',
-        '@typescript-eslint/explicit-function-return-type': 'off'
-      }
+      },
     },
     {
       files: ['*.js'],
       rules: {
-        '@typescript-eslint/explicit-function-return-type': 'off',
-        '@typescript-eslint/no-var-requires': 'off'
-      }
-    }
-  ]
+        '@typescript-eslint/no-var-requires': 'off',
+      },
+    },
+  ],
 };
