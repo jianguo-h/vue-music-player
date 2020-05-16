@@ -10,7 +10,7 @@ webpack(webpackProdConfig, (errout, stats) => {
       modules: false,
       children: false,
       chunks: false,
-      chunkModules: false
+      chunkModules: false,
     }) + '\n\n'
   );
 
