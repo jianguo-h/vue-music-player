@@ -22,21 +22,21 @@ if (!process.env.NODE_ENV) {
 
 const webpackDevMiddlewareInstance = webpackDevMiddleware(compiler, {
   stats: {
-    colors: true
-  }
+    colors: true,
+  },
 });
 const webpackHotMiddlewareInstance = webpackHotMiddleware(compiler, {
-  log: () => {}
+  log: () => {},
 });
 
 // force page reload when html-webpack-plugin template changes
-compiler.hooks.compilation.tap('HtmlWebpackPlugin', compilation => {
+/* compiler.hooks.compilation.tap('HtmlWebpackPlugin', compilation => {
   compilation.hooks.htmlWebpackPluginAfterEmit.tap('HtmlWebpackPlugin', () => {
     webpackHotMiddlewareInstance.publish({
-      action: 'reload'
+      action: 'reload',
     });
   });
-});
+}); */
 /* compiler.plugin('compilation', compilation => {
   compilation.plugin('html-webpack-plugin-after-emit', (data, cb) => {
     webpackHotMiddlewareInstance.publish({
@@ -53,8 +53,8 @@ historyMode(app);
 const extraProxys = {
   '/api': {
     target: 'http://localhost:' + config.prod.port,
-    changeOrigin: true
-  }
+    changeOrigin: true,
+  },
 };
 proxy(app, extraProxys);
 
@@ -66,18 +66,10 @@ app.use(webpackHotMiddlewareInstance);
 const staticPath = path.resolve(__dirname, '../static');
 app.use('/static', express.static(staticPath));
 
-let _resolve;
-new Promise(resolve => {
-  _resolve = resolve;
-});
-
 console.log('> Starting dev server...');
-webpackDevMiddlewareInstance.waitUntilValid(() => {
+webpackDevMiddlewareInstance.waitUntilValid(async () => {
   console.log('server start at ' + url);
-  if (process.env.NODE_ENV === config.dev.env) {
-    // open(url);
-  }
-  _resolve();
+  await open(url);
 });
 
 // 端口检测
