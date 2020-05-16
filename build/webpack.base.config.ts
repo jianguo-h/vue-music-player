@@ -1,8 +1,9 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const VueLoaderPlugin = require('vue-loader/lib/plugin');
+import path from 'path';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import { VueLoaderPlugin } from 'vue-loader';
+import { Configuration } from 'webpack';
 
-module.exports = {
+const webpackBaseConfig: Configuration = {
   entry: {
     app: './src/main.ts',
   },
@@ -10,6 +11,7 @@ module.exports = {
     filename: 'static/js/[name].[hash:8].js',
     chunkFilename: 'static/js/[name].[chunkhash:8].js',
     path: path.resolve(__dirname, '../dist'),
+    publicPath: '/',
   },
   module: {
     rules: [
@@ -82,3 +84,5 @@ module.exports = {
     runtimeChunk: 'single',
   },
 };
+
+export default webpackBaseConfig;

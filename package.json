@@ -4,7 +4,7 @@
   "description": "> A Vue.js project",
   "main": "src/main.ts",
   "scripts": {
-    "dev": "set NODE_ENV=development&&node build/dev-server.js",
+    "dev": "env-cmd ts-node build/dev-server.ts",
     "build": "set NODE_ENV=production&&node build/build.js",
     "build-dll": "node build/build.dll.js",
     "start": "node express/index.js"

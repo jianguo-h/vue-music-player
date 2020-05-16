@@ -1,29 +1,23 @@
-const open = require('open');
-const path = require('path');
-const express = require('express');
-const webpack = require('webpack');
-const config = require('../config');
-const proxy = require('../express/proxy');
-const historyMode = require('../express/history-mode');
-const webpackDevConfig = require('./webpack.dev.config');
-const detectionPort = require('../express/detection-port');
-const webpackDevMiddleware = require('webpack-dev-middleware');
-const webpackHotMiddleware = require('webpack-hot-middleware');
+import open from 'open';
+import path from 'path';
+import express from 'express';
+import webpack from 'webpack';
+import config from '../config';
+import proxy from '../express/proxy';
+import historyMode from '../express/history-mode';
+import webpackDevConfig from './webpack.dev.config';
+import detectionPort from '../express/detection-port';
+import webpackDevMiddleware from 'webpack-dev-middleware';
+import webpackHotMiddleware from 'webpack-hot-middleware';
 
 const app = express();
 const compiler = webpack(webpackDevConfig);
-const devPort = config.dev.port;
+const devPort = process.env.PORT ?? 8080;
 const url = 'http://localhost:' + devPort;
 
-// 当环境变量不存在时设置为开发环境
-if (!process.env.NODE_ENV) {
-  process.env.NODE_ENV = config.dev.env;
-}
-
 const webpackDevMiddlewareInstance = webpackDevMiddleware(compiler, {
-  stats: {
-    colors: true,
-  },
+  publicPath: webpackDevConfig.output?.publicPath ?? '/',
+  stats: { colors: true },
 });
 const webpackHotMiddlewareInstance = webpackHotMiddleware(compiler);
 
