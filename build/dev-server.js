@@ -25,9 +25,7 @@ const webpackDevMiddlewareInstance = webpackDevMiddleware(compiler, {
     colors: true,
   },
 });
-const webpackHotMiddlewareInstance = webpackHotMiddleware(compiler, {
-  log: () => {},
-});
+const webpackHotMiddlewareInstance = webpackHotMiddleware(compiler);
 
 // force page reload when html-webpack-plugin template changes
 /* compiler.hooks.compilation.tap('HtmlWebpackPlugin', compilation => {
@@ -66,7 +64,6 @@ app.use(webpackHotMiddlewareInstance);
 const staticPath = path.resolve(__dirname, '../static');
 app.use('/static', express.static(staticPath));
 
-console.log('> Starting dev server...');
 webpackDevMiddlewareInstance.waitUntilValid(async () => {
   console.log('server start at ' + url);
   await open(url);
