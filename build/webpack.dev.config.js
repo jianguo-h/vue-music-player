@@ -14,26 +14,26 @@ const webpackDevConfig = webpackMerge(webpackBaseConfig, {
   mode: config.dev.env,
   devtool: '#cheap-module-eval-source-map',
   output: {
-    publicPath: config.dev.publicPath
+    publicPath: config.dev.publicPath,
   },
   module: {
     rules: [
       {
         test: /\.less$/,
-        use: ['style-loader', 'css-loader', 'postcss-loader', 'less-loader']
+        use: ['style-loader', 'css-loader', 'postcss-loader', 'less-loader'],
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader']
+        use: ['style-loader', 'css-loader'],
       },
       {
         test: /\.vue$/,
         use: ['vue-loader'],
-        exclude: /node_modules/
-      }
-    ]
+        exclude: /node_modules/,
+      },
+    ],
   },
-  plugins: [new webpack.HotModuleReplacementPlugin()]
+  plugins: [new webpack.HotModuleReplacementPlugin()],
 });
 
 module.exports = webpackDevConfig;
