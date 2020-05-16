@@ -1,5 +1,6 @@
 const config = require('../config');
 const { createProxyMiddleware } = require('http-proxy-middleware');
+
 let proxyTable = config.proxyTable;
 const isDev = process.env.NODE_ENV === config.dev.env;
 

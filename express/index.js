@@ -6,6 +6,7 @@ const config = require('../config');
 const historyMode = require('./history-mode');
 const detectionPort = require('./detection-port');
 
+// get instance
 const app = express();
 const serverPort = config.prod.port;
 

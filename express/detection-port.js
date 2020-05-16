@@ -2,7 +2,20 @@
 const { exec } = require('child_process');
 const cmd = process.platform === 'win32' ? 'netstat -ano' : 'ps aux';
 
-module.exports = function(app, port) {
+module.exports = function (app, port) {
+  // 开启服务
+  const startServer = () => {
+    if (port) {
+      app.listen(port, () => {
+        if (process.env.NODE_ENV !== 'development') {
+          console.log('server start at http://localhost:' + port);
+        }
+      });
+    } else {
+      throw new Error('port is not defined' + port);
+    }
+  };
+
   exec(cmd, (err, stdout) => {
     if (err) {
       console.log('>>> err', err);
@@ -31,23 +44,10 @@ module.exports = function(app, port) {
           console.log('>>> 释放指定端口失败', error);
           return;
         }
-        startServer(port);
+        startServer();
       });
     } else {
-      startServer(port);
+      startServer();
     }
   });
-
-  // 开启服务
-  const startServer = () => {
-    if (port) {
-      app.listen(port, () => {
-        if (process.env.NODE_ENV !== 'development') {
-          console.log('server start at http://localhost:' + port);
-        }
-      });
-    } else {
-      throw new Error('port is not defined' + port);
-    }
-  };
 };
