@@ -1,8 +1,8 @@
-const config = require('../config');
+const { serverPort, proxyTable: configProxyTable } = require('../config');
 const { createProxyMiddleware } = require('http-proxy-middleware');
 
-let proxyTable = config.proxyTable;
-const isDev = process.env.NODE_ENV === config.dev.env;
+let proxyTable = configProxyTable;
+const isDev = process.env.NODE_ENV === 'development';
 
 module.exports = function (app, extraProxys = null) {
   if (extraProxys && extraProxys.constructor === Object) {
@@ -21,7 +21,7 @@ module.exports = function (app, extraProxys = null) {
       ctx,
       createProxyMiddleware({
         changeOrigin: true,
-        target: isDev ? 'http://localhost:' + config.prod.port : options.target,
+        target: isDev ? 'http://localhost:' + serverPort : options.target,
         pathRewrite: isDev ? null : options.pathRewrite,
       })
     );
