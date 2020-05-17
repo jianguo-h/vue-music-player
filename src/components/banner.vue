@@ -36,6 +36,10 @@
 </template>
 
 <script>
+  import banner1 from '../../static/img/banner1.jpg';
+  import banner2 from '../../static/img/banner2.jpg';
+  import banner3 from '../../static/img/banner3.jpg';
+
   let timer = null;
   const clientWidth = document.documentElement.clientWidth;
   /* const dpr = window.navigator.appVersion.match(/iphone/gi)
@@ -48,9 +52,9 @@
         initialItems: [], // 存储图片地址的原始数组(定义这个数组主要是为了处理loop为true的情况)
         items: [
           // 数组
-          require('../../static/img/banner1.jpg'),
-          require('../../static/img/banner2.jpg'),
-          require('../../static/img/banner3.jpg'),
+          banner1,
+          banner2,
+          banner3,
         ],
         curItemIndex: 0, // 当前轮播的索引值
         curPaginationIndex: 0, // 当前分页节点的索引值
