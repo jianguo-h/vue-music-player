@@ -44,6 +44,7 @@
 
 <script lang="ts">
   import { Vue, Component } from 'vue-property-decorator';
+  import { ITab } from '@src/types/header';
 
   @Component
   export default class VHeader extends Vue {
@@ -51,19 +52,19 @@
     resultCount: number = 0; // 得到的结果数量
     resultList: any[] = []; // 搜索得到的结果列表
     searchTip: string = '正在搜索...'; // 搜索时的提示信息
-    tabs: [
+    tabs: ITab[] = [
       {
-        path: 'new';
-        name: '新歌';
+        path: 'new',
+        name: '新歌',
       },
       {
-        path: 'recommend';
-        name: '推荐';
+        path: 'recommend',
+        name: '推荐',
       },
       {
-        path: 'local';
-        name: '本地';
-      }
+        path: 'local',
+        name: '本地',
+      },
     ];
 
     get searchCount(): number {
