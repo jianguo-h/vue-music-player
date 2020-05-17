@@ -7,7 +7,7 @@
     "dev": "env-cmd ts-node build/dev-server.ts",
     "build": "env-cmd -f .env.production ts-node build/build.ts",
     "build-dll": "env-cmd -f .env.production ts-node build/webpack.dll.config.ts",
-    "start": "node express/index.js"
+    "server": "node express/index.js"
   },
   "repository": {
     "type": "git",
