@@ -2,7 +2,7 @@ import open from 'open';
 import path from 'path';
 import express from 'express';
 import webpack from 'webpack';
-import config from '../config';
+import { devPort, serverPort } from '../config';
 import proxy from '../express/proxy';
 import historyMode from '../express/history-mode';
 import webpackDevConfig from './webpack.dev.config';
@@ -12,7 +12,6 @@ import webpackHotMiddleware from 'webpack-hot-middleware';
 
 const app = express();
 const compiler = webpack(webpackDevConfig);
-const devPort = process.env.PORT ?? 8080;
 const url = 'http://localhost:' + devPort;
 
 const webpackDevMiddlewareInstance = webpackDevMiddleware(compiler, {
@@ -44,7 +43,7 @@ historyMode(app);
 // config proxy
 const extraProxys = {
   '/api': {
-    target: 'http://localhost:' + config.prod.port,
+    target: 'http://localhost:' + serverPort,
     changeOrigin: true,
   },
 };

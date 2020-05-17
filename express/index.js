@@ -2,13 +2,12 @@ const path = require('path');
 const proxy = require('./proxy');
 const router = require('./router');
 const express = require('express');
-const config = require('../config');
+const { serverPort } = require('../config');
 const historyMode = require('./history-mode');
 const detectionPort = require('./detection-port');
 
 // get instance
 const app = express();
-const serverPort = config.prod.port;
 
 // config express router
 router(app);

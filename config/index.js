@@ -1,16 +1,8 @@
 const path = require('path');
 
 module.exports = {
-  dev: {
-    port: 8080,
-    env: 'development',
-    publicPath: '/',
-  },
-  prod: {
-    env: 'production',
-    publicPath: '/',
-    port: 8088,
-  },
+  devPort: process.env.PORT || 8080,
+  serverPort: process.env.SERVER_PORT || 8088,
   // node服务器接口代理
   proxyTable: {
     // 搜索接口
