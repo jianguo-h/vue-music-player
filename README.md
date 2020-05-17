@@ -29,14 +29,14 @@ npm i or cnpm i
 # serve with hot reload at localhost:8080
 安装好依赖后, 启动项目, 这里分 3 步
 1). npm run build-dll, 生成3方库的libs文件, 也就是dll目录下的文件, 已有的话可以忽略这步
-2). npm run start
+2). npm run server
 3). npm run dev
 
 # build for production with minification
 npm run build
 
 # also you can
-或者执行完第一步后，也可以在控制台下直接运行npm run start命令
+或者执行完第一步后，也可以在控制台下直接运行npm run server命令
 该命令会直接运行express目录下的index.js文件，加载已打包好的dist目录下的文件
 启动成功后直接在浏览器中打开 http://localhost:8088 即可
 ```
