@@ -7,7 +7,11 @@
     "dev": "env-cmd ts-node build/dev-server.ts",
     "build": "env-cmd -f .env.production ts-node build/build.ts",
     "build-dll": "env-cmd -f .env.production ts-node build/webpack.dll.config.ts",
-    "server": "node express/index.js"
+    "server": "node express/index.js",
+    "lint": "npm run prettier && npm run lint-script && npm run lint-style",
+    "prettier": "prettier --ignore-path .eslintignore --write \"*.{vue,js?(x),ts?(x),css,less,scss,sass}\"",
+    "lint-script": "eslint --cache --ext .vue,.js,.jsx,.ts,.tsx --ignore-path .eslintignore --fix ./",
+    "lint-style": "stylelint --ignore-path .eslintignore --cache --fix src/**/*.{vue,css,less,scss,sass}"
   },
   "repository": {
     "type": "git",
