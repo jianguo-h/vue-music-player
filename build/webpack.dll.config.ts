@@ -11,7 +11,7 @@ const webpackDllConfig: Configuration = {
   },
   output: {
     path: libsPath,
-    filename: '[name].[hash:8].js',
+    filename: '[name].[contenthash:8].js',
     library: '[name]_library',
   },
   resolve: {
