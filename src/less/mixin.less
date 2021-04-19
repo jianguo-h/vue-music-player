@@ -1,10 +1,10 @@
 .fontSize(@fontSize) {
-  font-size: round(@fontSize / 2) * 1px;
+  font-size: round((@fontSize / 2)) * 1px;
   [data-dpr='2'] & {
     font-size: @fontSize * 1px;
   }
   [data-dpr='3'] & {
-    font-size: round(@fontSize / 2 * 3) * 1px;
+    font-size: round((@fontSize / 2) * 3) * 1px;
   }
   [data-dpr='4'] & {
     font-size: round(@fontSize * 2) * 1px;
