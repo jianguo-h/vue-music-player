@@ -12,40 +12,6 @@ const webpackProdConfig: Configuration = webpackMerge(webpackBaseConfig, {
   output: {
     filename: 'static/js/[name].[contenthash:8].js',
   },
-  module: {
-    rules: [
-      {
-        test: /\.less$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          'css-loader',
-          'postcss-loader',
-          'less-loader',
-        ],
-      },
-      {
-        test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'],
-      },
-      {
-        test: /\.vue$/,
-        loader: 'vue-loader',
-        exclude: /node_modules/,
-        options: {
-          loaders: {
-            js: ['babel-loader'],
-            less: [
-              MiniCssExtractPlugin.loader,
-              'css-loader',
-              'postcss-loader',
-              'less-loader',
-            ],
-            css: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'],
-          },
-        },
-      },
-    ],
-  },
   plugins: [
     new webpack.ProgressPlugin({}),
     // 每次打包前清除dist目录

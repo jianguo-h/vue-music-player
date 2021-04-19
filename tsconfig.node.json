@@ -13,7 +13,7 @@
     "moduleResolution": "node"
   },
   "include": [
-    "build/**/*"
+    "build"
   ],
   "exclude": ["node_modules"]
 }
