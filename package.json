@@ -8,7 +8,7 @@
     "build": "env-cmd -f .env.production ts-node build/build.ts",
     "server": "env-cmd -f .env.server node express/index.js",
     "lint": "npm run prettier && npm run lint-script && npm run lint-style",
-    "prettier": "prettier --ignore-path .eslintignore --write \"*.{vue,js?(x),ts?(x),css,less,scss,sass}\"",
+    "prettier": "prettier --ignore-path .eslintignore --write \"./**/*.{vue,js?(x),ts?(x),css,less,scss,sass}\"",
     "lint-script": "eslint --cache --ext .vue,.js,.jsx,.ts,.tsx --ignore-path .eslintignore --fix ./",
     "lint-style": "stylelint --ignore-path .eslintignore --cache --fix src/**/*.{vue,css,less,scss,sass}"
   },

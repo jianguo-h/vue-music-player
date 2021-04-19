@@ -1,5 +1,5 @@
 module.exports = {
-  '*.{vue,js?(x),ts?(x)}': [
+  './**/*.{vue,js?(x),ts?(x)}': [
     'prettier --ignore-path .eslintignore --write',
     'eslint --fix',
   ],
