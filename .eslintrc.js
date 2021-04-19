@@ -5,9 +5,7 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:vue/recommended',
     'prettier',
-    'prettier/@typescript-eslint',
     'plugin:prettier/recommended',
-    'prettier/vue',
   ],
   plugins: ['vue'],
   parserOptions: {
@@ -28,6 +26,8 @@ module.exports = {
     '@typescript-eslint/no-var-requires': 'warn',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/interface-name-prefix': 'off',
+    '@typescript-eslint/no-empty-interface': 'error',
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-inferrable-types': [
       'error',
       {
@@ -35,9 +35,49 @@ module.exports = {
         ignoreProperties: true,
       },
     ],
-    '@typescript-eslint/camelcase': [
+    '@typescript-eslint/naming-convention': [
       'error',
-      { properties: 'never', ignoreDestructuring: true },
+      {
+        selector: 'interface',
+        format: ['StrictPascalCase'],
+        prefix: ['I'],
+        leadingUnderscore: 'forbid',
+        trailingUnderscore: 'forbid',
+      },
+      {
+        selector: 'typeLike',
+        format: ['StrictPascalCase'],
+        leadingUnderscore: 'forbid',
+        trailingUnderscore: 'forbid',
+      },
+      {
+        selector: 'property',
+        format: ['strictCamelCase', 'snake_case', 'StrictPascalCase'],
+        leadingUnderscore: 'allow',
+        trailingUnderscore: 'allow',
+      },
+      {
+        selector: 'variableLike',
+        format: [
+          'strictCamelCase',
+          'snake_case',
+          'StrictPascalCase',
+          'UPPER_CASE',
+        ],
+        leadingUnderscore: 'allow',
+        trailingUnderscore: 'allow',
+      },
+      /* {
+        selector: 'default',
+        format: [
+          'strictCamelCase',
+          'snake_case',
+          'UPPER_CASE',
+          'StrictPascalCase',
+        ],
+        leadingUnderscore: 'allow',
+        trailingUnderscore: 'allow',
+      }, */
     ],
   },
   overrides: [
