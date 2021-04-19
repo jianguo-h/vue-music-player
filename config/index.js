@@ -27,5 +27,4 @@ module.exports = {
       },
     },
   },
-  libsPath: path.resolve(__dirname, '../src/libs'),
 };

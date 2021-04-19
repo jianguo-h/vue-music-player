@@ -7,7 +7,6 @@ import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import AddAssetHtmlPlugin from 'add-asset-html-webpack-plugin';
 import OptimizeCssAssetsPlugin from 'optimize-css-assets-webpack-plugin';
-import { libsPath } from '../config';
 
 const webpackProdConfig: Configuration = webpackMerge(webpackBaseConfig, {
   mode: 'production',
@@ -52,19 +51,6 @@ const webpackProdConfig: Configuration = webpackMerge(webpackBaseConfig, {
   plugins: [
     // 每次打包前清除dist目录
     new CleanWebpackPlugin(),
-    // dllPlugin
-    new webpack.DllReferencePlugin({
-      context: __dirname,
-      manifest: require(libsPath + '/libs-manifest.json'),
-    }),
-    // 将dllplugin生成的js自动注入到html中
-    new AddAssetHtmlPlugin({
-      publicPath: '/static/js/',
-      filepath: path.resolve(libsPath, '*.js'),
-      // 不加这个会在dist目录下多出一个libs.js文件，并不会到dist/static/js目录下去，原因未知
-      // https://github.com/SimenB/add-asset-html-webpack-plugin/issues/82
-      outputPath: 'static/js',
-    }),
     // 提取less和css
     new MiniCssExtractPlugin({
       filename: 'static/css/[name].[contenthash:8].css',

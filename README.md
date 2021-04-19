@@ -27,10 +27,9 @@ npm i or cnpm i
 如果安装了yarn, 也可以yarn install
 
 # serve with hot reload at localhost:8080
-安装好依赖后, 启动项目, 这里分 3 步
-1). npm run build-dll, 生成3方库的libs文件, 也就是dll目录下的文件, 已有的话可以忽略这步
-2). npm run server
-3). npm run dev
+安装好依赖后, 启动项目, 这里分 2 步
+1). npm run server
+2). npm run dev
 
 # build for production with minification
 npm run build
