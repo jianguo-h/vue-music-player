@@ -14,10 +14,7 @@ const app = express();
 const compiler = webpack(webpackDevConfig);
 const url = 'http://localhost:' + devPort;
 
-const webpackDevMiddlewareInstance = webpackDevMiddleware(compiler, {
-  publicPath: webpackDevConfig.output?.publicPath ?? '/',
-  stats: { colors: true },
-});
+const webpackDevMiddlewareInstance = webpackDevMiddleware(compiler);
 const webpackHotMiddlewareInstance = webpackHotMiddleware(compiler);
 
 // force page reload when html-webpack-plugin template changes

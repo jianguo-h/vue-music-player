@@ -1,7 +1,7 @@
 import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-import { VueLoaderPlugin } from 'vue-loader';
 import { Configuration } from 'webpack';
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 const webpackBaseConfig: Configuration = {
   entry: {
