@@ -2,21 +2,31 @@ import webpack from 'webpack';
 import webpackProdConfig from './webpack.prod.config';
 
 console.log('building for production...\n');
-webpack(webpackProdConfig, (errout, stats) => {
-  if (errout) throw errout;
+
+webpack(webpackProdConfig, (err, stats) => {
+  if (err || stats?.hasErrors()) {
+    process.stdout.write(
+      stats?.toString({
+        errors: true,
+        errorDetails: true,
+        warnings: true,
+        colors: true,
+        all: false,
+      }) ?? ''
+    );
+    console.log('Build failed');
+    throw err;
+  }
+
   process.stdout.write(
-    stats.toString({
+    stats?.toString({
+      all: false,
       colors: true,
-      modules: false,
-      children: false,
-      chunks: false,
-      chunkModules: false,
+      assets: true,
+      version: true,
+      excludeAssets: /media/,
     }) + '\n\n'
   );
 
-  console.log('Build complete \n');
-  console.log(
-    'Tip: built files are meant to be served over an HTTP server.\n' +
-      "Opening index.html over file:// won't work.\n"
-  );
+  console.log('Build successfully \n');
 });

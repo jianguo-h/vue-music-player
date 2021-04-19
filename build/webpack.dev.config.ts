@@ -18,7 +18,7 @@ const webpackDevConfig: Configuration = webpackMerge(webpackBaseConfig, {
   devtool: 'eval-cheap-module-source-map',
   entry: devConfigEntry,
   output: {
-    filename: 'static/js/[name].[hash:8].js',
+    filename: 'static/js/[name].[fullhash:8].js',
   },
   module: {
     rules: [
