@@ -6,10 +6,6 @@ import router from './router';
 import api from './api';
 import adapt from './js/adapt';
 
-if (module.hot) {
-  module.hot.accept();
-}
-
 adapt();
 Vue.prototype.api = api;
 Vue.component(Switch.name, Switch);
