@@ -47,7 +47,7 @@
   import { ITab } from '@src/types/header';
 
   @Component
-  export default class VHeader extends Vue {
+  export default class AppHeader extends Vue {
     keyword: string = ''; // 搜索的关键字
     resultCount: number = 0; // 得到的结果数量
     resultList: any[] = []; // 搜索得到的结果列表

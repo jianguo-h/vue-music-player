@@ -47,7 +47,6 @@ const api: IApi = {
         platform: 'WebFilter',
         userid: -1,
         iscorrection: 1,
-        // eslint-disable-next-line @typescript-eslint/camelcase
         privilege_filter: 0,
         filter: 2,
       };

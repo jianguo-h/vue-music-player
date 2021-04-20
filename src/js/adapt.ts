@@ -1,9 +1,9 @@
 // rem 适配手机屏幕
 export default function (): void {
   // const evt = "onorientationchange" in window ? "onorientationchange" : "resize";
-  const isIPhone = window.navigator.appVersion.match(/iphone/gi);
+  const isIphone = window.navigator.appVersion.match(/iphone/gi);
   let dpr = window.devicePixelRatio;
-  if (isIPhone) {
+  if (isIphone) {
     if (dpr >= 3 && (!dpr || dpr >= 3)) {
       dpr = 3;
     } else if (dpr >= 2 && (!dpr || dpr >= 2)) {
