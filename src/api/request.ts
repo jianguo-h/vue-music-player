@@ -1,6 +1,8 @@
 // 统一管理请求接口
 
-export default {
+const request: {
+  [path: string]: string;
+} = {
   new: '/api/new',
   recommend: '/api/recommend',
   local: '/api/local',
@@ -8,3 +10,5 @@ export default {
   play: '/play',
   songsearch: '/songsearch',
 };
+
+export default request;

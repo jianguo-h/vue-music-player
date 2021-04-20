@@ -26,7 +26,7 @@ const actions: ActionTree<IStoreState, IStoreState> = {
                 message: '暂无播放来源',
                 duration: 3,
               });
-              Indicator.close('加载中...');
+              Indicator.close();
               return;
             }
             const audioSrc = data.play_url;
