@@ -53,7 +53,7 @@ interface IMessageBoxPromiseValue {
 }
 
 declare interface IMessageBox {
-  (options?: string | IMessageBoxOptions): ToastComponent;
+  (options?: string | IMessageBoxOptions): void;
   alert(
     message: string,
     title: string,
