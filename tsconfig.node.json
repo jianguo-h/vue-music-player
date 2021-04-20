@@ -12,10 +12,10 @@
     "allowSyntheticDefaultImports": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
+    "paths": {
+      "*": ["@types/*"]
+    }
   },
-  "include": [
-    "./build",
-    "./server"
-  ],
+  "include": ["./build/**/*", "./server/**/*"],
   "exclude": ["node_modules"]
 }
