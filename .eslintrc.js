@@ -28,6 +28,7 @@ module.exports = {
     '@typescript-eslint/interface-name-prefix': 'off',
     '@typescript-eslint/no-empty-interface': 'error',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
+    'vue/order-in-components': 'off',
     '@typescript-eslint/no-inferrable-types': [
       'error',
       {
