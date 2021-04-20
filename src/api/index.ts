@@ -30,7 +30,7 @@ const api: IApi = {
     return new Promise((resolve, reject) => {
       console.log('>>> [api.params] 获取静态json数据中的歌曲列表', path);
       axios
-        .post(request[path])
+        .get(request[path])
         .then(res => {
           resolve(res);
         })
