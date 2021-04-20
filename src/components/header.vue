@@ -67,8 +67,8 @@
       },
     ];
 
-    get searchCount(): number {
-      return this.$store.state.searchCount;
+    get searchCount() {
+      return this.$$store.state.searchCount;
     }
 
     // 点击搜索事件, keyword为关键字

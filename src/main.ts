@@ -12,6 +12,7 @@ Vue.component(Switch.name, Switch);
 Vue.prototype.$Toast = Toast;
 Vue.prototype.$Indicator = Indicator;
 Vue.prototype.$MessageBox = MessageBox;
+Vue.prototype.$$store = store;
 Vue.config.productionTip = false;
 
 new Vue({

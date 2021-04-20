@@ -139,7 +139,7 @@
       },
       // 关闭悬浮歌词
       close() {
-        this.$store.commit('setLrcSwitch', false);
+        this.$$store.commit('setLrcSwitch', false);
       },
     },
   };

@@ -9,7 +9,7 @@
       <div class="playDetail-top">
         <div
           class="goback"
-          @click="$store.commit('setShowDetail', false)"
+          @click="$$store.commit('setShowDetail', false)"
         ></div>
         <div class="playDetail-title">{{ curPlayFileName }}</div>
       </div>
@@ -210,7 +210,7 @@
       },
       curLrcIndex(newCurLrcIndex) {
         console.log('>>> curLrcIndex', newCurLrcIndex);
-        this.$store.commit('setCurLrcIndex', newCurLrcIndex);
+        this.$$store.commit('setCurLrcIndex', newCurLrcIndex);
         if (!this.showDetail) return;
 
         const lrcBox = this.$refs.lrcBox;
@@ -251,9 +251,9 @@
           lrcSwitch = true;
         }
 
-        this.$store.commit('setModeType', modeType);
-        this.$store.commit('setLrcSwitch', lrcSwitch);
-        this.$store.commit('setLrcColor', {
+        this.$$store.commit('setModeType', modeType);
+        this.$$store.commit('setLrcSwitch', lrcSwitch);
+        this.$$store.commit('setLrcColor', {
           defaultColor: currentColorObj.defaultColor,
           activeColor: currentColorObj.activeColor,
         });
@@ -326,7 +326,7 @@
         );
         this.audio.currentTime = this.curPlayTime;
 
-        this.$store.commit('setLock', true);
+        this.$$store.commit('setLock', true);
       },
       // 切换播放模式
       switchMode() {
@@ -349,8 +349,8 @@
           modeType = 'random';
         }
 
-        this.$store.commit('setLoop', loop);
-        this.$store.commit('setModeType', modeType);
+        this.$$store.commit('setLoop', loop);
+        this.$$store.commit('setModeType', modeType);
         window.localStorage.modeType = modeType;
         setTimeout(() => {
           this.modeSwitch = false;
@@ -359,12 +359,12 @@
       },
       // 歌曲结束时根据播放模式来处理
       dealMode() {
-        this.$store.commit('setLock', false);
+        this.$$store.commit('setLock', false);
         if (this.modeType === 'random') {
           const randomIndex = Math.floor(Math.random() * this.listTotal);
 
-          this.$store.commit('setCurPlayIndex', randomIndex);
-          this.$store.dispatch('playSong');
+          this.$$store.commit('setCurPlayIndex', randomIndex);
+          this.$$store.dispatch('playSong');
         } else if (this.modeType === 'loop') {
           this.initPlay();
         }
@@ -376,8 +376,8 @@
       },
       // 点击列表时播放歌曲
       playSong(CurPlayIndex) {
-        this.$store.commit('setCurPlayIndex', CurPlayIndex);
-        this.$store.dispatch('playSong');
+        this.$$store.commit('setCurPlayIndex', CurPlayIndex);
+        this.$$store.dispatch('playSong');
         this.isShowList = false;
       },
       // 点击改变歌词颜色
@@ -392,7 +392,7 @@
           defaultColor: this.defaultColor,
           activeColor: this.activeColor,
         };
-        this.$store.commit('setLrcColor', {
+        this.$$store.commit('setLrcColor', {
           defaultColor: this.defaultColor,
           activeColor: this.activeColor,
         });
@@ -402,7 +402,7 @@
       // 悬浮歌词开关
       toggleLrcSwitch(lrcSwitch) {
         lrcSwitch = !lrcSwitch;
-        this.$store.commit('setLrcSwitch', lrcSwitch);
+        this.$$store.commit('setLrcSwitch', lrcSwitch);
       },
     },
     filters: {

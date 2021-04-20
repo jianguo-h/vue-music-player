@@ -115,7 +115,7 @@
               this.isLoading = false;
               this.$Indicator.close();
               this.songList = songList.concat(searchSongList);
-              this.$store.commit('setSearchCount', searchCount);
+              this.$$store.commit('setSearchCount', searchCount);
             }
           })
           .catch(err => {
@@ -129,10 +129,10 @@
         const view = this.routerPath;
         const songList = this.songList;
 
-        this.$store.commit('setView', view);
-        this.$store.commit('setSongList', songList);
-        this.$store.commit('setCurPlayIndex', CurPlayIndex);
-        this.$store.dispatch('playSong');
+        this.$$store.commit('setView', view);
+        this.$$store.commit('setSongList', songList);
+        this.$$store.commit('setCurPlayIndex', CurPlayIndex);
+        this.$$store.dispatch('playSong');
       },
       // 滑动加载
       scrollLoad() {

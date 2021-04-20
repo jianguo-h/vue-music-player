@@ -67,7 +67,7 @@
     methods: {
       // 点击显示详情页
       showPlayDetail() {
-        this.$store.commit('setShowDetail', true);
+        this.$$store.commit('setShowDetail', true);
       },
       // 监听audio的canplay事件
       canplay() {
@@ -75,8 +75,8 @@
         const audio = this.$refs.audio;
         if (audio.readyState === 4) {
           audio.play();
-          this.$store.commit('setAudio', audio);
-          this.$store.commit('setIsPlayed', true);
+          this.$$store.commit('setAudio', audio);
+          this.$$store.commit('setIsPlayed', true);
         } else {
           this.$Toast({
             message: '歌曲暂时无法播放, 请稍后重试',
@@ -90,8 +90,8 @@
 
         let curPlayIndex = this.curPlayIndex;
         curPlayIndex++;
-        this.$store.commit('setCurPlayIndex', curPlayIndex);
-        this.$store.dispatch('playSong');
+        this.$$store.commit('setCurPlayIndex', curPlayIndex);
+        this.$$store.dispatch('playSong');
       },
     },
     components: {

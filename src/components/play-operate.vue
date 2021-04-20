@@ -16,20 +16,20 @@
   @Component
   export default class PlayOperate extends Vue {
     get paused() {
-      return this.$store.state.paused;
+      return this.$$store.state.paused;
     }
 
     get showDetail() {
-      return this.$store.state.showDetail;
+      return this.$$store.state.showDetail;
     }
 
     get curPlayIndex() {
-      return this.$store.state.curPlayIndex;
+      return this.$$store.state.curPlayIndex;
     }
 
     // 切换状态 play or paused
     togglePlayState() {
-      this.$store.commit('setPaused');
+      this.$$store.commit('setPaused');
     }
 
     // 切歌 上一首 or 下一首
@@ -37,9 +37,9 @@
       let curPlayIndex = this.curPlayIndex;
       operate === 'next' ? curPlayIndex++ : curPlayIndex--;
 
-      this.$store.commit('setCurPlayIndex', curPlayIndex);
-      // this.$store.commit("setLock", false);
-      this.$store.dispatch('playSong');
+      this.$$store.commit('setCurPlayIndex', curPlayIndex);
+      // this.$$store.commit("setLock", false);
+      this.$$store.dispatch('playSong');
     }
   }
 </script>
