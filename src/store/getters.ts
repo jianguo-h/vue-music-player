@@ -3,23 +3,23 @@ import { IStoreState } from './state';
 
 const getters: GetterTree<IStoreState, IStoreState> = {
   listTotal: (state): number => state.songList.length,
-  curPlayFileName: (state): string => {
+  curPlayFileName: state => {
     if (state.curPlayIndex < 0) {
       return '';
     }
-    return state.songList[state.curPlayIndex].FileName;
+    return state.songList?.[state.curPlayIndex]?.FileName;
   },
-  curPlaySongName: (state): string => {
+  curPlaySongName: state => {
     if (state.curPlayIndex < 0) {
       return '';
     }
-    return state.songList[state.curPlayIndex].SongName;
+    return state.songList?.[state.curPlayIndex]?.SongName;
   },
-  curPlaySingerName: (state): string => {
+  curPlaySingerName: state => {
     if (state.curPlayIndex < 0) {
       return '';
     }
-    return state.songList[state.curPlayIndex].SingerName;
+    return state.songList?.[state.curPlayIndex]?.SingerName;
   },
 };
 

@@ -150,7 +150,7 @@
           this.translateOffset;
       },
       // touchend事件
-      touchend(evt) {
+      touchend() {
         const offsetTime = new Date().getTime() - this.startTime;
         const boundary = offsetTime <= 500 ? 50 : clientWidth / 2;
 

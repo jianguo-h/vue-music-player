@@ -1,3 +1,4 @@
+import { IPlayLrc } from '@src/types/song';
 import { MutationTree } from 'vuex';
 import { IStoreState } from './state';
 
@@ -59,7 +60,7 @@ const mutations: MutationTree<IStoreState> = {
     }
     const lrc = lyrics.replace(/\n/g, '').split('[').slice(1);
 
-    const curPlayLrcArr: any[] = [];
+    const curPlayLrcArr: IPlayLrc[] = [];
     for (const [index, item] of lrc.entries()) {
       const times = item.split(']')[0].replace('.', ':').split(':');
       const time =

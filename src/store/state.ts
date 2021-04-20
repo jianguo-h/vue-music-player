@@ -1,6 +1,8 @@
+import { IPlayLrc, ISong } from '@src/types/song';
+
 export interface IStoreState {
   view: string;
-  songList: any[];
+  songList: ISong[];
   searchCount: number;
   showDetail: boolean;
   audio: null | HTMLAudioElement;
@@ -10,7 +12,7 @@ export interface IStoreState {
   paused: boolean;
   curPlayIndex: number;
   curPlayImgSrc: string;
-  curPlayLrcArr: any[];
+  curPlayLrcArr: IPlayLrc[];
   curLrcIndex: number;
   lock: boolean;
   loop: boolean;
