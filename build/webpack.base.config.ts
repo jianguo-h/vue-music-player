@@ -4,7 +4,6 @@ import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import { Configuration } from 'webpack';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 const { VueLoaderPlugin } = require('vue-loader');
 
 const isProduction = process.env.NODE_ENV === 'production';
@@ -119,12 +118,6 @@ const webpackBaseConfig: Configuration = {
     }),
     // 加载vue-loader
     new VueLoaderPlugin(),
-    new ForkTsCheckerWebpackPlugin({
-      async: true,
-      typescript: {
-        configFile: path.resolve(__dirname, '../tsconfig.json'),
-      },
-    }),
   ],
   optimization: {
     runtimeChunk: 'single',
