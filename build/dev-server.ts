@@ -5,23 +5,15 @@ import detectPort from 'detect-port';
 import { serverPort } from '../config';
 
 const options: WebpackDevServer.Configuration = {
-  hot: true,
   historyApiFallback: true,
   open: true,
+  hot: true,
   liveReload: true,
-  stats: {
-    errors: true,
-    errorDetails: true,
-    errorStack: true,
-    warnings: true,
-    colors: true,
-    assets: false,
-    chunks: false,
-    modules: false,
-  },
-  overlay: {
-    warnings: false,
-    errors: true,
+  client: {
+    overlay: {
+      warnings: false,
+      errors: true,
+    },
   },
   proxy: {
     '/api': {
@@ -31,17 +23,15 @@ const options: WebpackDevServer.Configuration = {
   },
 };
 
-WebpackDevServer.addDevServerEntrypoints(webpackDevConfig, options);
-
 const compiler = webpack(webpackDevConfig);
-const server = new WebpackDevServer(compiler, options);
-
 let port = 8080;
 
 async function startDevServer() {
   const _port = await detectPort(port);
   if (_port === port) {
-    server.listen(port);
+    options.port = port;
+    const server = new WebpackDevServer(options, compiler);
+    await server.start();
     return;
   }
   port += 1;

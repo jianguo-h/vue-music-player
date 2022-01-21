@@ -84,7 +84,9 @@
     // 搜索框input事件, keyword为关键字
     input() {
       const keyword = this.keyword;
-      if (!keyword || keyword.trim() === '') return;
+      if (!keyword || keyword.trim() === '') {
+        return;
+      }
 
       this.resultCount = 0;
       this.searchTip = '正在搜索...';

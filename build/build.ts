@@ -9,9 +9,12 @@ webpack(webpackProdConfig, (err, stats) => {
       stats?.toString({
         errors: true,
         errorDetails: true,
+        errorStack: true,
         warnings: true,
         colors: true,
-        all: false,
+        assets: false,
+        chunks: false,
+        modules: false,
       }) ?? ''
     );
     console.log('Build failed');

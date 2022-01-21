@@ -139,7 +139,9 @@
       },
       // touchmove事件
       touchmove(evt) {
-        if (this.animated) return;
+        if (this.animated) {
+          return;
+        }
         const endX = evt.targetTouches[0].pageX;
         this.offsetX = endX - this.startX;
 
@@ -164,7 +166,9 @@
       },
       // 运动, slide 为滑动的方向
       play(slide = 'next') {
-        if (this.animated) return;
+        if (this.animated) {
+          return;
+        }
         const itemsLen = this.items.length;
         slide === 'next' ? this.curItemIndex++ : this.curItemIndex--;
         if (!this.loop && this.curItemIndex > itemsLen - 1) {

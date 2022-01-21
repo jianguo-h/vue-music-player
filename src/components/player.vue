@@ -71,7 +71,9 @@
       },
       // 监听audio的canplay事件
       canplay() {
-        if (this.lock) return;
+        if (this.lock) {
+          return;
+        }
         const audio = this.$refs.audio;
         if (audio.readyState === 4) {
           audio.play();
@@ -86,7 +88,9 @@
       },
       // 监听audio的ended事件
       ended() {
-        if (this.modeType !== 'order') return;
+        if (this.modeType !== 'order') {
+          return;
+        }
 
         let curPlayIndex = this.curPlayIndex;
         curPlayIndex++;

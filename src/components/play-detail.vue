@@ -211,7 +211,9 @@
       curLrcIndex(newCurLrcIndex) {
         console.log('>>> curLrcIndex', newCurLrcIndex);
         this.$$store.commit('setCurLrcIndex', newCurLrcIndex);
-        if (!this.showDetail) return;
+        if (!this.showDetail) {
+          return;
+        }
 
         const lrcBox = this.$refs.lrcBox;
         const lrcBoxHeight = lrcBox.offsetHeight;
@@ -330,7 +332,9 @@
       },
       // 切换播放模式
       switchMode() {
-        if (this.modeSwitch) return;
+        if (this.modeSwitch) {
+          return;
+        }
 
         let modeType = '';
         let loop = false;

@@ -14,9 +14,7 @@ const webpackProdConfig: Configuration = webpackMerge(webpackBaseConfig, {
   },
   plugins: [
     new webpack.ProgressPlugin({}),
-    // 每次打包前清除dist目录
     new CleanWebpackPlugin(),
-    // 提取less和css
     new MiniCssExtractPlugin({
       filename: 'static/css/[name].[contenthash:8].css',
       chunkFilename: 'static/css/[name].[contenthash:8].chunk.css',
@@ -28,6 +26,9 @@ const webpackProdConfig: Configuration = webpackMerge(webpackBaseConfig, {
       new CssMinimizerPlugin({
         parallel: true,
         minimizerOptions: {
+          processorOptions: {
+            map: false,
+          },
           preset: [
             'default',
             {

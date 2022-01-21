@@ -11,7 +11,7 @@ module.exports = {
   parserOptions: {
     parser: '@typescript-eslint/parser',
     sourceType: 'module',
-    ecmaVersion: 2019,
+    ecmaVersion: 2021,
     ecmaFeatures: {
       legacyDecorators: true,
     },
@@ -22,6 +22,7 @@ module.exports = {
     node: true,
   },
   rules: {
+    curly: 'error',
     'vue/script-indent': ['error', 2, { baseIndent: 1 }],
     '@typescript-eslint/no-var-requires': 'warn',
     '@typescript-eslint/explicit-function-return-type': 'off',
@@ -47,38 +48,21 @@ module.exports = {
       },
       {
         selector: 'typeLike',
-        format: ['StrictPascalCase'],
+        format: ['PascalCase', 'StrictPascalCase'],
         leadingUnderscore: 'forbid',
         trailingUnderscore: 'forbid',
       },
       {
-        selector: 'property',
-        format: ['strictCamelCase', 'snake_case', 'StrictPascalCase'],
-        leadingUnderscore: 'allow',
-        trailingUnderscore: 'allow',
-      },
-      {
-        selector: 'variableLike',
-        format: [
-          'strictCamelCase',
-          'snake_case',
-          'StrictPascalCase',
-          'UPPER_CASE',
-        ],
-        leadingUnderscore: 'allow',
-        trailingUnderscore: 'allow',
-      },
-      /* {
         selector: 'default',
         format: [
           'strictCamelCase',
           'snake_case',
-          'UPPER_CASE',
           'StrictPascalCase',
+          'UPPER_CASE',
         ],
-        leadingUnderscore: 'allow',
-        trailingUnderscore: 'allow',
-      }, */
+        leadingUnderscore: 'forbid',
+        trailingUnderscore: 'forbid',
+      },
     ],
   },
   overrides: [
@@ -86,6 +70,7 @@ module.exports = {
       files: ['*.vue'],
       rules: {
         indent: 'off',
+        'vue/multi-word-component-names': 'off',
       },
     },
     {

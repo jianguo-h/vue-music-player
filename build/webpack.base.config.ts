@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable @typescript-eslint/naming-convention */
 import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
@@ -17,6 +18,7 @@ const webpackBaseConfig: Configuration = {
     chunkFilename: 'static/js/[name].[contenthash:8].chunk.js',
     path: path.resolve(__dirname, '../dist'),
     publicPath: '/',
+    assetModuleFilename: 'static/media/[name].[hash:8].[ext]',
   },
   module: {
     rules: [
@@ -83,15 +85,7 @@ const webpackBaseConfig: Configuration = {
           /\.vue$/,
           /\.(css|sass|scss|less)$/,
         ],
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              limit: 1024 * 8,
-              name: 'static/media/[name].[hash:8].[ext]',
-            },
-          },
-        ],
+        type: 'asset/resource',
       },
     ],
   },
